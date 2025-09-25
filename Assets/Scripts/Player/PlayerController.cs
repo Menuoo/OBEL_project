@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,7 +24,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayers;
 
 
+    Vector3 walkDir;
+
+    private float playerRotation = 0f;
     private Vector2 cameraRotation = Vector2.zero;
+
     float verticalVelocity = 0;
     bool isGrounded = false;
     float groundedCheckConstant = 0;
@@ -42,10 +45,15 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         CheckState();
-        Look();
 
         HandleVertical();
         Move();
+    }
+
+    private void LateUpdate()
+    {
+        MoveRotate(walkDir);
+        Look();
     }
 
 
@@ -60,33 +68,31 @@ public class PlayerController : MonoBehaviour
         Vector3 cameraForward = new Vector3(playerCamera.transform.forward.x, 0f, playerCamera.transform.forward.z).normalized;
         Vector3 cameraRight = new Vector3(playerCamera.transform.right.x, 0f, playerCamera.transform.right.z).normalized;
 
-        Vector3 walkDir = cameraForward * input.Walk.y + cameraRight * input.Walk.x;
+        walkDir = cameraForward * input.Walk.y + cameraRight * input.Walk.x;
 
 
-        float rotationFactor = MoveRotate(walkDir);
+        float rotationFactor = 1f - Vector3.Angle(walkDir, transform.forward) / 180f;
+        rotationFactor = math.max(rotationFactor, 0.1f);
 
         Vector3 velocity = walkDir * (input.SprintPressed ? sprintSpeed : movementSpeed);
         velocity *= math.lerp(0f, 1f, rotationFactor);
+
 
         velocity.y += verticalVelocity;
 
         characterController.Move(velocity * Time.deltaTime);
     }
 
-    float MoveRotate(Vector3 walkDir)
+    void MoveRotate(Vector3 walkDir)
     {
-        float factor = 1f;
-
-        float angle = Vector3.Angle(walkDir, transform.forward);
-        float dot = Vector3.Cross(transform.forward, walkDir).y;
+        float angle = Vector3.Angle(walkDir.normalized, transform.forward);
+        float crossY = Vector3.Cross(transform.forward, walkDir).y;
 
         float rotationAmount = math.min(angle, rotateSpeed * Time.deltaTime);
 
+        playerRotation += rotationAmount * math.sign(crossY);
 
-        transform.Rotate(Vector3.up * math.sign(dot), rotationAmount);
-
-        factor = factor - Vector3.Angle(walkDir, transform.forward) / 180f;
-        return factor;
+        transform.rotation = Quaternion.Euler(0f, playerRotation, 0f);
     }
 
 
@@ -105,7 +111,7 @@ public class PlayerController : MonoBehaviour
         cameraRotation.y = math.clamp(cameraRotation.y - lookSensitivity.y * input.Look.y,
                                 -lookLimitV, lookLimitV);
 
-        //playerCamera.transform.rotation = Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0f); // camera rotation application
+        playerCamera.transform.rotation = Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0f); // camera rotation application
     }
 
 
