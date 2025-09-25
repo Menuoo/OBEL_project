@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] float movementSpeed;
+    [SerializeField] float rotateSpeed;
     [SerializeField] float sprintSpeed;
     [SerializeField] float jumpStrength;
     [SerializeField] float gravity;
@@ -60,11 +62,33 @@ public class PlayerController : MonoBehaviour
 
         Vector3 walkDir = cameraForward * input.Walk.y + cameraRight * input.Walk.x;
 
+
+        float rotationFactor = MoveRotate(walkDir);
+
         Vector3 velocity = walkDir * (input.SprintPressed ? sprintSpeed : movementSpeed);
+        velocity *= math.lerp(0f, 1f, rotationFactor);
+
         velocity.y += verticalVelocity;
 
         characterController.Move(velocity * Time.deltaTime);
     }
+
+    float MoveRotate(Vector3 walkDir)
+    {
+        float factor = 1f;
+
+        float angle = Vector3.Angle(walkDir, transform.forward);
+        float dot = Vector3.Cross(transform.forward, walkDir).y;
+
+        float rotationAmount = math.min(angle, rotateSpeed * Time.deltaTime);
+
+
+        transform.Rotate(Vector3.up * math.sign(dot), rotationAmount);
+
+        factor = factor - Vector3.Angle(walkDir, transform.forward) / 180f;
+        return factor;
+    }
+
 
     void HandleVertical()
     {
