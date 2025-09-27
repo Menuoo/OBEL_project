@@ -9,12 +9,12 @@ public class PlayerController : MonoBehaviour
     [Header("Components")]
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Camera playerCamera;
-    [SerializeField] PlayerInput input;
+    [SerializeField] PlayerInput playerInput;
 
     [Header("Movement")]
     [SerializeField] float movementSpeed;
-    [SerializeField] float rotateSpeed;
     [SerializeField] float sprintSpeed;
+    [SerializeField] float rotateSpeed;
     [SerializeField] float jumpStrength;
     [SerializeField] float gravity;
 
@@ -68,13 +68,13 @@ public class PlayerController : MonoBehaviour
         Vector3 cameraForward = new Vector3(playerCamera.transform.forward.x, 0f, playerCamera.transform.forward.z).normalized;
         Vector3 cameraRight = new Vector3(playerCamera.transform.right.x, 0f, playerCamera.transform.right.z).normalized;
 
-        walkDir = cameraForward * input.Walk.y + cameraRight * input.Walk.x;
+        walkDir = cameraForward * playerInput.Walk.y + cameraRight * playerInput.Walk.x;
 
 
         float rotationFactor = 1f - Vector3.Angle(walkDir, transform.forward) / 180f;
         rotationFactor = math.max(rotationFactor, 0.1f);
 
-        Vector3 velocity = walkDir * (input.SprintPressed ? sprintSpeed : movementSpeed);
+        Vector3 velocity = walkDir * (playerInput.SprintPressed ? sprintSpeed : movementSpeed);
         velocity *= math.lerp(0f, 1f, rotationFactor);
 
 
@@ -107,8 +107,8 @@ public class PlayerController : MonoBehaviour
 
     void Look()
     {
-        cameraRotation.x += lookSensitivity.x * input.Look.x;
-        cameraRotation.y = math.clamp(cameraRotation.y - lookSensitivity.y * input.Look.y,
+        cameraRotation.x += lookSensitivity.x * playerInput.Look.x;
+        cameraRotation.y = math.clamp(cameraRotation.y - lookSensitivity.y * playerInput.Look.y,
                                 -lookLimitV, lookLimitV);
 
         playerCamera.transform.rotation = Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0f); // camera rotation application
