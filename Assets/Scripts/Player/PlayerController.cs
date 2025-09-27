@@ -24,7 +24,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayers;
 
 
-    Vector3 walkDir;
+    public Vector3 walkDir { get; private set; }
+    public float animSpeed { get; private set; }
 
     private float playerRotation = 0f;
     private Vector2 cameraRotation = Vector2.zero;
@@ -74,8 +75,11 @@ public class PlayerController : MonoBehaviour
         float rotationFactor = 1f - Vector3.Angle(walkDir, transform.forward) / 180f;
         rotationFactor = math.max(rotationFactor, 0.1f);
 
+
         Vector3 velocity = walkDir * (playerInput.SprintPressed ? sprintSpeed : movementSpeed);
         velocity *= math.lerp(0f, 1f, rotationFactor);
+
+        animSpeed = playerInput.SprintPressed ? 2.5f : 1.5f;
 
 
         velocity.y += verticalVelocity;

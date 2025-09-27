@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAnimationLogic : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class PlayerAnimationLogic : MonoBehaviour
     bool rightHandHold = false;
 
 
-    private static int rightHandHoldHash = Animator.StringToHash("rightHandHold");
+    private static int rightHandHash = Animator.StringToHash("rightHandHold");
+    private static int walkingHash = Animator.StringToHash("isWalking");
+    private static int walkSpeedHash = Animator.StringToHash("walkSpeed");
 
 
     void Start()
@@ -20,9 +23,11 @@ public class PlayerAnimationLogic : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        playerAnimator.SetBool(rightHandHash, rightHandHold);
+        playerAnimator.SetBool(walkingHash, playerController.walkDir.magnitude != 0);
+        playerAnimator.SetFloat(walkSpeedHash, playerController.animSpeed);
     }
 }

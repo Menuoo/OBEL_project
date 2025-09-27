@@ -791,9 +791,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 865776792}
   playerCamera: {fileID: 1877779285}
-  input: {fileID: 865776793}
+  playerInput: {fileID: 865776793}
   movementSpeed: 2
-  sprintSpeed: 5
+  sprintSpeed: 4
   rotateSpeed: 300
   jumpStrength: 1
   gravity: 25
