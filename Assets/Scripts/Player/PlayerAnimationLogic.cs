@@ -9,7 +9,7 @@ public class PlayerAnimationLogic : MonoBehaviour
     PlayerController playerController;
     PlayerInput playerInput;
 
-    bool rightHandHold = false;
+    bool rightHandHold = true;
 
 
     private static int rightHandHash = Animator.StringToHash("rightHandHold");
