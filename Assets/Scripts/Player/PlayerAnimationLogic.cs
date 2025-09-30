@@ -10,6 +10,7 @@ public class PlayerAnimationLogic : MonoBehaviour
     PlayerInput playerInput;
 
     bool rightHandHold = true;
+    bool addAvailable = false;
 
 
     private static int rightHandHash = Animator.StringToHash("rightHandHold");
@@ -42,22 +43,40 @@ public class PlayerAnimationLogic : MonoBehaviour
     {
         if (weapon == CurrentWeapon.Knife)
         {
-            if (playerAnimator.GetBool(slicingHash) == true)
-            {
-                playerAnimator.SetBool(additionalActionHash, true);
-            }
-
             playerAnimator.SetBool(slicingHash, true);
+
+            if (addAvailable)
+                playerAnimator.SetBool(additionalActionHash, true);
         }
 
         if (weapon == CurrentWeapon.Pistol)
         {
-            playerAnimator.SetBool(additionalActionHash, true);
+            if (addAvailable)
+                playerAnimator.SetBool(additionalActionHash, true);
         }
     }
 
     public void Aiming(bool state)
     {
         playerAnimator.SetBool(aimingHash, state);
+
+        playerController.SetAnimationLock(state);
+    }
+
+
+
+    public void ResetAdd()
+    {
+        playerAnimator.SetBool(additionalActionHash, false);
+    }
+
+    public void ResetSlice()
+    {
+        playerAnimator.SetBool(slicingHash, false);
+    }
+
+    public void SetAddAvailability(bool state)
+    { 
+        addAvailable = state;
     }
 }

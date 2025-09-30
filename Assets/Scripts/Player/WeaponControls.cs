@@ -46,12 +46,12 @@ public class WeaponControls : MonoBehaviour
 
     void HandleAim()
     {
-        playerAnim.Aiming(true);
+        playerAnim.Aiming(currentWeapon == CurrentWeapon.Pistol ? true : false);
     }
 
     void HandleWeaponAction()
-    { 
-        
+    {
+        playerAnim.WeaponAction(currentWeapon);
     }
 
 

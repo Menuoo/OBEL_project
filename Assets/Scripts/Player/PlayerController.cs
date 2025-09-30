@@ -99,12 +99,6 @@ public class PlayerController : MonoBehaviour
 
     void MoveRotate(Vector3 walkDir)
     {
-        if (inAnimationLock)
-        {
-            return;
-        }
-
-
         float angle = Vector3.Angle(walkDir.normalized, transform.forward);
         float crossY = Vector3.Cross(transform.forward, walkDir).y;
 

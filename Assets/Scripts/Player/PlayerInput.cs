@@ -18,6 +18,8 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     public PlayerActions playerActions { get; private set; }
 
 
+    bool alreadyPressed = false;
+
 
     private void OnEnable()
     {
@@ -78,11 +80,13 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     {
         if (context.performed)
         {
-            WeaponActionPressed = true;
+            WeaponActionPressed = alreadyPressed ? false : true;
+            alreadyPressed = true;
         }
         else if (!context.performed)
         {
             WeaponActionPressed = false;
+            alreadyPressed = false;
         }
     }
 }
