@@ -15,6 +15,9 @@ public class PlayerAnimationLogic : MonoBehaviour
     private static int rightHandHash = Animator.StringToHash("rightHandHold");
     private static int walkingHash = Animator.StringToHash("isWalking");
     private static int walkSpeedHash = Animator.StringToHash("walkSpeed");
+    private static int aimingHash = Animator.StringToHash("isAiming");
+    private static int slicingHash = Animator.StringToHash("isSlicing");
+    private static int additionalActionHash = Animator.StringToHash("additionalAction");
 
 
     void Start()
@@ -26,8 +29,35 @@ public class PlayerAnimationLogic : MonoBehaviour
 
     void Update()
     {
-        playerAnimator.SetBool(rightHandHash, rightHandHold);
-        playerAnimator.SetBool(walkingHash, playerController.walkDir.magnitude != 0);
-        playerAnimator.SetFloat(walkSpeedHash, playerController.animSpeed);
+        if (!playerController.inAnimationLock)
+        {
+            playerAnimator.SetBool(rightHandHash, rightHandHold);
+
+            playerAnimator.SetBool(walkingHash, playerController.walkDir.magnitude != 0);
+            playerAnimator.SetFloat(walkSpeedHash, playerController.animSpeed);
+        }
+    }
+
+    public void WeaponAction(CurrentWeapon weapon)
+    {
+        if (weapon == CurrentWeapon.Knife)
+        {
+            if (playerAnimator.GetBool(slicingHash) == true)
+            {
+                playerAnimator.SetBool(additionalActionHash, true);
+            }
+
+            playerAnimator.SetBool(slicingHash, true);
+        }
+
+        if (weapon == CurrentWeapon.Pistol)
+        {
+            playerAnimator.SetBool(additionalActionHash, true);
+        }
+    }
+
+    public void Aiming(bool state)
+    {
+        playerAnimator.SetBool(aimingHash, state);
     }
 }

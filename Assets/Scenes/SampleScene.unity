@@ -216,6 +216,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &85925534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a56af373bee02a745b1de8c38d0537ed, type: 3}
+  m_PrefabInstance: {fileID: 1823830705}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &228470125
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,6 +782,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 131.7, y: -30, z: 0}
+--- !u!1 &727420646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6982d1e1d56dca34b8c8d0be3bedc234, type: 3}
+  m_PrefabInstance: {fileID: 1526011183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &865776789
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,6 +800,7 @@ GameObject:
   - component: {fileID: 865776794}
   - component: {fileID: 865776793}
   - component: {fileID: 865776795}
+  - component: {fileID: 865776796}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -890,6 +901,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 658327026}
+--- !u!114 &865776796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865776789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324dc75d5ac4c34b9b26a4ad68a641c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knife: {fileID: 85925534}
+  pistol: {fileID: 727420646}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
