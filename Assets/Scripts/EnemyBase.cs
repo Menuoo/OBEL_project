@@ -17,7 +17,7 @@ public class EnemyBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Console.WriteLine(other.name + " has attacked!");
+        Debug.Log(other.gameObject.name + " has attacked!");
 
         Knife knife = other.gameObject.GetComponent<Knife>();
         if (knife != null)
