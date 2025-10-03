@@ -11,6 +11,7 @@ public class PlayerAnimationLogic : MonoBehaviour
 
     bool rightHandHold = true;
     bool addAvailable = false;
+    public bool actionHappened { get; private set; }
 
 
     private static int rightHandHash = Animator.StringToHash("rightHandHold");
@@ -19,7 +20,7 @@ public class PlayerAnimationLogic : MonoBehaviour
     private static int aimingHash = Animator.StringToHash("isAiming");
     private static int slicingHash = Animator.StringToHash("isSlicing");
     private static int additionalActionHash = Animator.StringToHash("additionalAction");
-
+    private static int inActionHash = Animator.StringToHash("inAction");
 
     void Start()
     {
@@ -30,17 +31,16 @@ public class PlayerAnimationLogic : MonoBehaviour
 
     void Update()
     {
-        if (!playerController.inAnimationLock)
-        {
-            playerAnimator.SetBool(rightHandHash, rightHandHold);
+        //playerAnimator.SetBool(rightHandHash, rightHandHold);
 
-            playerAnimator.SetBool(walkingHash, playerController.walkDir.magnitude != 0);
-            playerAnimator.SetFloat(walkSpeedHash, playerController.animSpeed);
-        }
+        playerAnimator.SetBool(walkingHash, playerController.walkDir.magnitude != 0);
+        playerAnimator.SetFloat(walkSpeedHash, playerController.animSpeed);
     }
 
     public void WeaponAction(CurrentWeapon weapon)
     {
+        actionHappened = true;
+
         if (weapon == CurrentWeapon.Knife)
         {
             playerAnimator.SetBool(slicingHash, true);
@@ -60,8 +60,12 @@ public class PlayerAnimationLogic : MonoBehaviour
     {
         playerAnimator.SetBool(aimingHash, state);
 
-        playerController.SetAnimationLock(state);
+        if (state)
+            playerController.SetAnimationLock(state, playerController.inRotationLock);
+        else if (!playerAnimator.GetBool(inActionHash))
+            playerController.SetAnimationLock(false, false);
     }
+
 
 
 
@@ -74,6 +78,21 @@ public class PlayerAnimationLogic : MonoBehaviour
     {
         playerAnimator.SetBool(slicingHash, false);
     }
+
+
+    public void SetInAction(bool state)
+    { 
+        playerAnimator.SetBool(inActionHash, state);
+    }
+
+    public void ResetActions()
+    {
+        playerAnimator.SetBool(additionalActionHash, false);
+        playerAnimator.SetBool(slicingHash, false);
+        actionHappened = false;
+    }
+
+
 
     public void SetAddAvailability(bool state)
     { 

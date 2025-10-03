@@ -33,9 +33,9 @@ public class WeaponControls : MonoBehaviour
 
         if (playerInput.AimPressed)
         {
-            HandleAim();
+            HandleAim(true);
         }
-        else { playerAnim.Aiming(false); }
+        else { HandleAim(false); }
 
         if (playerInput.WeaponActionPressed)
         {
@@ -44,9 +44,16 @@ public class WeaponControls : MonoBehaviour
     }
 
 
-    void HandleAim()
+    void HandleAim(bool state)
     {
-        playerAnim.Aiming(currentWeapon == CurrentWeapon.Pistol ? true : false);
+        if (currentWeapon == CurrentWeapon.Pistol)
+        {
+            playerAnim.Aiming(state);
+            if (!state)
+            {
+                playerAnim.ResetAdd();
+            }
+        }
     }
 
     void HandleWeaponAction()

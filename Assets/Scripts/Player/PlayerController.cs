@@ -34,13 +34,16 @@ public class PlayerController : MonoBehaviour
     bool isGrounded = false;
     float groundedCheckConstant = 0;
 
-    public bool inAnimationLock { get; private set; }
+    public bool inMovementLock { get; private set; }
+    public bool inRotationLock { get; private set; }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        inAnimationLock = false;
+        inMovementLock = false;
+        inRotationLock = false;
+
         lookSensitivity.Scale(new Vector2(0.01f, 0.01f));
         groundedCheckConstant = - characterController.height / 2f - characterController.skinWidth + characterController.radius - 0.01f;
     }
@@ -85,7 +88,7 @@ public class PlayerController : MonoBehaviour
         animSpeed = playerInput.SprintPressed ? 2.5f : 1.5f;
 
 
-        if (inAnimationLock)
+        if (inMovementLock)
         {
             velocity = Vector3.up * velocity.y;
         }
@@ -99,6 +102,9 @@ public class PlayerController : MonoBehaviour
 
     void MoveRotate(Vector3 walkDir)
     {
+        if (inRotationLock)
+            return;
+
         float angle = Vector3.Angle(walkDir.normalized, transform.forward);
         float crossY = Vector3.Cross(transform.forward, walkDir).y;
 
@@ -141,8 +147,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void SetAnimationLock(bool state)
-    { 
-        inAnimationLock = state;
+    public void SetAnimationLock(bool movementState, bool rotationState)
+    {
+        inMovementLock = movementState;
+        inRotationLock = rotationState;
     }
 }
