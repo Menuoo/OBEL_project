@@ -9,9 +9,15 @@ public class PlayerAnimationLogic : MonoBehaviour
     PlayerController playerController;
     PlayerInput playerInput;
 
+    float intentionTimer = 0f;
+
+    float flinchTime = 0f;
+    bool isFlinching = false;
+
+
     bool rightHandHold = true;
     bool addAvailable = false;
-    public bool actionHappened { get; private set; }
+    public bool actionIntention { get; private set; }
 
 
     private static int rightHandHash = Animator.StringToHash("rightHandHold");
@@ -21,6 +27,7 @@ public class PlayerAnimationLogic : MonoBehaviour
     private static int slicingHash = Animator.StringToHash("isSlicing");
     private static int additionalActionHash = Animator.StringToHash("additionalAction");
     private static int inActionHash = Animator.StringToHash("inAction");
+    private static int flinchingHash = Animator.StringToHash("flinching");
 
     void Start()
     {
@@ -31,15 +38,44 @@ public class PlayerAnimationLogic : MonoBehaviour
 
     void Update()
     {
+        if (intentionTimer > 0f)
+        {
+            intentionTimer -= Time.deltaTime;
+
+            if (intentionTimer <= 0f)
+                ResetIntention();
+        }
+
+
+        if (isFlinching)
+        {
+            if (flinchTime > 0)
+            {
+                flinchTime -= Time.deltaTime;
+            }
+            else 
+            { 
+                FinishFlinch();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Flinch();
+        }
+
         //playerAnimator.SetBool(rightHandHash, rightHandHold);
 
         playerAnimator.SetBool(walkingHash, playerController.walkDir.magnitude != 0);
         playerAnimator.SetFloat(walkSpeedHash, playerController.animSpeed);
     }
 
+
     public void WeaponAction(CurrentWeapon weapon)
     {
-        actionHappened = true;
+        actionIntention = true;
+        if (intentionTimer <= 0f)
+            intentionTimer = 0.3f;
 
         if (weapon == CurrentWeapon.Knife)
         {
@@ -55,6 +91,17 @@ public class PlayerAnimationLogic : MonoBehaviour
                 playerAnimator.SetBool(additionalActionHash, true);
         }
     }
+
+    public void ResetIntention()
+    {
+        if (!playerAnimator.GetBool(inActionHash))
+        {
+            Debug.Log("intention reset");
+            actionIntention = false;
+            ResetActions();
+        }
+    }
+
 
     public void Aiming(bool state)
     {
@@ -81,7 +128,7 @@ public class PlayerAnimationLogic : MonoBehaviour
 
 
     public void SetInAction(bool state)
-    { 
+    {
         playerAnimator.SetBool(inActionHash, state);
     }
 
@@ -89,9 +136,30 @@ public class PlayerAnimationLogic : MonoBehaviour
     {
         playerAnimator.SetBool(additionalActionHash, false);
         playerAnimator.SetBool(slicingHash, false);
-        actionHappened = false;
+        playerAnimator.SetBool(inActionHash, false);
+        actionIntention = false;
+        addAvailable = false;
     }
 
+
+    public void Flinch()
+    {
+        ResetActions();
+        isFlinching = true;
+        playerAnimator.SetBool(flinchingHash, true);
+        playerController.SetAnimationLock(true, true);
+
+        addAvailable = false;
+        flinchTime = 1f;
+    }
+
+    public void FinishFlinch()
+    {
+        ResetActions();
+        isFlinching = false;
+        playerAnimator.SetBool(flinchingHash, false);
+        playerController.SetAnimationLock(false, false);
+    }
 
 
     public void SetAddAvailability(bool state)

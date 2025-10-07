@@ -40,24 +40,26 @@ public class AnimationHandling : MonoBehaviour
 
     public void Slash1_Start()
     {
-        if (playerAnim.actionHappened)
+        if (playerAnim.actionIntention)
         {
             playerController.SetAnimationLock(true, true);
+            playerAnim.SetInAction(true);
         }
     }
 
     public void Slash2_Start()
     {
-        if (playerAnim.actionHappened)
+        if (playerAnim.actionIntention)
         {
             playerAnim.SetAddAvailability(false);
             playerController.SetAnimationLock(true, true);
+            playerAnim.SetInAction(true);
         }
     }
 
     public void Shoot_Start()
     {
-        if (playerAnim.actionHappened)
+        if (playerAnim.actionIntention)
         {
             playerAnim.SetAddAvailability(false);
             playerController.SetAnimationLock(true, true);
