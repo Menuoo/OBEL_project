@@ -963,6 +963,7 @@ GameObject:
   - component: {fileID: 865776792}
   - component: {fileID: 865776794}
   - component: {fileID: 865776793}
+  - component: {fileID: 865776797}
   - component: {fileID: 865776795}
   - component: {fileID: 865776796}
   m_Layer: 10
@@ -1027,6 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2d5dae7d4f1fb4db2edbeb2d4ced3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 865776797}
 --- !u!114 &865776794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1079,6 +1081,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knife: {fileID: 85925534}
   pistol: {fileID: 727420646}
+--- !u!114 &865776797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865776789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bb8d8c3a5c3eaa4cbd41ffe6d73bbdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
