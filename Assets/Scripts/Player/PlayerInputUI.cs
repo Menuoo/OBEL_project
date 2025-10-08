@@ -5,9 +5,24 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputUI : MonoBehaviour, PlayerActions.IUIActions
 {
+    public PlayerInput input { get; private set; }
+    public bool ConfirmPressed { get; private set; }
+
+
+    private void LateUpdate()
+    {
+        ConfirmPressed = false;
+    }
+
+
+    private void Start()
+    {
+        input = GetComponent<PlayerInput>();
+    }
 
     public void OnConfirm(InputAction.CallbackContext context)
     {
-        Debug.Log("chill");
+        if (context.performed)
+            ConfirmPressed = true;
     }
 }

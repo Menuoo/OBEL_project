@@ -46,19 +46,20 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            SwapControls();
+            SwapControls(ControlsEnabled ? 0 : 1);
         }
     }
 
     public void LateUpdate()
     {
         WeaponActionPressed = false;
+        InteractPressed = false;
     }
 
 
-    void SwapControls()
+    public void SwapControls(int state)
     {
-        if (ControlsEnabled)
+        if (state == 0)
         {
             playerActions.UI.Enable();
             playerActions.UI.SetCallbacks(ui);
@@ -68,7 +69,7 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
             ControlsEnabled = !ControlsEnabled;
         }
-        else
+        else if (state == 1)
         {
             playerActions.Main.Enable();
             playerActions.Main.SetCallbacks(this);
@@ -114,10 +115,14 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     {
         if (context.performed)
             WeaponActionPressed = true;
+
+        if (context.canceled)
+            WeaponActionPressed = false;
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        AimPressed = context.action.WasPressedThisFrame();
+        if (context.performed)
+            InteractPressed = true;
     }
 }
