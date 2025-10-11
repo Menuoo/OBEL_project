@@ -1,9 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 
 public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 {
@@ -13,13 +12,16 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     public Vector2 Look { get; private set; }
 
     public bool ControlsEnabled { get; private set; }
+    public bool GamePaused { get; private set; }
 
 
-    public bool JumpPressed { get; private set; }
     public bool SprintPressed { get; private set; }
-    public bool WeaponActionPressed { get; private set; }
     public bool AimPressed { get; private set; }
-    public bool InteractPressed { get; private set; }
+
+
+    public static event Action<PlayerInput> OnWeaponActionEvent;
+    public static event Action<PlayerInput> OnInteractEvent;
+    public static event Action<bool> PauseGameEvent;
 
     public PlayerActions playerActions { get; private set; }
 
@@ -27,6 +29,7 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     private void OnEnable()
     {
         ControlsEnabled = true;
+        GamePaused = false;
 
         playerActions = new PlayerActions();
         playerActions.Enable();
@@ -52,8 +55,6 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
     public void LateUpdate()
     {
-        WeaponActionPressed = false;
-        InteractPressed = false;
     }
 
 
@@ -114,15 +115,24 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     public void OnWeaponAction(InputAction.CallbackContext context)
     {
         if (context.performed)
-            WeaponActionPressed = true;
-
-        if (context.canceled)
-            WeaponActionPressed = false;
+            OnWeaponActionEvent(this);
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed)
-            InteractPressed = true;
+            OnInteractEvent(this);
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            PauseGame();
+    }
+
+
+    public void PauseGame()
+    { 
+        
     }
 }

@@ -54,6 +54,14 @@ public class UIcontroller : MonoBehaviour
 
     public void ContinueTextBox()
     {
+        if (charAmount < textLength)
+        {
+            charAmount = textLength + 1;
+            text.maxVisibleCharacters = textLength + 1;
+            return;
+        }
+
+
         index++;
         if (index >= textToDisplay.Length)
         {

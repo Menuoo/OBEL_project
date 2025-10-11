@@ -11,6 +11,16 @@ public class WeaponControls : MonoBehaviour
     PlayerInput playerInput;
 
 
+    private void OnEnable()
+    {
+        PlayerInput.OnWeaponActionEvent += HandleWeaponAction;
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -36,11 +46,6 @@ public class WeaponControls : MonoBehaviour
             HandleAim(true);
         }
         else { HandleAim(false); }
-
-        if (playerInput.WeaponActionPressed)
-        {
-            HandleWeaponAction();
-        }
     }
 
 
@@ -56,7 +61,7 @@ public class WeaponControls : MonoBehaviour
         }
     }
 
-    void HandleWeaponAction()
+    void HandleWeaponAction(PlayerInput input)
     {
         playerAnim.WeaponAction(currentWeapon);
     }

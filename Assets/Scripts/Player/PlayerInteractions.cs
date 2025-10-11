@@ -1,29 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerInteractions : MonoBehaviour
 {
     [SerializeField] UIcontroller uiControls;
     [SerializeField] PlayerInput input;
+    [SerializeField] LayerMask interactLayers;
+
 
     BoxCollider interactCollider;
 
     bool interactTriggered = false;
 
 
+    private void OnEnable()
+    {
+        PlayerInput.OnInteractEvent += HandleInteract;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInput.OnInteractEvent -= HandleInteract;
+    }
+
     private void Start()
     {
         interactCollider = GetComponent<BoxCollider>();
-    }
-
-    private void Update()
-    {
-        interactCollider.enabled = input.InteractPressed;
-        if (input.InteractPressed)
-        { 
-            interactTriggered = true;
-        }
     }
 
     public void DisplayMessage(string[] text)
@@ -31,16 +35,45 @@ public class PlayerInteractions : MonoBehaviour
         uiControls.StartTextBox(text);
     }
 
-    private void OnTriggerEnter(Collider other)
+
+
+
+
+    void HandleInteract(PlayerInput input)
     {
-        IInteractable interactable = other.GetComponent<IInteractable>();
-        if (interactable != null)
+        interactTriggered = true;
+
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position,
+        interactCollider.size / 2f, transform.parent.forward, transform.parent.rotation, 0f, interactLayers);
+
+
+        foreach (RaycastHit hit in hits)
         {
-            if (interactTriggered)
+            IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+            if (interactable != null)
             {
-                interactTriggered = false;
-                interactable.OnInteract(this);
+                if (interactTriggered)
+                {
+                    interactTriggered = false;
+                    interactable.OnInteract(this);
+                }
             }
         }
     }
+
+    /*private void OnTriggerStay(Collider other)
+    {
+        if (interactTriggered)
+        {
+            IInteractable interactable = other.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                if (interactTriggered)
+                {
+                    interactTriggered = false;
+                    interactable.OnInteract(this);
+                }
+            }
+        }
+    }*/
 }

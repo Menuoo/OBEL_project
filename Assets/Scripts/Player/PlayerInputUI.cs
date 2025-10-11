@@ -25,4 +25,9 @@ public class PlayerInputUI : MonoBehaviour, PlayerActions.IUIActions
         if (context.performed)
             ConfirmPressed = true;
     }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        input.PauseGame();
+    }
 }

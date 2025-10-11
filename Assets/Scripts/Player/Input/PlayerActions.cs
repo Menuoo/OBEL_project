@@ -80,6 +80,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""91d6ce0d-1e51-4aa2-9451-3d80e5acc0de"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -280,6 +289,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a87b6a84-0c43-44d2-8bca-20f7557fd3bf"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -291,6 +311,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""name"": ""Confirm"",
                     ""type"": ""Button"",
                     ""id"": ""87cad02e-c8c1-4b11-b1d0-efd340af51e7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6ad4b85-ab46-4436-aafa-08799f5e63be"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -319,6 +348,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b90e680b-aed2-4965-b1d9-cd9b1212eb2e"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -333,9 +373,11 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Main_WeaponAction = m_Main.FindAction("WeaponAction", throwIfNotFound: true);
         m_Main_Aim = m_Main.FindAction("Aim", throwIfNotFound: true);
         m_Main_Interact = m_Main.FindAction("Interact", throwIfNotFound: true);
+        m_Main_Pause = m_Main.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Confirm = m_UI.FindAction("Confirm", throwIfNotFound: true);
+        m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -409,6 +451,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_WeaponAction;
     private readonly InputAction m_Main_Aim;
     private readonly InputAction m_Main_Interact;
+    private readonly InputAction m_Main_Pause;
     public struct MainActions
     {
         private @PlayerActions m_Wrapper;
@@ -419,6 +462,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         public InputAction @WeaponAction => m_Wrapper.m_Main_WeaponAction;
         public InputAction @Aim => m_Wrapper.m_Main_Aim;
         public InputAction @Interact => m_Wrapper.m_Main_Interact;
+        public InputAction @Pause => m_Wrapper.m_Main_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -446,6 +490,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -468,6 +515,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -490,11 +540,13 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Confirm;
+    private readonly InputAction m_UI_Pause;
     public struct UIActions
     {
         private @PlayerActions m_Wrapper;
         public UIActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Confirm => m_Wrapper.m_UI_Confirm;
+        public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -507,6 +559,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Confirm.started += instance.OnConfirm;
             @Confirm.performed += instance.OnConfirm;
             @Confirm.canceled += instance.OnConfirm;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -514,6 +569,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Confirm.started -= instance.OnConfirm;
             @Confirm.performed -= instance.OnConfirm;
             @Confirm.canceled -= instance.OnConfirm;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -539,9 +597,11 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         void OnWeaponAction(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnConfirm(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
