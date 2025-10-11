@@ -28,6 +28,10 @@ public class PlayerInputUI : MonoBehaviour, PlayerActions.IUIActions
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        input.PauseGame();
+        if (context.performed)
+        {
+            Debug.Log("triggered");
+            input.PauseGame();
+        }
     }
 }

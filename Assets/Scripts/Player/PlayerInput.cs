@@ -36,12 +36,18 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
         playerActions.Main.Enable();
         playerActions.Main.SetCallbacks(this);
+
+        playerActions.UI.Disable();
+        playerActions.UI.RemoveCallbacks(ui);
     }
 
     private void OnDisable()
     {
         playerActions.Main.Disable();
         playerActions.Main.RemoveCallbacks(this);
+
+        playerActions.UI.Disable();
+        playerActions.UI.RemoveCallbacks(ui);
     }
 
 
@@ -132,7 +138,9 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
 
     public void PauseGame()
-    { 
-        
+    {
+        PauseHandler.FlipTime();
+        PauseGameEvent(PauseHandler.pauseState);
+        SwapControls(PauseHandler.pauseState ? 0 : 1);
     }
 }

@@ -8,16 +8,29 @@ public class UIcontroller : MonoBehaviour
 {
     [SerializeField] GameObject textBox;
     [SerializeField] TMP_Text text;
-
-    [SerializeField] PlayerInputUI inputUI;
-
     [SerializeField] float textDisplaySpeed = 30f;
 
+    bool textMenuOpen = false;
     string[] textToDisplay;
     int textLength = 0;
     int index = 0;
     float charAmount = 0;
 
+
+
+    [SerializeField] PlayerInputUI inputUI;
+    [SerializeField] PauseMenu pauseMenu;
+
+
+    private void OnEnable()
+    {
+        PlayerInput.PauseGameEvent += EnablePauseMenu;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInput.PauseGameEvent -= EnablePauseMenu;
+    }
 
     void Start()
     {
@@ -26,20 +39,27 @@ public class UIcontroller : MonoBehaviour
 
     void Update()
     {
-        if (textLength > charAmount)
-            charAmount += Time.deltaTime * textDisplaySpeed;
+        // have to add a check for whether we're even doing this in the first place
 
-        text.maxVisibleCharacters = (int)charAmount;
+        if (textMenuOpen)
+        {
+            if (textLength > charAmount)
+                charAmount += Time.deltaTime * textDisplaySpeed;
+
+            text.maxVisibleCharacters = (int)charAmount;
 
 
-        if (inputUI.ConfirmPressed)
-        { 
-            ContinueTextBox();
+            if (inputUI.ConfirmPressed)
+            {
+                ContinueTextBox();
+            }
         }
     }
 
+
     public void StartTextBox(string[] texts)
     {
+        textMenuOpen = true;
         textToDisplay = texts;
         index = 0;
         textLength = textToDisplay[index].Length;
@@ -81,5 +101,12 @@ public class UIcontroller : MonoBehaviour
         inputUI.input.SwapControls(1);
 
         textBox.SetActive(false);
+        textMenuOpen = false;
+    }
+
+
+    public void EnablePauseMenu(bool state)
+    { 
+        pauseMenu.gameObject.SetActive(state);
     }
 }

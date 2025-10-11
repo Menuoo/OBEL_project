@@ -30,6 +30,7 @@ public class PlayerInteractions : MonoBehaviour
         interactCollider = GetComponent<BoxCollider>();
     }
 
+
     public void DisplayMessage(string[] text)
     { 
         uiControls.StartTextBox(text);
