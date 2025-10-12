@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1001
   itemName: Bandage
-  inventorySprite: {fileID: 0}
+  inventorySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   description: Using this item will restore a small amount of health
   altDescription: 
   canEquip: 0
