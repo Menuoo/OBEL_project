@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField] PlayerInformation playerInformation;
+    [SerializeField] ItemDatabase ItemDatabase;
+
+    List<InventoryItem> items = new List<InventoryItem>();
+
+    void Start()
+    {
+        ItemDatabase.InitializeList();
+        //this.gameObject.SetActive(false);
+    }
+
     private void OnEnable()
     {
-        
+        DisplayInventory();
     }
 
     private void OnDisable()
@@ -14,11 +25,15 @@ public class PauseMenu : MonoBehaviour
         
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        this.gameObject.SetActive(false);
+
+    void DisplayInventory()
+    { 
+        foreach(var item in playerInformation.inventory)
+        {
+            Debug.Log(item.Key + ", quantity: " + item.Value);
+        }
     }
+
 
     void QuitMenu()
     { 

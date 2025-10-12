@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class PlayerInteractions : MonoBehaviour
 {
+    [SerializeField] PlayerInformation playerInfo;
     [SerializeField] UIcontroller uiControls;
     [SerializeField] PlayerInput input;
     [SerializeField] LayerMask interactLayers;
@@ -36,9 +37,9 @@ public class PlayerInteractions : MonoBehaviour
         uiControls.StartTextBox(text);
     }
 
-    public void AddItemToInventory(InventoryItem item, int quantity)
-    { 
-        
+    public void AddItemToInventory(int id, int quantity)
+    {
+        playerInfo.AddItem(id, quantity);
     }
 
 

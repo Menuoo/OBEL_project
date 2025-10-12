@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class FieldItem : MonoBehaviour, IInteractable
 {
-    [SerializeField] InventoryItem item;
+    [SerializeField] int id;
     [SerializeField] int quantity;
 
     public void OnInteract(PlayerInteractions interactions)
     {
-        interactions.AddItemToInventory(item, quantity);
+        Debug.Log("touched " + this.gameObject.name);
+        interactions.AddItemToInventory(id, quantity);
         Destroy(this.gameObject);
     }
 }
