@@ -21,11 +21,6 @@ public class ItemDatabase : ScriptableObject
         {
             itemsDictionary.Add(item.GetId(), item);
         }
-
-        foreach (var pair in itemsDictionary)
-        { 
-            Debug.Log(pair.Key + "<key ;; value>" + pair.Value.name);
-        }
     }
 
     public InventoryItem GetItem(int id)

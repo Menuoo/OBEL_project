@@ -16,27 +16,27 @@ public abstract class InventoryItem : ScriptableObject
 
     ItemButton[] buttons = { new ItemButton(0, "Use/Equip"), new ItemButton(1, "Inspect") };
 
-    public void ItemAction(int actionID)
+    public void ItemAction(int actionID, PlayerInformation playerInfo)
     {
         switch (actionID)
         {
-            case 0: UseEquipItem(); break;
+            case 0: UseEquipItem(playerInfo); break;
             case 1: InspectItem(); break;
             default: break;
         }
     }
 
-    public abstract void UseEquipItem();
+    public abstract void UseEquipItem(PlayerInformation playerInfo);
 
-    public void InspectItem()
+    public string InspectItem()
     {
-        // Change display text from description to inspectDescription
+        return altDescription;
     }
 
     public int GetId() => id;
     public string GetName() => name;
     public string GetDescription() => description;
-    public string GetAltDescription() => altDescription;
+    //public string GetAltDescription() => altDescription;
     public Sprite GetSprite() => inventorySprite;
 }
 

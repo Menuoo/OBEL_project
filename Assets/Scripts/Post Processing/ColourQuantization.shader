@@ -47,6 +47,11 @@ Shader "Custom/ColourQuantization"
 
 
 
+            float random (float2 uv)
+            {
+                return frac(sin(dot(uv,float2(12.9898,78.233)))*43758.5453123);
+            }
+
 
             v2f vert (appdata v)
             {
@@ -65,6 +70,8 @@ Shader "Custom/ColourQuantization"
                 float2 pixelCoord = (i.uv * _MainTex_TexelSize.zw) % 4;
 
                 float mapValue = _BayerMatrix[pixelCoord.y * 4 + pixelCoord.x] / 16.0 - 0.5;
+
+                //mapValue = (col.rgb * _ColourAmount) % _ColourAmount + random(i.uv) - 0.5;
 
                 col.rgb = floor(col.rgb * _ColourAmount + mapValue * _Spread) / _ColourAmount;
 

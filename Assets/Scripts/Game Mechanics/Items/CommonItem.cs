@@ -9,8 +9,8 @@ public class HealingItem : InventoryItem
     [Header("Healing Item")]
     [SerializeField] int healingAmount = 20;
 
-    public override void UseEquipItem()
-    { 
-        // call healing method with the value healingAmount
+    public override void UseEquipItem(PlayerInformation playerInfo)
+    {
+        playerInfo.AlterHP(healingAmount);
     }
 }

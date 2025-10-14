@@ -19,7 +19,10 @@ public class PlayerInformation : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            //health -= 10;
+        }
     }
 
     public void AddItem(int id, int quantity)
@@ -36,5 +39,10 @@ public class PlayerInformation : MonoBehaviour
             inventory.Remove(id);
         else 
             inventory[id] -= 1;
+    }
+
+    public void AlterHP(int amount)
+    { 
+        health = Math.Clamp(health + amount, 0, maxHealth);
     }
 }
