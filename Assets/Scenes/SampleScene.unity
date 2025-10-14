@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInformation: {fileID: 865776798}
-  ItemDatabase: {fileID: 11400000, guid: b4d67caed7c549548a623c94eecbdd6c, type: 2}
+  ItemDatabase: {fileID: 11400000, guid: a170dfe00a32b5149b43a2f5dcec7909, type: 2}
   invImages:
   - {fileID: 537160700}
   - {fileID: 176554653}

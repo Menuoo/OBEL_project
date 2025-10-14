@@ -52,25 +52,3 @@ public struct ItemButton
     public int id { get; private set; }
     public string name { get; private set; }
 }
-
-
-[CreateAssetMenu(menuName = "ScriptableObjects/ItemDatabase")]
-public class ItemDatabase : ScriptableObject
-{
-    [SerializeField] InventoryItem[] items;
-
-    Dictionary<int , InventoryItem> itemsDictionary = new Dictionary<int , InventoryItem>();
-
-    public void InitializeList()
-    {
-        foreach (InventoryItem item in items)
-        {
-            itemsDictionary.Add(item.GetId(), item);
-        }
-    }
-
-    public InventoryItem GetItem(int id)
-    { 
-        return itemsDictionary[id];
-    }
-}

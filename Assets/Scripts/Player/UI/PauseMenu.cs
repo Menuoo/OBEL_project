@@ -15,7 +15,7 @@ public class PauseMenu : MonoBehaviour
     int lastId;
     int currentIndex;
 
-    void Start()
+    void Awake()
     {
         ItemDatabase.InitializeList();
         //this.gameObject.SetActive(false);
