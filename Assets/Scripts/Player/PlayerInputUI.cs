@@ -43,7 +43,6 @@ public class PlayerInputUI : MonoBehaviour, PlayerActions.IUIActions
         if (context.started)
         {
             DirectionPressedEvent(context.ReadValue<Vector2>());
-            Debug.Log("event called!");
         }
     }
 }

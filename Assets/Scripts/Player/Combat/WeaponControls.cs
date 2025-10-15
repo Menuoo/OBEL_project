@@ -18,14 +18,14 @@ public class WeaponControls : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        PlayerInput.OnWeaponActionEvent -= HandleWeaponAction;
     }
 
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
         playerAnim = GetComponent<PlayerAnimationLogic>();
-        SwitchKnife();
+        SetNone();
     }
 
 
@@ -67,6 +67,23 @@ public class WeaponControls : MonoBehaviour
     }
 
 
+    public void SetWeapon(CurrentWeapon newWeap)
+    {
+        switch (newWeap)
+        { 
+            case CurrentWeapon.Pistol: SwitchPistol(); break;
+            case CurrentWeapon.Knife: SwitchKnife(); break;
+            default: SetNone(); break;
+        }
+    }
+
+    void SetNone()
+    {
+        currentWeapon = CurrentWeapon.None;
+        pistol.SetActive(false);
+        knife.SetActive(false);
+    }
+
     void SwitchKnife()
     {
         currentWeapon = CurrentWeapon.Knife;
@@ -84,4 +101,4 @@ public class WeaponControls : MonoBehaviour
     }
 }
 
-public enum CurrentWeapon { Knife, Pistol }
+public enum CurrentWeapon { None, Knife, Pistol }

@@ -18,6 +18,13 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] TMP_Text quantityField;
     [SerializeField] TMP_Text descriptionField;
 
+    [SerializeField] Button button1;
+    [SerializeField] Button button2;
+
+    [SerializeField] InventoryItem equippedItem;
+    [SerializeField] Image equipImage;
+
+
     List<InventoryItem> items = new List<InventoryItem>();
     int lastId;
     int currentIndex;
@@ -31,6 +38,7 @@ public class PauseMenu : MonoBehaviour
     private void OnEnable()
     {
         PlayerInputUI.DirectionPressedEvent += HandleDirectionEvent;
+        InventoryItem.ChangeDescription += ChangeDesc;
         HandleInventory();
         HealthVisuals();
     }
@@ -38,7 +46,8 @@ public class PauseMenu : MonoBehaviour
     private void OnDisable()
     {
         PlayerInputUI.DirectionPressedEvent -= HandleDirectionEvent;
-        items.Clear();
+        InventoryItem.ChangeDescription -= ChangeDesc;
+        //items.Clear();
     }
 
 
@@ -46,6 +55,8 @@ public class PauseMenu : MonoBehaviour
     {
         int i = 0;
         currentIndex = 0;
+        items.Clear();
+
         foreach(var item in playerInformation.inventory)
         {
             items.Add(ItemDatabase.GetItem(item.Key));
@@ -65,7 +76,10 @@ public class PauseMenu : MonoBehaviour
     void DisplayInventory()
     {
         if (items.Count == 0)
+        {
+            descriptionField.text = "ERROR:EMPTY  ERROR:EMPTY  ERROR:EMPTY  ERROR:EMPTY  \nERROR:EMPTY  ERROR:EMPTY  ERROR:EMPTY  ERROR:EMPTY  ERROR:EMPTY  ";
             return;
+        }
 
         // index of first item in line
         int itemIndex = currentIndex - 2;
@@ -73,7 +87,7 @@ public class PauseMenu : MonoBehaviour
 
         if (itemIndex < 0)
         {
-            itemIndex = math.abs(itemIndex) % items.Count;
+            itemIndex = math.abs(items.Count + itemIndex) % items.Count;
         }
 
         for (int i = 0; i < 5; i++)
@@ -97,13 +111,14 @@ public class PauseMenu : MonoBehaviour
 
         playerInformation.inventory.TryGetValue(items[currentIndex].GetId(), out var quant);
         quantityField.text = "Quantity: " + quant.ToString();
+
+        button1.GetComponentInChildren<TMP_Text>().text = items[currentIndex].GetButtons()[0].name;
+        button2.GetComponentInChildren<TMP_Text>().text = items[currentIndex].GetButtons()[1].name;
     }
     
 
     void HandleDirectionEvent(Vector2 dir)
     {
-        Debug.Log(dir.x);
-
         if (dir.x > 0)
         {
             currentIndex++;
@@ -119,6 +134,21 @@ public class PauseMenu : MonoBehaviour
 
 
 
+    public void UseButton(int buttonNum)
+    {
+        items[currentIndex].ItemAction(buttonNum, playerInformation);
+
+        // some bullshit because handleinventory resets the desc
+        if (buttonNum == 1)
+            return;
+
+        HandleInventory();
+    }
+
+    public void ChangeDesc(string newDesc)
+    { 
+        descriptionField.text = newDesc;
+    }
 
 
     void HealthVisuals()

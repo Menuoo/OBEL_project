@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class PlayerInformation : MonoBehaviour
 {
+    [SerializeField] WeaponControls weaponControls;
     [SerializeField] int maxHealth = 100;
+
+
     public int health { get; private set; }
 
     public Dictionary<int, int> inventory { get; private set; }
@@ -14,6 +17,10 @@ public class PlayerInformation : MonoBehaviour
     void Start()
     {
         inventory = new Dictionary<int, int>();
+        // adds gun and knife to inventory
+        inventory.Add(2001, 1);
+        inventory.Add(2002, 1);
+
         health = maxHealth;
     }
 
@@ -44,5 +51,10 @@ public class PlayerInformation : MonoBehaviour
     public void AlterHP(int amount)
     { 
         health = Math.Clamp(health + amount, 0, maxHealth);
+    }
+
+    public void Equip(CurrentWeapon weaponToEquip)
+    { 
+        weaponControls.SetWeapon(weaponToEquip);
     }
 }

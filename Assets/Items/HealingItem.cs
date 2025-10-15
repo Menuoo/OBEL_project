@@ -12,5 +12,6 @@ public class HealingItem : InventoryItem
     public override void UseEquipItem(PlayerInformation playerInfo)
     {
         playerInfo.AlterHP(healingAmount);
+        playerInfo.RemoveItem(this.GetId());
     }
 }

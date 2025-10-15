@@ -16,6 +16,6 @@ MonoBehaviour:
   itemName: Bandage
   inventorySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   description: Using this item will restore a small amount of health
-  altDescription: 
+  altDescription: It's made by a company named LiveSolutions..
   canEquip: 0
   healingAmount: 20

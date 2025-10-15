@@ -14,7 +14,6 @@ public class ItemDatabase : ScriptableObject
 
     public void InitializeList()
     {
-        Debug.Log("dict size: " + itemsDictionary.Count);
         itemsDictionary.Clear();
 
         foreach (InventoryItem item in items)

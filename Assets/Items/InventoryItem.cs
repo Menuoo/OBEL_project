@@ -12,7 +12,9 @@ public abstract class InventoryItem : ScriptableObject
     [SerializeField] Sprite inventorySprite;
     [SerializeField] string description;
     [SerializeField] string altDescription;
-    [SerializeField] bool canEquip;
+    //[SerializeField] bool canEquip;
+
+    public static event Action<string> ChangeDescription;
 
     ItemButton[] buttons = { new ItemButton(0, "Use/Equip"), new ItemButton(1, "Inspect") };
 
@@ -30,6 +32,9 @@ public abstract class InventoryItem : ScriptableObject
 
     public string InspectItem()
     {
+        Debug.Log("inspected??");
+
+        ChangeDescription(altDescription);
         return altDescription;
     }
 
@@ -38,6 +43,8 @@ public abstract class InventoryItem : ScriptableObject
     public string GetDescription() => description;
     //public string GetAltDescription() => altDescription;
     public Sprite GetSprite() => inventorySprite;
+
+    public ItemButton[] GetButtons() => buttons;
 }
 
 
