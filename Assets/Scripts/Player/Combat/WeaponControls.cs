@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class WeaponControls : MonoBehaviour
 {
-    [SerializeField] GameObject knife, pistol;
+    [SerializeField] Knife knife;
+    [SerializeField] GameObject pistol;
 
     CurrentWeapon currentWeapon = CurrentWeapon.Knife;
     PlayerAnimationLogic playerAnim;
@@ -81,7 +82,7 @@ public class WeaponControls : MonoBehaviour
     {
         currentWeapon = CurrentWeapon.None;
         pistol.SetActive(false);
-        knife.SetActive(false);
+        knife.gameObject.SetActive(false);
     }
 
     void SwitchKnife()
@@ -89,14 +90,14 @@ public class WeaponControls : MonoBehaviour
         currentWeapon = CurrentWeapon.Knife;
 
         pistol.SetActive(false);
-        knife.SetActive(true);
+        knife.gameObject.SetActive(true);
     }
 
     void SwitchPistol()
     {
         currentWeapon = CurrentWeapon.Pistol;
 
-        knife.SetActive(false);
+        knife.gameObject.SetActive(false);
         pistol.SetActive(true);
     }
 }

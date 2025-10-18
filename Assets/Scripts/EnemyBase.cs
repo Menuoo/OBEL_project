@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     [SerializeField] float health = 20;
+    int lastAttack = -1;
 
     private void Update()
     {
@@ -21,8 +22,15 @@ public class EnemyBase : MonoBehaviour
 
         Knife knife = other.gameObject.GetComponent<Knife>();
         if (knife != null)
-        { 
-            health -= knife.GetDamage();
+        {
+            int attackId;
+            int dmgTaken = knife.GetDamage(out attackId);
+
+            if (lastAttack != attackId)
+            { 
+                lastAttack = attackId;
+                health -= dmgTaken;
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ public class PlayerAnimationLogic : MonoBehaviour
     [SerializeField] Animator playerAnimator;
     PlayerController playerController;
     PlayerInput playerInput;
+    WeaponControls weaponControls;
+
+    public static event Action<bool> KnifeAction;
+
 
     float intentionTimer = 0f;
 
@@ -33,6 +38,7 @@ public class PlayerAnimationLogic : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         playerInput = GetComponent<PlayerInput>();
+        weaponControls = GetComponent<WeaponControls>();
     }
 
 
@@ -116,20 +122,15 @@ public class PlayerAnimationLogic : MonoBehaviour
 
 
 
-    public void ResetAdd()
-    {
-        playerAnimator.SetBool(additionalActionHash, false);
-    }
-
-    public void ResetSlice()
-    {
-        playerAnimator.SetBool(slicingHash, false);
-    }
-
 
     public void SetInAction(bool state)
     {
         playerAnimator.SetBool(inActionHash, state);
+    }
+
+    public void SetKnife(bool state)
+    {
+        KnifeAction?.Invoke(state);
     }
 
     public void ResetActions()
@@ -139,7 +140,12 @@ public class PlayerAnimationLogic : MonoBehaviour
         playerAnimator.SetBool(inActionHash, false);
         actionIntention = false;
         addAvailable = false;
+
+        SetKnife(false);
     }
+
+
+
 
 
     public void Flinch()
@@ -162,8 +168,20 @@ public class PlayerAnimationLogic : MonoBehaviour
     }
 
 
+
+
+
     public void SetAddAvailability(bool state)
     { 
         addAvailable = state;
+    }
+    public void ResetAdd()
+    {
+        playerAnimator.SetBool(additionalActionHash, false);
+    }
+
+    public void ResetSlice()
+    {
+        playerAnimator.SetBool(slicingHash, false);
     }
 }

@@ -53,17 +53,26 @@ public class PlayerInteractions : MonoBehaviour
         interactCollider.size / 2f, transform.parent.forward, transform.parent.rotation, 0f, interactLayers);
 
 
+        IInteractable finalTarget = null;
+        float minDist = 100f;
         foreach (RaycastHit hit in hits)
         {
             IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
             if (interactable != null)
             {
-                if (interactTriggered)
+                float distance = Vector3.Magnitude(interactable.transform.position - this.transform.position);
+                if (distance < minDist)
                 {
-                    interactTriggered = false;
-                    interactable.OnInteract(this);
+                    finalTarget = interactable;
+                    minDist = distance;
                 }
             }
+        }
+
+        if (interactTriggered)
+        {
+            interactTriggered = false;
+            finalTarget.OnInteract(this);
         }
     }
 

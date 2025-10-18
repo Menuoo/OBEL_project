@@ -44,6 +44,8 @@ public class AnimationHandling : MonoBehaviour
         {
             playerController.SetAnimationLock(true, true);
             playerAnim.SetInAction(true);
+
+            playerAnim.SetKnife(true);
         }
     }
 
@@ -54,6 +56,8 @@ public class AnimationHandling : MonoBehaviour
             playerAnim.SetAddAvailability(false);
             playerController.SetAnimationLock(true, true);
             playerAnim.SetInAction(true);
+
+            playerAnim.SetKnife(true);
         }
     }
 

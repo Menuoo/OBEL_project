@@ -121,13 +121,13 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     public void OnWeaponAction(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnWeaponActionEvent(this);
+            OnWeaponActionEvent?.Invoke(this);
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnInteractEvent(this);
+            OnInteractEvent?.Invoke(this);
     }
 
     public void OnPause(InputAction.CallbackContext context)
@@ -140,7 +140,7 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     public void PauseGame()
     {
         PauseHandler.FlipTime();
-        PauseGameEvent(PauseHandler.pauseState);
+        PauseGameEvent?.Invoke(PauseHandler.pauseState);
         SwapControls(PauseHandler.pauseState ? 0 : 1);
     }
 }

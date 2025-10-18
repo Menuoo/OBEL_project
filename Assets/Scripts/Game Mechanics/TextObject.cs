@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TextObject : MonoBehaviour, IInteractable
+public class TextObject : IInteractable
 {
     [SerializeField] string[] displayText;
 
-    public void OnInteract(PlayerInteractions interactions)
+    public override void OnInteract(PlayerInteractions interactions)
     {
         interactions.DisplayMessage(displayText);
     }
 }
 
-public interface IInteractable
+public abstract class IInteractable : MonoBehaviour
 {
-    public void OnInteract(PlayerInteractions interactions);
+    public abstract void OnInteract(PlayerInteractions interactions);
 }
