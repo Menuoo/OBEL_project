@@ -1,4 +1,4 @@
-Shader "Custom/Sharpness"
+Shader "Custom/Bloom"
 {
     Properties
     {
@@ -46,16 +46,7 @@ Shader "Custom/Sharpness"
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
 
-                float2 offset = 1 / _MainTex_TexelSize.zw;
-
-                fixed4 colL = tex2D(_MainTex, i.uv + float2(-offset.x, 0));
-                fixed4 colR = tex2D(_MainTex, i.uv + float2(offset.x, 0));
-                fixed4 colU = tex2D(_MainTex, i.uv + float2(0, offset.y));
-                fixed4 colD = tex2D(_MainTex, i.uv + float2(0, -offset.y));
-
-                fixed4 finalCol = col * 5 - colL - colR - colU - colD;
-
-                return finalCol;
+                return col;
             }
             ENDCG
         }

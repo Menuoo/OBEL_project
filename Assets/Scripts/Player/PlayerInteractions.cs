@@ -69,7 +69,7 @@ public class PlayerInteractions : MonoBehaviour
             }
         }
 
-        if (interactTriggered)
+        if (interactTriggered && finalTarget != null)
         {
             interactTriggered = false;
             finalTarget.OnInteract(this);

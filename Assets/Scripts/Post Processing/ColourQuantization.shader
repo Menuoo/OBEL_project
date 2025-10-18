@@ -5,6 +5,7 @@ Shader "Custom/ColourQuantization"
         _MainTex ("Texture", 2D) = "white" {}
         _ColourAmount ("Colour Amount", Int) = 64
         _Spread ("Dither Spread", float) = 1
+        _Contrast ("Colour Contrast", float) = 1
     }
     SubShader
     {
@@ -36,7 +37,7 @@ Shader "Custom/ColourQuantization"
             float4 _MainTex_ST;
             float4 _MainTex_TexelSize;
             int _ColourAmount;
-            float _Spread;
+            float _Spread, _Contrast;
 
             static const int _BayerMatrix[16] = {
                 0, 8, 2, 10, 
@@ -72,6 +73,8 @@ Shader "Custom/ColourQuantization"
                 float mapValue = _BayerMatrix[pixelCoord.y * 4 + pixelCoord.x] / 16.0 - 0.5;
 
                 //mapValue = (col.rgb * _ColourAmount) % _ColourAmount + random(i.uv) - 0.5;
+
+                col.rgb = float3(pow(col.r, _Contrast), pow(col.g, _Contrast), pow(col.b, _Contrast));
 
                 col.rgb = floor(col.rgb * _ColourAmount + mapValue * _Spread) / _ColourAmount;
 
