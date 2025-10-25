@@ -7,6 +7,8 @@ Shader "Unlit/BlendMove"
         _SecTex ("Secondary Texture", 2D) = "white" {}
         _Speed ("Tex Speed", Float) = 0.0
         _Range ("Colour Range", Float) = 0.0
+
+        _Timer ("Time Offset", Range(0.0, 1.0)) = 0.0
     }
     SubShader
     {
@@ -39,7 +41,7 @@ Shader "Unlit/BlendMove"
             float4 _Color;
             sampler2D _MainTex, _SecTex;
             float4 _MainTex_ST, _SecTex_ST;
-            float _Speed, _Range;
+            float _Speed, _Range, _Timer;
 
             v2f vert (appdata v)
             {
@@ -58,7 +60,7 @@ Shader "Unlit/BlendMove"
                 if (_Range != 0)
                 {
                     localAlpha = (clr.r >= time ? (clr.r - time) : (clr.r + 1.0 - time)) / _Range;
-                    localAlpha = 1.0;
+                    //localAlpha = 1.0;
                 }
 
                 if (rangeEnd > 1) 
@@ -77,19 +79,19 @@ Shader "Unlit/BlendMove"
             {
                 float curTime = frac(_Time.y * _Speed);
 
-                fixed4 mainCol = tex2D (_MainTex, i.uv);// + float2(1, 0) * curTime);// * _Color;
-                fixed4 secCol = tex2D (_MainTex, i.uv2);// + float2(1, 0) * frac(curTime + 0.5));// * _Color;
+                fixed4 mainCol = tex2D (_MainTex, i.uv); // + float2(1, 0) * curTime);// * _Color;
+                fixed4 secCol = tex2D (_MainTex, i.uv2); // + float2(1, 0) * frac(curTime + 0.5));// * _Color;
 
 
                 mainCol.r = FindRange(mainCol, curTime);
-                //secCol.r = FindRange(secCol, frac(curTime + 0.5 + _Range / 2));
-
-                curTime = abs(curTime - 0.5);
+                secCol.r = FindRange(secCol, frac(curTime + _Timer));
 
 
-                fixed4 finalCol = mainCol; //mainCol * (curTime) + secCol * (1 - curTime);
+                curTime = abs(curTime - 0.5) * 2.0;
 
-                finalCol.a = finalCol.r;
+                fixed4 finalCol = mainCol * (curTime) + secCol * (1 - curTime);
+
+                finalCol.a = finalCol.r * _Color.a;
                 finalCol.rgb = _Color;
 
                 return finalCol;
