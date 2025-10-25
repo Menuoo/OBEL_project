@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] Button button1;
     [SerializeField] Button button2;
 
-    [SerializeField] InventoryItem equippedItem;
+    InventoryItem equippedItem;
     [SerializeField] Image equipImage;
 
 
@@ -90,6 +90,7 @@ public class PauseMenu : MonoBehaviour
             itemIndex = math.abs(items.Count + itemIndex) % items.Count;
         }
 
+        // handle main inventory slots
         for (int i = 0; i < 5; i++)
         {
             finalIndex = (itemIndex + i) % items.Count;
@@ -98,6 +99,18 @@ public class PauseMenu : MonoBehaviour
             if (i == 2)
                 currentIndex = finalIndex;
         }
+
+
+        // handle equip image
+        if (playerInformation.equipChange)
+        {
+            equippedItem = ItemDatabase.GetItem(playerInformation.equipId);
+        }
+        if (equippedItem != null)
+        {
+            equipImage.sprite = equippedItem.GetSprite();
+        }
+
 
         DisplayItem();
     }

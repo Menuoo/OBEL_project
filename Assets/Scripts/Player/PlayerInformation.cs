@@ -12,7 +12,8 @@ public class PlayerInformation : MonoBehaviour
     public int health { get; private set; }
 
     public Dictionary<int, int> inventory { get; private set; }
-    
+    public bool equipChange { get; private set; }
+    public int equipId { get; private set; }
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class PlayerInformation : MonoBehaviour
         inventory.Add(2002, 1);
 
         health = maxHealth;
+        equipChange = false;
     }
 
     void Update()
@@ -53,8 +55,17 @@ public class PlayerInformation : MonoBehaviour
         health = Math.Clamp(health + amount, 0, maxHealth);
     }
 
-    public void Equip(CurrentWeapon weaponToEquip)
+
+    public void Equip(CurrentWeapon weaponToEquip, int id)
     { 
         weaponControls.SetWeapon(weaponToEquip);
+        equipChange = true;
+        equipId = id;
     }
+
+    public void ResetEquip()
+    { 
+        equipChange = false;
+    }
+
 }

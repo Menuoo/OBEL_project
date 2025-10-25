@@ -10,6 +10,6 @@ public class EquipItem : InventoryItem
 
     public override void UseEquipItem(PlayerInformation playerInfo)
     {
-        playerInfo.Equip(weaponType);
+        playerInfo.Equip(weaponType, this.GetId());
     }
 }
