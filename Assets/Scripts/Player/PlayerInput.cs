@@ -21,6 +21,7 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
     public static event Action<PlayerInput> OnWeaponActionEvent;
     public static event Action<PlayerInput> OnInteractEvent;
+    public static event Action<bool> OnFlashlightEvent;
     public static event Action<bool> PauseGameEvent;
 
     public PlayerActions playerActions { get; private set; }
@@ -129,6 +130,13 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
         if (context.performed)
             OnInteractEvent?.Invoke(this);
     }
+    public void OnFlashlight(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            OnFlashlightEvent(true);
+    }
+
+
 
     public void OnPause(InputAction.CallbackContext context)
     {

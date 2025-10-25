@@ -8,6 +8,8 @@ public class PlayerInformation : MonoBehaviour
     [SerializeField] WeaponControls weaponControls;
     [SerializeField] int maxHealth = 100;
 
+    [SerializeField] Light flashlight;
+    bool flashlightOn = false;
 
     public int health { get; private set; }
 
@@ -24,7 +26,22 @@ public class PlayerInformation : MonoBehaviour
 
         health = maxHealth;
         equipChange = false;
+
+        flashlight.enabled = flashlightOn;
     }
+
+    private void OnEnable()
+    {
+        PlayerInput.OnFlashlightEvent += TriggerFlashlight;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInput.OnFlashlightEvent -= TriggerFlashlight;
+    }
+
+
+
 
     void Update()
     {
@@ -68,4 +85,10 @@ public class PlayerInformation : MonoBehaviour
         equipChange = false;
     }
 
+
+    public void TriggerFlashlight(bool state)
+    { 
+        flashlightOn = !flashlightOn;
+        flashlight.enabled = flashlightOn;
+    }
 }

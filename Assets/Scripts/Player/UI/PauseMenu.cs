@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using TMPro;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class PauseMenu : MonoBehaviour
         InventoryItem.ChangeDescription += ChangeDesc;
         HandleInventory();
         HealthVisuals();
+
+        Camera.main.GetComponent<PostProcessLayer>().enabled = false;
     }
 
     private void OnDisable()
@@ -48,6 +51,8 @@ public class PauseMenu : MonoBehaviour
         PlayerInputUI.DirectionPressedEvent -= HandleDirectionEvent;
         InventoryItem.ChangeDescription -= ChangeDesc;
         //items.Clear();
+
+        Camera.main.GetComponent<PostProcessLayer>().enabled = true;
     }
 
 

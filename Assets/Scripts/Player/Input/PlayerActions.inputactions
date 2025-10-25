@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Flashlight",
+                    "type": "Button",
+                    "id": "4a412582-9829-411d-9e41-b049cd7fe540",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -271,11 +280,22 @@
                 {
                     "name": "",
                     "id": "a87b6a84-0c43-44d2-8bca-20f7557fd3bf",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eec2ddf4-aa96-4c20-ab5c-216b884339f7",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flashlight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -449,7 +469,7 @@
                 {
                     "name": "",
                     "id": "b90e680b-aed2-4965-b1d9-cd9b1212eb2e",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
