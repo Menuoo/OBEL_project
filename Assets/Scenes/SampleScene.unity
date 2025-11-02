@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.1
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.12452829, g: 0.026080454, b: 0.026080454, a: 1}
+  m_AmbientSkyColor: {r: 0.1254902, g: 0.027450982, b: 0.074285045, a: 1}
   m_AmbientEquatorColor: {r: 0.3372549, g: 0.10588235, b: 0.20507076, a: 1}
   m_AmbientGroundColor: {r: 0.14117648, g: 0.056634232, b: 0.050980385, a: 1}
   m_AmbientIntensity: 0.2
@@ -4662,7 +4662,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.5113207, b: 0.58371335, a: 1}
+  m_Color: {r: 1, g: 0.50980395, b: 0.9056912, a: 1}
   m_Intensity: 0.58
   m_Range: 10
   m_SpotAngle: 30
@@ -5728,6 +5728,7 @@ Transform:
   - {fileID: 1877779287}
   - {fileID: 658327024}
   - {fileID: 320418704}
+  - {fileID: 1510710463}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &865776792
@@ -14341,6 +14342,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503802800}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1510710462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510710463}
+  - component: {fileID: 1510710464}
+  m_Layer: 10
+  m_Name: TEMPORARY_FOR_TEST_ONLY
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510710463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510710462}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 865776791}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1510710464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510710462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5abf3a8b0b4160f48ba9a9896db1790f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posterizer: {fileID: 2100000, guid: 4176045e547e99847b1e237cff74f43d, type: 2}
 --- !u!1001 &1518089380
 PrefabInstance:
   m_ObjectHideFlags: 0
