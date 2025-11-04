@@ -29,6 +29,7 @@ public class PlayerAnimationLogic : MonoBehaviour
     private static int walkingHash = Animator.StringToHash("isWalking");
     private static int walkSpeedHash = Animator.StringToHash("walkSpeed");
     private static int aimingHash = Animator.StringToHash("isAiming");
+    private static int aimHeightHash = Animator.StringToHash("aimHeight");
     private static int slicingHash = Animator.StringToHash("isSlicing");
     private static int additionalActionHash = Animator.StringToHash("additionalAction");
     private static int inActionHash = Animator.StringToHash("inAction");
@@ -117,6 +118,9 @@ public class PlayerAnimationLogic : MonoBehaviour
     public void Aiming(bool state)
     {
         playerAnimator.SetBool(aimingHash, state);
+
+        float verticalValue = weaponControls.GetPistol().GetTargetValue();
+        playerAnimator.SetFloat(aimHeightHash, verticalValue);
 
         if (state)
             playerController.SetAnimationLock(state, playerController.inRotationLock);

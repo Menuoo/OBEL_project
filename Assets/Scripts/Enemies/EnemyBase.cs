@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] GameObject targetPoint;
+    [SerializeField] Transform targetPoint;
     [SerializeField] float health = 20;
     int enemyId;
     int lastAttack = -1;
@@ -48,4 +48,6 @@ public class EnemyBase : MonoBehaviour
             }
         }
     }
+
+    public Vector3 GetTargetPos() => targetPoint.position;
 }

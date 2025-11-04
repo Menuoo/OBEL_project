@@ -916,7 +916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ebde0ea42265b459e0abdc42635559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPoint: {fileID: 325142527}
+  targetPoint: {fileID: 325142528}
   health: 20
 --- !u!65 &159821683
 BoxCollider:
@@ -12826,6 +12826,7 @@ MonoBehaviour:
   weaponControls: {fileID: 865776796}
   shotLight: {fileID: 20232605}
   shotDelay: 0.1
+  range: 10
 --- !u!4 &1146104674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2367404602177384665, guid: 0966340c7034ba44ea087fe45ce813b3, type: 3}
@@ -17364,6 +17365,7 @@ MonoBehaviour:
   weaponControls: {fileID: 0}
   shotLight: {fileID: 0}
   shotDelay: 0.1
+  range: 10
 --- !u!1001 &1804045100
 PrefabInstance:
   m_ObjectHideFlags: 0
