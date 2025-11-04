@@ -9,6 +9,8 @@ public class FieldItem : IInteractable
 
     public override void OnInteract(PlayerInteractions interactions)
     {
+        SoundManager.instance.PlaySound(7);
+
         Debug.Log("touched " + this.gameObject.name);
         interactions.AddItemToInventory(id, quantity);
         Destroy(this.gameObject);

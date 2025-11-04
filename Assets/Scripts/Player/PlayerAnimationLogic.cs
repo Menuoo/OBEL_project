@@ -16,7 +16,7 @@ public class PlayerAnimationLogic : MonoBehaviour
 
     float verticalValue = 0.5f;
     float verticalTarget = 0.5f;
-    float verticalSpeed = 0.5f;
+    float verticalSpeed = 1f;
 
 
     float intentionTimer = 0f;

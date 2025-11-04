@@ -9,11 +9,14 @@ public class Pistol : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] WeaponControls weaponControls;
 
+    [SerializeField] int damage = 10;
+
     [SerializeField] Light shotLight;
     [SerializeField] float shotDelay = 0.1f;
     [SerializeField] float range = 10f;
 
     bool canShoot = true;
+    int attackId = 9;
 
     EnemyBase target = null;
 
@@ -116,14 +119,13 @@ public class Pistol : MonoBehaviour
             Vector3 vecTo = targetPos - playerController.transform.position;
 
             float angle = Vector3.Angle(vecTo, playerController.transform.up);
-            Debug.Log(angle);
 
             float rawValue = 1f - (angle - 45f) / 90f;
 
             return math.clamp(rawValue, 0f, 1f);
         }
 
-        return 0.5f;
+        return 0.7f;
     }
 
 
@@ -134,7 +136,10 @@ public class Pistol : MonoBehaviour
 
         Debug.Log("we shootin out here");
 
+        attackId = (attackId + 1) % 8 + 8;
+        target?.TakeDamage(attackId, damage);
 
+        input.PlaySound(1);
 
         shotLight.enabled = true;
         canShoot = false;

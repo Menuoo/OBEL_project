@@ -6,6 +6,12 @@ public class AnimationHandling : MonoBehaviour
 {
     [SerializeField] PlayerAnimationLogic playerAnim;
     [SerializeField] PlayerController playerController;
+    [SerializeField] AudioSource playerSource;
+
+    public void PlaySound(int id)
+    { 
+        playerSource.PlayOneShot(SoundManager.instance.GetSound(id));
+    }
 
     public void ResetSlice()
     {

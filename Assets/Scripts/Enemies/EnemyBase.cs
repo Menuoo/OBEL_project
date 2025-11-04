@@ -41,11 +41,16 @@ public class EnemyBase : MonoBehaviour
             int attackId;
             int dmgTaken = knife.GetDamage(out attackId);
 
-            if (lastAttack != attackId)
-            { 
-                lastAttack = attackId;
-                health -= dmgTaken;
-            }
+            TakeDamage(attackId, dmgTaken);
+        }
+    }
+
+    public void TakeDamage(int attackId, int dmgTaken)
+    {
+        if (lastAttack != attackId)
+        {
+            lastAttack = attackId;
+            health -= dmgTaken;
         }
     }
 

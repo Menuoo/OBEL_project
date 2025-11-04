@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 {
     [SerializeField] PlayerInputUI ui;
     [SerializeField] LayerMask mouseLayers;
+    [SerializeField] AudioSource playerSource;
 
     public Vector3 mousePosition { get; private set; }
 
@@ -160,5 +161,11 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
         PauseHandler.FlipTime();
         PauseGameEvent?.Invoke(PauseHandler.pauseState);
         SwapControls(PauseHandler.pauseState ? 0 : 1);
+    }
+
+
+    public void PlaySound(int id)
+    {
+        playerSource.PlayOneShot(SoundManager.instance.GetSound(id));
     }
 }
