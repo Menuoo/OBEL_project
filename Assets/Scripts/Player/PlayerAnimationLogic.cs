@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,10 @@ public class PlayerAnimationLogic : MonoBehaviour
     WeaponControls weaponControls;
 
     public static event Action<bool> KnifeAction;
+
+    float verticalValue = 0.5f;
+    float verticalTarget = 0.5f;
+    float verticalSpeed = 0.5f;
 
 
     float intentionTimer = 0f;
@@ -45,6 +50,14 @@ public class PlayerAnimationLogic : MonoBehaviour
 
     void Update()
     {
+        // adjust vertical aim
+        //verticalValue = math.lerp(verticalValue, verticalTarget, Time.deltaTime * verticalSpeed);
+        verticalValue = verticalValue > verticalTarget ?
+            math.max(verticalValue - verticalSpeed * Time.deltaTime, verticalTarget) :
+            math.min(verticalValue + verticalSpeed * Time.deltaTime, verticalTarget);
+        playerAnimator.SetFloat(aimHeightHash, verticalValue);
+
+
         if (intentionTimer > 0f)
         {
             intentionTimer -= Time.deltaTime;
@@ -52,7 +65,6 @@ public class PlayerAnimationLogic : MonoBehaviour
             if (intentionTimer <= 0f)
                 ResetIntention();
         }
-
 
         if (isFlinching)
         {
@@ -71,7 +83,7 @@ public class PlayerAnimationLogic : MonoBehaviour
             Flinch();
         }
 
-        //playerAnimator.SetBool(rightHandHash, rightHandHold);
+        playerAnimator.SetBool(rightHandHash, rightHandHold);
 
         playerAnimator.SetBool(walkingHash, playerController.walkDir.magnitude != 0);
         playerAnimator.SetFloat(walkSpeedHash, playerController.animSpeed);
@@ -119,8 +131,8 @@ public class PlayerAnimationLogic : MonoBehaviour
     {
         playerAnimator.SetBool(aimingHash, state);
 
-        float verticalValue = weaponControls.GetPistol().GetTargetValue();
-        playerAnimator.SetFloat(aimHeightHash, verticalValue);
+        // for vertical aim
+        verticalTarget = weaponControls.GetPistol().GetTargetValue();
 
         if (state)
             playerController.SetAnimationLock(state, playerController.inRotationLock);

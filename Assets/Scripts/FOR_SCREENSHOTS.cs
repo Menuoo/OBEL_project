@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class FOR_SCREENSHOTS : MonoBehaviour
 {
     [SerializeField] Material posterizer;
+    [SerializeField] CinemachineVirtualCamera virtCamera;
 
     // Update is called once per frame
     void Update()
@@ -16,6 +18,15 @@ public class FOR_SCREENSHOTS : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
             posterizer.SetFloat("_ColourAmount", posterizer.GetFloat("_ColourAmount") - 1f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            virtCamera.m_Lens.FieldOfView += 3f;
+        }
+        if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            virtCamera.m_Lens.FieldOfView -= 3f;
         }
     }
 }

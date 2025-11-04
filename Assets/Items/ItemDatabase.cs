@@ -10,7 +10,7 @@ public class ItemDatabase : ScriptableObject
 
     Dictionary<int, InventoryItem> itemsDictionary = new Dictionary<int, InventoryItem>();
 
-    bool initialized = false;
+    //bool initialized = false;
 
     public void InitializeList()
     {

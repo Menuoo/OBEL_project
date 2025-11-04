@@ -72,27 +72,53 @@ public class Pistol : MonoBehaviour
             }
         }
 
-        if (targetEnemy != null)
-            TargetNewEnemy(targetEnemy);
+        target = targetEnemy;
     }
 
-    void TargetNewEnemy(EnemyBase newEnemy)
+    /*void TargetNewEnemy(EnemyBase newEnemy)
     {
+        Debug.Log("found new enemy!!!");
         target = newEnemy;
-    }
+    }*/
 
     // returns value between 0 and 1 (instead of -1 and 1), for vertical aim
     public float GetTargetValue()
     {
         if (target != null)
         {
-
-            // FOR SURE INCOMPLETE/INCORRECT      --  - - - - -     FIX THIS
-
+            /*
+            
+            // highkey worse version
 
             Vector3 targetPos = target.GetTargetPos();
+            
+            Vector3 vecTo = targetPos - playerController.transform.position;
+            Vector3 vecToNormal = vecTo;
+            vecToNormal.y = 0f;
+
+            float angle = math.degrees(math.acos(vecToNormal.magnitude / vecTo.magnitude)); // dangerous line
+            float sign = math.sign(Vector3.Cross(vecTo, vecToNormal).magnitude);
+            //float sign = math.sign(targetPos.y - playerController.transform.position.y - 0.4f); // 0.5f is the pistol default state offset
+            float rawValue = sign * (angle / 90f) * 0.5f + 0.5f;
+
+            return math.clamp(rawValue, 0f, 1f);*/
+
+
+            // lowkey better version
+
+            /*Vector3 targetPos = target.GetTargetPos();
             float rawValue = targetPos.y - transform.position.y;
             rawValue = rawValue / 2f + 0.5f;
+
+            return math.clamp(rawValue, 0f, 1f);*/
+
+            Vector3 targetPos = target.GetTargetPos();
+            Vector3 vecTo = targetPos - playerController.transform.position;
+
+            float angle = Vector3.Angle(vecTo, playerController.transform.up);
+            Debug.Log(angle);
+
+            float rawValue = 1f - (angle - 45f) / 90f;
 
             return math.clamp(rawValue, 0f, 1f);
         }
