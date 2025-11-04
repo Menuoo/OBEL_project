@@ -59,11 +59,6 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
     public void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.V))
-        {
-            SwapControls(ControlsEnabled ? 0 : 1);
-        }*/
-
         // Mouse World Position
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -72,7 +67,6 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
         if (mouseHit)
         {
             mousePosition = hit.point;
-            //Debug.Log(mousePosition);
         }
     }
 

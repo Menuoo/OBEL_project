@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponControls : MonoBehaviour
 {
     [SerializeField] Knife knife;
-    [SerializeField] GameObject pistol;
+    [SerializeField] Pistol pistol;
 
     public bool isAiming { get; private set; }
 
@@ -86,7 +86,7 @@ public class WeaponControls : MonoBehaviour
     void SetNone()
     {
         currentWeapon = CurrentWeapon.None;
-        pistol.SetActive(false);
+        pistol.gameObject.SetActive(false);
         knife.gameObject.SetActive(false);
     }
 
@@ -94,7 +94,7 @@ public class WeaponControls : MonoBehaviour
     {
         currentWeapon = CurrentWeapon.Knife;
 
-        pistol.SetActive(false);
+        pistol.gameObject.SetActive(false);
         knife.gameObject.SetActive(true);
     }
 
@@ -103,8 +103,10 @@ public class WeaponControls : MonoBehaviour
         currentWeapon = CurrentWeapon.Pistol;
 
         knife.gameObject.SetActive(false);
-        pistol.SetActive(true);
+        pistol.gameObject.SetActive(true);
     }
+
+    public Pistol GetPistol() => pistol;
 }
 
 public enum CurrentWeapon { None, Knife, Pistol }

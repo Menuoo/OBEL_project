@@ -88,13 +88,18 @@ public class PlayerAnimationLogic : MonoBehaviour
             playerAnimator.SetBool(slicingHash, true);
 
             if (addAvailable)
+            {
                 playerAnimator.SetBool(additionalActionHash, true);
+            }
         }
 
         if (weapon == CurrentWeapon.Pistol)
         {
-            if (addAvailable)
-                playerAnimator.SetBool(additionalActionHash, true);
+            if (addAvailable && !isFlinching)
+            {
+                weaponControls.GetPistol().HandleShot(playerInput);
+                //playerAnimator.SetBool(additionalActionHash, true);
+            }
         }
     }
 
@@ -175,6 +180,7 @@ public class PlayerAnimationLogic : MonoBehaviour
     { 
         addAvailable = state;
     }
+
     public void ResetAdd()
     {
         playerAnimator.SetBool(additionalActionHash, false);

@@ -5,13 +5,28 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
+    [SerializeField] GameObject targetPoint;
     [SerializeField] float health = 20;
+    int enemyId;
     int lastAttack = -1;
+
+
+    private void Start()
+    {
+        enemyId = EnemyManager.instance.AddEnemy(this);
+    }
+
 
     private void Update()
     {
+        Die();
+    }
+
+    void Die()
+    {
         if (health <= 0)
         {
+            EnemyManager.instance.RemoveEnemy(enemyId);
             Destroy(this.gameObject);
         }
     }
