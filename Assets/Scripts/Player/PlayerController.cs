@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float gravity;
 
     [Header("Other")]
+    [SerializeField] bool cameraRotEnabled = false;
     [SerializeField] Vector2 lookSensitivity;
     [SerializeField] float lookLimitV;
     [SerializeField] LayerMask groundLayers;
@@ -27,8 +28,11 @@ public class PlayerController : MonoBehaviour
     public Vector3 walkDir { get; private set; }
     public float animSpeed { get; private set; }
 
+
+    // ROTATION   ---   Player and Camera
     private float playerRotation = 0f;
     private Vector2 cameraRotation = Vector2.zero;
+
 
     float verticalVelocity = 0;
     bool isGrounded = false;
@@ -127,6 +131,12 @@ public class PlayerController : MonoBehaviour
 
     void Look()
     {
+        if (!cameraRotEnabled)
+        { 
+            playerCamera.transform.rotation = Camera.main.transform.rotation;
+            return;
+        }
+
         cameraRotation.x += lookSensitivity.x * playerInput.Look.x;
         cameraRotation.y = math.clamp(cameraRotation.y - lookSensitivity.y * playerInput.Look.y,
                                 -lookLimitV, lookLimitV);
