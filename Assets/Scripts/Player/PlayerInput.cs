@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 {
     [SerializeField] PlayerInputUI ui;
+    [SerializeField] LayerMask mouseLayers;
+
+    public Vector3 mousePosition { get; private set; }
 
     public Vector2 Walk { get; private set; }
     public Vector2 Look { get; private set; }
@@ -29,6 +32,8 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
     private void OnEnable()
     {
+        mousePosition = Vector3.zero;
+
         ControlsEnabled = true;
         GamePaused = false;
 
@@ -54,9 +59,20 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        /*if (Input.GetKeyDown(KeyCode.V))
         {
             SwapControls(ControlsEnabled ? 0 : 1);
+        }*/
+
+        // Mouse World Position
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        bool mouseHit = Physics.Raycast(ray, out hit, 1000f, mouseLayers);
+
+        if (mouseHit)
+        {
+            mousePosition = hit.point;
+            //Debug.Log(mousePosition);
         }
     }
 

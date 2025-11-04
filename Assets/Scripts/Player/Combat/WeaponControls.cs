@@ -7,6 +7,8 @@ public class WeaponControls : MonoBehaviour
     [SerializeField] Knife knife;
     [SerializeField] GameObject pistol;
 
+    public bool isAiming { get; private set; }
+
     CurrentWeapon currentWeapon = CurrentWeapon.Knife;
     PlayerAnimationLogic playerAnim;
     PlayerInput playerInput;
@@ -52,8 +54,11 @@ public class WeaponControls : MonoBehaviour
 
     void HandleAim(bool state)
     {
+        isAiming = false;
         if (currentWeapon == CurrentWeapon.Pistol)
         {
+            isAiming = state;
+
             playerAnim.Aiming(state);
             if (!state)
             {

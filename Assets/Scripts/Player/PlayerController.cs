@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Camera playerCamera;
     [SerializeField] PlayerInput playerInput;
+    [SerializeField] WeaponControls weaponControls;
 
     [Header("Movement")]
     [SerializeField] float movementSpeed;
@@ -109,8 +110,19 @@ public class PlayerController : MonoBehaviour
         if (inRotationLock)
             return;
 
-        float angle = Vector3.Angle(walkDir.normalized, transform.forward);
-        float crossY = Vector3.Cross(transform.forward, walkDir).y;
+        Vector3 nextDir = walkDir.normalized;
+
+        if (weaponControls.isAiming)
+        {
+            nextDir = (playerInput.mousePosition - transform.position);
+            nextDir.y = 0f;
+            nextDir = nextDir.normalized;
+        }
+
+
+
+        float angle = Vector3.Angle(nextDir, transform.forward);
+        float crossY = Vector3.Cross(transform.forward, nextDir).y;
 
         float rotationAmount = math.min(angle, rotateSpeed * Time.deltaTime);
 
