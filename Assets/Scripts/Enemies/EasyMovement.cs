@@ -6,16 +6,33 @@ using UnityEngine;
 public class EasyMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1.0f;
-    Vector3 originalPos;
+    [SerializeField] CharacterController controller;
+    [SerializeField] Animator animator;
+
+    PlayerController player;
 
     private void Start()
     {
-        originalPos = transform.position;
-        originalPos.y = 1.75f;
+        player = EnemyManager.instance.GetPlayer();
     }
 
     void Update()
     {
-        transform.position = originalPos + (Vector3.up * math.sin(Time.time * movementSpeed));
+        if (player != null) {
+            Move();
+        }
+    }
+
+    void Move()
+    {
+        Vector3 dir = player.transform.position - transform.position;
+        dir.y = 0;
+        dir = dir.normalized;
+        dir.y = -1f;
+
+        controller.Move(dir * movementSpeed * Time.deltaTime);
+
+        transform.LookAt(player.transform.position);
+        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
     }
 }

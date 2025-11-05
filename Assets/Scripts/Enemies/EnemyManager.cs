@@ -6,8 +6,10 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance { get; private set; }
 
+    [SerializeField] PlayerController player;
+
     int currentID = 0;
-    public Dictionary<int, EnemyBase> enemyList;
+    public Dictionary<int, EnemyBase> enemyList { get; private set; }
 
 
     private void Awake()
@@ -32,6 +34,8 @@ public class EnemyManager : MonoBehaviour
     { 
         enemyList.Remove(id);
     }
+
+    public PlayerController GetPlayer() => player;
 }
 
 /*public static class EnemyManager
