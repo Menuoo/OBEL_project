@@ -49,6 +49,9 @@ public class PlayerInformation : MonoBehaviour
         {
             //health -= 10;
         }
+
+        if (health <= 0)
+            Die();
     }
 
     public void AddItem(int id, int quantity)
@@ -68,7 +71,9 @@ public class PlayerInformation : MonoBehaviour
     }
 
     public void AlterHP(int amount)
-    { 
+    {
+        Debug.Log("health changed by: " + amount);
+
         health = Math.Clamp(health + amount, 0, maxHealth);
     }
 
@@ -90,5 +95,10 @@ public class PlayerInformation : MonoBehaviour
     { 
         flashlightOn = !flashlightOn;
         flashlight.enabled = flashlightOn;
+    }
+
+    void Die()
+    {
+        Destroy(this.gameObject);
     }
 }
