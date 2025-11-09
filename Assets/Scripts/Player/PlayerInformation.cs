@@ -22,8 +22,9 @@ public class PlayerInformation : MonoBehaviour
     {
         inventory = new Dictionary<int, int>();
         // adds gun and knife to inventory
-        inventory.Add(2001, 1);
-        inventory.Add(2002, 1);
+        inventory.Add(2001, 1); // knife
+        inventory.Add(2002, 15); // gun
+        inventory.Add(2003, 30); // ammo
 
         health = maxHealth;
         equipChange = false;
@@ -46,11 +47,6 @@ public class PlayerInformation : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            //health -= 10;
-        }
-
         if (health <= 0)
             Die();
     }
@@ -66,8 +62,11 @@ public class PlayerInformation : MonoBehaviour
     public void RemoveItem(int id)
     {
         if (inventory[id] <= 1)
-            inventory.Remove(id);
-        else 
+        {
+            if (id != 2002)
+                inventory.Remove(id);
+        }
+        else
             inventory[id] -= 1;
     }
 
@@ -91,6 +90,33 @@ public class PlayerInformation : MonoBehaviour
     }
 
 
+    public bool TryShoot()
+    {
+        int bullets = inventory[2002];
+
+        if (bullets > 0)
+        {
+            inventory[2002]--;
+            return true;
+        }
+        return false;
+    }
+
+    public void Reload(int id)
+    {
+        int ammoCount = inventory[id];       // bullet max is 15
+        int bulletCount = inventory[id + 1]; // follow this logic for any future weapons lol
+
+        int reloadCount = Mathf.Min((15 - ammoCount), bulletCount);
+
+        inventory[id] += reloadCount;
+        inventory[id + 1] -= reloadCount;
+
+        if (inventory[id + 1] < 1)
+        {
+            inventory.Remove(id + 1);
+        }
+    }
 
     public void Equip(CurrentWeapon weaponToEquip, int id)
     { 

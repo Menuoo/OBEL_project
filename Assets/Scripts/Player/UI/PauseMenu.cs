@@ -24,6 +24,7 @@ public class PauseMenu : MonoBehaviour
 
     InventoryItem equippedItem;
     [SerializeField] Image equipImage;
+    [SerializeField] TMP_Text gunAmmo;
 
 
     List<InventoryItem> items = new List<InventoryItem>();
@@ -115,6 +116,18 @@ public class PauseMenu : MonoBehaviour
         }
         if (equippedItem != null)
         {
+            if (equippedItem.GetId() == 2002)
+            {
+                int quant = 0;
+                gunAmmo.gameObject.SetActive(true);
+                playerInformation.inventory.TryGetValue(2002, out quant);
+                gunAmmo.text = "x" + quant;
+            }
+            else
+            {
+                gunAmmo.gameObject.SetActive(false);
+            }
+
             equipImage.sprite = equippedItem.GetSprite();
         }
 

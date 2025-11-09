@@ -6,6 +6,7 @@ using UnityEngine.Animations;
 
 public class Pistol : MonoBehaviour
 {
+    [SerializeField] PlayerInformation playerInfo;
     [SerializeField] PlayerController playerController;
     [SerializeField] WeaponControls weaponControls;
     [SerializeField] Billboard aimTarget;
@@ -131,6 +132,9 @@ public class Pistol : MonoBehaviour
     public void HandleShot(PlayerInput input)
     {
         if (!weaponControls.isAiming || !canShoot)
+            return;
+
+        if (!playerInfo.TryShoot())
             return;
 
         Debug.Log("we shootin out here");
