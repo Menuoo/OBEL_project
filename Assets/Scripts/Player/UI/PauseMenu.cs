@@ -58,6 +58,8 @@ public class PauseMenu : MonoBehaviour
 
     void HandleInventory()
     {
+        HealthVisuals();
+
         int i = 0;
         currentIndex = 0;
         items.Clear();

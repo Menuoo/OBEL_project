@@ -7,6 +7,7 @@ public class EnemySimple : MonoBehaviour
 {
     [SerializeField] EnemyBase enemy;
     [SerializeField] float movementSpeed = 1.0f;
+    [SerializeField] float rotationSpeed = 400f;
     [SerializeField] CharacterController controller;
     [SerializeField] Animator animator;
     [SerializeField] EnemyAttack attackCtrl;
@@ -17,7 +18,9 @@ public class EnemySimple : MonoBehaviour
     private static int flinchHash = Animator.StringToHash("flinch");
 
     public bool inAction { get; private set; }
+    bool canAttack = true;
 
+    public bool immobile = false;
 
     private void Start()
     {
@@ -27,9 +30,16 @@ public class EnemySimple : MonoBehaviour
 
     void Update()
     {
+        if (enemy.attackTaken)
+            TakeDamage();
+
+
         if (player != null) {    //  - - - --  -  HAVE TO ADD IDLING AND SEEING/HEARING PLAYER
 
             float dist = (player.transform.position - transform.position).magnitude;
+
+            if (immobile)
+                return;
 
             if (!inAction && dist <= 1.1f)
             {
@@ -44,15 +54,16 @@ public class EnemySimple : MonoBehaviour
 
     void Move()
     {
-        Vector3 dir = player.transform.position - transform.position;
-        dir.y = 0;
-        dir = dir.normalized;
-        dir.y = -1f;
+        //Vector3 dir = player.transform.position - transform.position;
+        //dir.y = 0;
+        //dir = dir.normalized;
+        //dir.y = -1f;
 
-        controller.Move(dir * movementSpeed * Time.deltaTime);
-
+        Quaternion rotation = transform.rotation;
         transform.LookAt(player.transform.position);
-        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Lerp(rotation, Quaternion.Euler(0, transform.eulerAngles.y, 0), Time.deltaTime * rotationSpeed);
+
+        controller.Move(transform.forward * movementSpeed * Time.deltaTime);
     }
 
     void Attack()
@@ -63,6 +74,8 @@ public class EnemySimple : MonoBehaviour
         inAction = true;
         animator.SetBool(attackHash, inAction);
         attackCtrl.Begin();
+
+        immobile = true;
     }
 
     void Flinch()
@@ -86,6 +99,19 @@ public class EnemySimple : MonoBehaviour
         animator.SetBool(attackHash, false);
         animator.SetBool(flinchHash, false);
         attackCtrl.End();
+
+        Invoke("Mobile", 0.5f);
     }
 
+
+    public void Mobile()
+    { 
+        immobile = false;
+    }
+
+    public void TakeDamage()
+    {
+        Flinch();
+        enemy.attackTaken = false;
+    }
 }

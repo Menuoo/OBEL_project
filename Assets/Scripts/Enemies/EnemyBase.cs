@@ -11,6 +11,9 @@ public class EnemyBase : MonoBehaviour
     int lastAttack = -1;
 
 
+    public bool attackTaken;
+
+
     private void Start()
     {
         enemyId = EnemyManager.instance.AddEnemy(this);
@@ -49,6 +52,8 @@ public class EnemyBase : MonoBehaviour
         {
             lastAttack = attackId;
             health -= dmgTaken;
+
+            attackTaken = true;
         }
     }
 

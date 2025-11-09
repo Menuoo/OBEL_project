@@ -27,6 +27,9 @@ public class EnemyManager : MonoBehaviour
     public int AddEnemy(EnemyBase toAdd)
     { 
         enemyList.Add(currentID++, toAdd);
+
+        Debug.Log(toAdd.name + " added to Enemy List");
+
         return currentID - 1;
     }
 

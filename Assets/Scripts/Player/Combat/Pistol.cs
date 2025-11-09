@@ -56,7 +56,8 @@ public class Pistol : MonoBehaviour
     {
         Vector3 playerForward = playerController.transform.forward;
         EnemyBase targetEnemy = null;
-        float minDist = range;
+        //float minDist = range;
+        float minAngle = 30f;
 
         foreach (var pair in EnemyManager.instance.enemyList)
         { 
@@ -68,11 +69,23 @@ public class Pistol : MonoBehaviour
                 continue;
             }
 
-            if (vectorTo.magnitude < minDist)
+            vectorTo.y = 0;
+            vectorTo = vectorTo.normalized;
+
+
+            float angleBetween = Vector3.Angle(vectorTo, playerForward);
+
+            if (angleBetween < minAngle)
+            {
+                minAngle = angleBetween;
+                targetEnemy = enemy;
+            }
+
+            /*if (vectorTo.magnitude < minDist)
             { 
                 minDist = vectorTo.magnitude;
                 targetEnemy = enemy;
-            }
+            }*/
         }
 
         target = targetEnemy;

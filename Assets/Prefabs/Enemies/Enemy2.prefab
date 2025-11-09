@@ -109,7 +109,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4450955156931113323}
   - component: {fileID: 3122705592862371336}
-  - component: {fileID: 4192859874040389843}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Untagged
@@ -125,7 +124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8591065716400909774}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.94, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -160,20 +159,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &4192859874040389843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8591065716400909774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ebde0ea42265b459e0abdc42635559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPoint: {fileID: 5148185455135693664}
-  health: 20
 --- !u!1001 &1217850367820215406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -258,7 +243,7 @@ PrefabInstance:
       addedObject: {fileID: 3555355035341695213}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f6c2fea9a4557b41862c503d0860749, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1560642541303211168}
+      addedObject: {fileID: 7023948231301740461}
   m_SourcePrefab: {fileID: 100100000, guid: 1f6c2fea9a4557b41862c503d0860749, type: 3}
 --- !u!4 &1687747086562218885 stripped
 Transform:
@@ -291,7 +276,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1560642541303211168
+--- !u!114 &7023948231301740461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -303,7 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e03ab1c404a0545824108ce58a6d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 4192859874040389843}
+  targetPoint: {fileID: 5148185455135693664}
+  health: 20
   movementSpeed: 1
   controller: {fileID: 3122705592862371336}
   animator: {fileID: 3555355035341695213}
