@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerInformation : MonoBehaviour
 {
@@ -72,10 +73,23 @@ public class PlayerInformation : MonoBehaviour
 
     public void AlterHP(int amount)
     {
+        if (amount < 0)
+        {
+            TakeDamage();
+        }
+
         Debug.Log("health changed by: " + amount);
 
         health = Math.Clamp(health + amount, 0, maxHealth);
     }
+
+    void TakeDamage()
+    {
+        CameraEffects.instance.Shake(10f);
+        CameraEffects.instance.Aberrate(4f);
+        Instantiate(EffectManager.instance.GetParticles(0), transform.position, Quaternion.identity);
+    }
+
 
 
     public void Equip(CurrentWeapon weaponToEquip, int id)

@@ -41,7 +41,7 @@ public class EnemySimple : MonoBehaviour
             if (immobile)
                 return;
 
-            if (!inAction && dist <= 1.1f)
+            if (!inAction && dist <= 1.1f)   // CHANGE LOGIC OF ATTACK DECISION (PROBABLY TO RAYCAST)  ---  OR SEPERATE OBJECT AROUND ATTACK LOCATION TO CHECK DIST
             {
                 Attack();
             }
@@ -113,5 +113,6 @@ public class EnemySimple : MonoBehaviour
     {
         Flinch();
         enemy.attackTaken = false;
+        Instantiate(EffectManager.instance.GetParticles(0), enemy.GetTargetPos(), Quaternion.identity);
     }
 }

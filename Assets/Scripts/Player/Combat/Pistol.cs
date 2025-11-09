@@ -8,6 +8,7 @@ public class Pistol : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
     [SerializeField] WeaponControls weaponControls;
+    [SerializeField] Billboard aimTarget;
 
     [SerializeField] int damage = 10;
 
@@ -39,18 +40,26 @@ public class Pistol : MonoBehaviour
 
     void HandleAim()
     {
-        if (weaponControls.isAiming)
-        {
+        if (weaponControls.isAiming) {
             //if (target == null)
             //{
                 TryLockOn();
             //}
         }
-        else
-        {
+        else {
             target = null;
         }
+
+
+        if (target != null) {
+            aimTarget.gameObject.SetActive(true);
+            aimTarget.transform.position = target.GetTargetPos();
+        }
+        else {
+            aimTarget.gameObject.SetActive(false);
+        }
     }
+
 
     void TryLockOn()
     {
@@ -91,35 +100,12 @@ public class Pistol : MonoBehaviour
         target = targetEnemy;
     }
 
-    /*void TargetNewEnemy(EnemyBase newEnemy)
-    {
-        Debug.Log("found new enemy!!!");
-        target = newEnemy;
-    }*/
 
     // returns value between 0 and 1 (instead of -1 and 1), for vertical aim
     public float GetTargetValue()
     {
         if (target != null)
         {
-            /*
-            
-            // highkey worse version
-
-            Vector3 targetPos = target.GetTargetPos();
-            
-            Vector3 vecTo = targetPos - playerController.transform.position;
-            Vector3 vecToNormal = vecTo;
-            vecToNormal.y = 0f;
-
-            float angle = math.degrees(math.acos(vecToNormal.magnitude / vecTo.magnitude)); // dangerous line
-            float sign = math.sign(Vector3.Cross(vecTo, vecToNormal).magnitude);
-            //float sign = math.sign(targetPos.y - playerController.transform.position.y - 0.4f); // 0.5f is the pistol default state offset
-            float rawValue = sign * (angle / 90f) * 0.5f + 0.5f;
-
-            return math.clamp(rawValue, 0f, 1f);*/
-
-
             // lowkey better version
 
             /*Vector3 targetPos = target.GetTargetPos();
@@ -152,8 +138,10 @@ public class Pistol : MonoBehaviour
         attackId = (attackId + 1) % 8 + 8;
         target?.TakeDamage(attackId, damage);
 
+
         input.PlaySound(1);
 
+        CameraEffects.instance.Shake(1f);
         shotLight.enabled = true;
         canShoot = false;
         Invoke("DisableLight", 0.05f);
