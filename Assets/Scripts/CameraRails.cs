@@ -7,7 +7,9 @@ using UnityEngine.UIElements;
 
 public class CameraRails : MonoBehaviour
 {
+    [SerializeField] bool rails = false;
     [SerializeField] CameraPosition[] positions;
+
     public int currentPos = 0;
 
 
@@ -20,8 +22,10 @@ public class CameraRails : MonoBehaviour
 
     private void Update()
     {
-        //CheckPositions();
-        Rails();
+        if (!rails)
+            CheckPositions();
+        else
+            Rails();
     }
 
 
@@ -76,6 +80,12 @@ public class CameraRails : MonoBehaviour
             }
 
             i++;
+        }
+
+        if (currentPos != thisTheOne)
+        {
+            // send signal to player
+            player.LockDir();
         }
 
         currentPos = thisTheOne;

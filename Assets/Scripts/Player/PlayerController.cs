@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour
     private float playerRotation = 0f;
     private Vector2 cameraRotation = Vector2.zero;
 
+    // For Instant Camera Snaps
+    Transform lastTrans;
+    bool stillLast = false;
+
 
     float verticalVelocity = 0;
     bool isGrounded = false;
@@ -46,6 +50,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lastTrans = CameraSingle.instance.transHolder.transform;
+
         inMovementLock = false;
         inRotationLock = false;
 
@@ -56,6 +62,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerInput.Walk.magnitude <= 0.1f)
+        {
+            stillLast = false; // might change to something else tbh
+        }
+
         CheckState();
 
         HandleVertical();
@@ -77,8 +88,15 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        Vector3 cameraForward = new Vector3(playerCamera.transform.forward.x, 0f, playerCamera.transform.forward.z).normalized;
-        Vector3 cameraRight = new Vector3(playerCamera.transform.right.x, 0f, playerCamera.transform.right.z).normalized;
+        Transform camTrans = playerCamera.transform;
+        if (stillLast)
+        {
+            camTrans = lastTrans;
+        }
+        Debug.Log(camTrans.position);
+
+        Vector3 cameraForward = new Vector3(camTrans.forward.x, 0f, camTrans.forward.z).normalized;
+        Vector3 cameraRight = new Vector3(camTrans.right.x, 0f, camTrans.right.z).normalized;
 
         walkDir = cameraForward * playerInput.Walk.y + cameraRight * playerInput.Walk.x;
 
@@ -173,5 +191,15 @@ public class PlayerController : MonoBehaviour
     {
         inMovementLock = movementState;
         inRotationLock = rotationState;
+    }
+
+    public void LockDir()
+    {
+        stillLast = true;
+        CameraSingle.instance.transHolder.transform.position = playerCamera.transform.position;
+        CameraSingle.instance.transHolder.transform.rotation = playerCamera.transform.rotation;
+        CameraSingle.instance.transHolder.transform.localScale = playerCamera.transform.localScale;
+
+        Debug.Log("direction locked");
     }
 }

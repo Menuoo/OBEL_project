@@ -37,6 +37,11 @@ public class PlayerInteractions : MonoBehaviour
         uiControls.StartTextBox(text);
     }
 
+    public void DisplayItem(int id, int quantity, FieldItem item)
+    {
+        uiControls.StartItemBox(id, quantity, item);
+    }
+
     public void AddItemToInventory(int id, int quantity)
     {
         playerInfo.AddItem(id, quantity);

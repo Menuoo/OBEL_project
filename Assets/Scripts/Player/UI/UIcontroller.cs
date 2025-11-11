@@ -2,22 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class UIcontroller : MonoBehaviour
 {
+    // text speech thing
+    [Header("Text Box")]
     [SerializeField] GameObject textBox;
     [SerializeField] TMP_Text text;
     [SerializeField] float textDisplaySpeed = 30f;
-
     bool textMenuOpen = false;
+
+    // item pickup thing
+    [Header("Item Box")]
+    [SerializeField] GameObject itemBox;
+    [SerializeField] TMP_Text itemText;
+    [SerializeField] UnityEngine.UI.Image itemImage;
+    bool itemMenuOpen = false;
+    FieldItem current = null;
+
     string[] textToDisplay;
     int textLength = 0;
     int index = 0;
     float charAmount = 0;
 
-
-
+    [Header("Components")]
+    [SerializeField] PlayerInteractions interactions;
+    [SerializeField] ItemDatabase ItemDatabase;
     [SerializeField] PlayerInputUI inputUI;
     [SerializeField] PauseMenu pauseMenu;
 
@@ -30,6 +42,11 @@ public class UIcontroller : MonoBehaviour
     private void OnDisable()
     {
         PlayerInput.PauseGameEvent -= EnablePauseMenu;
+    }
+
+    private void Awake()
+    {
+        ItemDatabase.InitializeList();
     }
 
     void Start()
@@ -54,6 +71,41 @@ public class UIcontroller : MonoBehaviour
                 ContinueTextBox();
             }
         }
+
+        if (itemMenuOpen)
+        {
+            if (inputUI.ConfirmPressed)
+            {
+                current.Confirm(interactions);
+                EndItemBox();
+            }
+
+            //    TO    IMPLEMENT
+            //if (cancel pressed)
+        }
+    }
+
+    public void StartItemBox(int id, int amnt, FieldItem fieldItem)
+    {
+        current = fieldItem;
+
+        inputUI.input.SwapControls(0);
+        itemBox.SetActive(true);
+
+        InventoryItem item = ItemDatabase.GetItem(id);
+
+        itemText.text = item.GetName() + " [x" + amnt + "] ?";
+        itemImage.sprite = ItemDatabase.GetItem(id).GetSprite();
+
+        itemMenuOpen = true;
+    }
+
+    public void EndItemBox()
+    {
+        inputUI.input.SwapControls(1);
+
+        itemBox.SetActive(false);
+        itemMenuOpen = false;
     }
 
 

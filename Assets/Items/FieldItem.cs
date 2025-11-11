@@ -11,7 +11,16 @@ public class FieldItem : IInteractable
     {
         SoundManager.instance.PlaySound(7);
 
-        Debug.Log("touched " + this.gameObject.name);
+        //Debug.Log("touched " + this.gameObject.name);
+
+        interactions.DisplayItem(id, quantity, this);
+
+        /*interactions.AddItemToInventory(id, quantity);
+        Destroy(this.gameObject);*/
+    }
+
+    public void Confirm(PlayerInteractions interactions)
+    {
         interactions.AddItemToInventory(id, quantity);
         Destroy(this.gameObject);
     }

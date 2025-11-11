@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     void Awake()
     {
-        ItemDatabase.InitializeList();
+        //ItemDatabase.InitializeList();
         //this.gameObject.SetActive(false);
     }
 

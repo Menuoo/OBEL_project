@@ -6,6 +6,8 @@ public class CameraSingle : MonoBehaviour
 {
     public static CameraSingle instance { get; private set; }
 
+    public Transform transHolder;
+
     private void Awake()
     {
         if (instance != null && instance != this)
