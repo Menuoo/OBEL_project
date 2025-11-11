@@ -58,6 +58,7 @@ public class PlayerInteractions : MonoBehaviour
         foreach (RaycastHit hit in hits)
         {
             IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+
             if (interactable != null)
             {
                 float distance = Vector3.Magnitude(interactable.transform.position - this.transform.position);
@@ -73,6 +74,19 @@ public class PlayerInteractions : MonoBehaviour
         {
             interactTriggered = false;
             finalTarget.OnInteract(this);
+        }
+    }
+
+    public bool CheckKey(int keyId)
+    {
+        if (playerInfo.inventory.ContainsKey(keyId))
+        {
+            playerInfo.inventory.Remove(keyId);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

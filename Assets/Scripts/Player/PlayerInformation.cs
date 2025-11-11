@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
@@ -43,13 +44,19 @@ public class PlayerInformation : MonoBehaviour
     }
 
 
-
-
     void Update()
     {
         if (health <= 0)
             Die();
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reload(2002); // reload gun
+            SoundManager.instance.PlaySound(2);
+        }
     }
+
+
 
     public void AddItem(int id, int quantity)
     { 

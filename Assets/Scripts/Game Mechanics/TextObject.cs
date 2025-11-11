@@ -12,8 +12,3 @@ public class TextObject : IInteractable
         interactions.DisplayMessage(displayText);
     }
 }
-
-public abstract class IInteractable : MonoBehaviour
-{
-    public abstract void OnInteract(PlayerInteractions interactions);
-}

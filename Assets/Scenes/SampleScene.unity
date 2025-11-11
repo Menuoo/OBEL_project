@@ -979,11 +979,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2367404602177384665, guid: 0966340c7034ba44ea087fe45ce813b3, type: 3}
   m_PrefabInstance: {fileID: 614973596}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &206248457 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4263110534935974934, guid: 207e649391b065a4fb4bf0c909146b4f, type: 3}
-  m_PrefabInstance: {fileID: 8687143207613463040}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &213253495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9400,7 +9395,7 @@ GameObject:
   - component: {fileID: 1419151227}
   - component: {fileID: 1419151226}
   m_Layer: 7
-  m_Name: Potion (1)
+  m_Name: item pick up 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11171,7 +11166,7 @@ GameObject:
   - component: {fileID: 1666772102}
   - component: {fileID: 1666772107}
   m_Layer: 7
-  m_Name: Potion
+  m_Name: item pick up 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11304,7 +11299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d056ac13ebd9b44494ba0c4796c4f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1001
+  id: 3001
   quantity: 1
 --- !u!1 &1668660080
 GameObject:
@@ -12246,7 +12241,6 @@ Transform:
   - {fileID: 1330717584}
   - {fileID: 1503522521}
   - {fileID: 702039488}
-  - {fileID: 206248457}
   - {fileID: 1837697660}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14848,7 +14842,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1818209073}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3486433574878826156, guid: 207e649391b065a4fb4bf0c909146b4f, type: 3}
       propertyPath: m_Name
@@ -14857,6 +14851,10 @@ PrefabInstance:
     - target: {fileID: 3486433574878826156, guid: 207e649391b065a4fb4bf0c909146b4f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3592734498133172047, guid: 207e649391b065a4fb4bf0c909146b4f, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3592734498133172047, guid: 207e649391b065a4fb4bf0c909146b4f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -14868,7 +14866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4263110534935974934, guid: 207e649391b065a4fb4bf0c909146b4f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 225.5639
+      value: 299.99997
       objectReference: {fileID: 0}
     - target: {fileID: 4263110534935974934, guid: 207e649391b065a4fb4bf0c909146b4f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14913,8 +14911,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3592734498133172047, guid: 207e649391b065a4fb4bf0c909146b4f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8687143207613463055}
   m_SourcePrefab: {fileID: 100100000, guid: 207e649391b065a4fb4bf0c909146b4f, type: 3}
+--- !u!1 &8687143207613463041 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3592734498133172047, guid: 207e649391b065a4fb4bf0c909146b4f, type: 3}
+  m_PrefabInstance: {fileID: 8687143207613463040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8687143207613463055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8687143207613463041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b6a5306f1dae447a50f95e0e4b11c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScene: 1
+  conditionItem: 3001
+  lockedText:
+  - The door is locked.
+  unlockText:
+  - Door unlocked!
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -14938,6 +14962,7 @@ SceneRoots:
   - {fileID: 1469255198}
   - {fileID: 705507995}
   - {fileID: 1534465112}
+  - {fileID: 8687143207613463040}
   - {fileID: 1818209073}
   - {fileID: 437403442}
   - {fileID: 474774643}

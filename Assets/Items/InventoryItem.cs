@@ -39,7 +39,7 @@ public abstract class InventoryItem : ScriptableObject
     }
 
     public int GetId() => id;
-    public string GetName() => name;
+    public string GetName() => itemName;
     public string GetDescription() => description;
     //public string GetAltDescription() => altDescription;
     public Sprite GetSprite() => inventorySprite;
