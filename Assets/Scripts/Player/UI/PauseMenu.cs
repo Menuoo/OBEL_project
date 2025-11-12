@@ -143,7 +143,7 @@ public class PauseMenu : MonoBehaviour
         descriptionField.text = items[currentIndex].GetDescription();
 
         playerInformation.inventory.TryGetValue(items[currentIndex].GetId(), out var quant);
-        quantityField.text = "Quantity: " + quant.ToString();
+        quantityField.text = (lastId == 2002 ? "Ammo: " : "Quantity: ") + quant.ToString();
 
         button1.GetComponentInChildren<TMP_Text>().text = items[currentIndex].GetButtons()[0].name;
         button2.GetComponentInChildren<TMP_Text>().text = items[currentIndex].GetButtons()[1].name;
