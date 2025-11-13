@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1002
   itemName: Medkit
-  inventorySprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  inventorySprite: {fileID: 21300000, guid: df7bdddb27780f94782f4505310dc1f3, type: 3}
   description: Using this will heal a moderate amount of health
   altDescription: The contents are well preserved thanks to the encasing.
-  canEquip: 0
   healingAmount: 50

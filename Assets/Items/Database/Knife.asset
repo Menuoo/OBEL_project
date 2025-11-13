@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2001
   itemName: Knife
-  inventorySprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  inventorySprite: {fileID: 21300000, guid: fd6d1ceaf5d624f4fab260fe82157397, type: 3}
   description: A short kitchen knife.
   altDescription: I hope I don't have to use this.
   weaponType: 1

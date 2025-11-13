@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2002
   itemName: Pistol
-  inventorySprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  inventorySprite: {fileID: 21300000, guid: 250f47e07c855904bb9a5d6ff47e56ab, type: 3}
   description: A common pistol. Uses 9mm ammo.
   altDescription: '"Aim true"'
   weaponType: 2

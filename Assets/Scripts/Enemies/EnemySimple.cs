@@ -59,11 +59,11 @@ public class EnemySimple : MonoBehaviour
         //dir = dir.normalized;
         //dir.y = -1f;
 
-        Quaternion rotation = transform.rotation;
-        transform.LookAt(player.transform.position);
-        transform.rotation = Quaternion.Lerp(rotation, Quaternion.Euler(0, transform.eulerAngles.y, 0), Time.deltaTime * rotationSpeed);
+        Quaternion rotation = controller.transform.rotation;
+        controller.transform.transform.LookAt(player.transform.position);
+        controller.transform.rotation = Quaternion.Lerp(rotation, Quaternion.Euler(0, controller.transform.eulerAngles.y, 0), Time.deltaTime * rotationSpeed);
 
-        controller.Move(transform.forward * movementSpeed * Time.deltaTime);
+        controller.Move(controller.transform.forward * movementSpeed * Time.deltaTime);
     }
 
     void Attack()
