@@ -53,11 +53,11 @@ public class Pistol : MonoBehaviour
 
 
         if (target != null) {
-            aimTarget.gameObject.SetActive(true);
+            aimTarget.GetComponent<Renderer>().enabled = true;
             aimTarget.transform.position = target.GetTargetPos();
         }
         else {
-            aimTarget.gameObject.SetActive(false);
+            aimTarget.GetComponent<Renderer>().enabled = false;
         }
     }
 

@@ -98,6 +98,18 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
             ControlsEnabled = !ControlsEnabled;
         }
+        else if (state == -1) // disable all controls
+        {
+            playerActions.Main.Disable();
+            playerActions.Main.RemoveCallbacks(this);
+
+            playerActions.UI.Disable();
+            playerActions.UI.RemoveCallbacks(ui);
+        }
+        else if (state == -2)
+        {
+            // enable previous conrols
+        }
     }
 
 
@@ -158,9 +170,9 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
     public void PauseGame()
     {
-        PauseHandler.FlipTime();
-        PauseGameEvent?.Invoke(PauseHandler.pauseState);
-        SwapControls(PauseHandler.pauseState ? 0 : 1);
+        //PauseHandler.FlipTime();
+        PauseGameEvent?.Invoke(!PauseHandler.pauseState);
+        //SwapControls(PauseHandler.pauseState ? 0 : 1);
     }
 
 

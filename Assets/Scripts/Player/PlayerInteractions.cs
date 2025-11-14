@@ -31,6 +31,8 @@ public class PlayerInteractions : MonoBehaviour
         interactCollider = GetComponent<BoxCollider>();
     }
 
+    public PlayerInput GetInput() => input;
+
 
     public void DisplayMessage(string[] text)
     { 

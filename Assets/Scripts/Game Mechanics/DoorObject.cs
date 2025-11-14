@@ -24,7 +24,7 @@ public class DoorObject : IInteractable
         if (state == 2 || conditionItem == -1)
         {
             Debug.Log("scene changed");
-            SceneControl.instance.ChangeScene(targetScene);
+            SceneControl.instance.TransitionScene(targetScene, interactions.GetInput());
         }
         else if (state == 0)
         {

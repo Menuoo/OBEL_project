@@ -33,7 +33,7 @@ public class PlayerInputUI : MonoBehaviour, PlayerActions.IUIActions
     {
         if (context.performed)
         {
-            Debug.Log("triggered");
+            //Debug.Log("triggered");
             input.PauseGame();
         }
     }
@@ -45,4 +45,6 @@ public class PlayerInputUI : MonoBehaviour, PlayerActions.IUIActions
             DirectionPressedEvent?.Invoke(context.ReadValue<Vector2>());
         }
     }
+
+    public PlayerInput GetInput() => input;
 }

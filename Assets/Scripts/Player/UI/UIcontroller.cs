@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.Windows;
 
 public class UIcontroller : MonoBehaviour
 {
@@ -33,15 +34,16 @@ public class UIcontroller : MonoBehaviour
     [SerializeField] PlayerInputUI inputUI;
     [SerializeField] PauseMenu pauseMenu;
 
+    bool pauseState = false;
 
     private void OnEnable()
     {
-        PlayerInput.PauseGameEvent += EnablePauseMenu;
+        PlayerInput.PauseGameEvent += TransitionPauseMenu;
     }
 
     private void OnDisable()
     {
-        PlayerInput.PauseGameEvent -= EnablePauseMenu;
+        PlayerInput.PauseGameEvent -= TransitionPauseMenu;
     }
 
     private void Awake()
@@ -160,5 +162,38 @@ public class UIcontroller : MonoBehaviour
     public void EnablePauseMenu(bool state)
     { 
         pauseMenu.gameObject.SetActive(state);
+    }
+
+    public void PauseMenuChange(bool state)
+    {
+        if (state)
+        {
+            Debug.Log(pauseState);
+            EnablePauseMenu(pauseState);
+            TransitionLogic.instance.TransitionScene(false);
+        }
+        else
+        {
+            TransitionLogic.TransitionEvent -= PauseMenuChange;
+
+            inputUI.input.SwapControls(pauseState ? 0 : 1);
+
+            if (!pauseState)
+            {
+                PauseHandler.ResumeTime();
+            }
+        }
+    }
+
+    public void TransitionPauseMenu(bool value)
+    {
+        pauseState = value;
+
+        TransitionLogic.instance.TransitionScene(true);
+        TransitionLogic.TransitionEvent += PauseMenuChange;
+
+        inputUI.input.SwapControls(-1);
+        if (pauseState)
+            PauseHandler.PauseTime();
     }
 }

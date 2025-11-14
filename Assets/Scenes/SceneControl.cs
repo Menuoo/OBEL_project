@@ -5,7 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneControl : MonoBehaviour
 {
+    [SerializeField] PlayerInput input;
+
     public static SceneControl instance { get; private set; }
+
+    int nextId = 0;
 
     private void Awake()
     {
@@ -17,9 +21,32 @@ public class SceneControl : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    public void ChangeScene(int id)
+
+    public void ChangeScene(bool version)
     {
-        SceneManager.LoadScene(id);
+        if (version)
+        {
+            SceneManager.LoadScene(nextId);
+            TransitionLogic.instance.TransitionScene(false);
+        }
+        else
+        {
+            TransitionLogic.TransitionEvent -= ChangeScene;
+
+            input.SwapControls(1);
+            PauseHandler.ResumeTime();
+        }
+    }
+
+    // could maybe do an invoke for input?,    ---   ALSO: setup is unideal, cause it depends on another script to finish, may be prone to softlocks
+    public void TransitionScene(int id, PlayerInput newInput)
+    {
+        nextId = id;
+        TransitionLogic.instance.TransitionScene(true);
+        TransitionLogic.TransitionEvent += ChangeScene;
+
+        input = newInput; 
+        input.SwapControls(-1);
+        PauseHandler.PauseTime();
     }
 }
