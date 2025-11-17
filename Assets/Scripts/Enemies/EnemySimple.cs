@@ -16,6 +16,7 @@ public class EnemySimple : MonoBehaviour
 
     private static int attackHash = Animator.StringToHash("attack");
     private static int flinchHash = Animator.StringToHash("flinch");
+    private static int deadHash = Animator.StringToHash("dead");
 
     public bool inAction { get; private set; }
     bool canAttack = true;
@@ -33,6 +34,11 @@ public class EnemySimple : MonoBehaviour
         if (enemy.attackTaken)
             TakeDamage();
 
+        if (enemy.isDead)
+        {
+            Die();
+            return;
+        }
 
         if (player != null) {    //  - - - --  -  HAVE TO ADD IDLING AND SEEING/HEARING PLAYER
 
@@ -114,5 +120,12 @@ public class EnemySimple : MonoBehaviour
         Flinch();
         enemy.attackTaken = false;
         Instantiate(EffectManager.instance.GetParticles(0), enemy.GetTargetPos(), Quaternion.identity);
+    }
+
+    public void Die()
+    {
+        animator.SetBool(deadHash, true);
+        this.enabled = false;
+        controller.enabled = false;
     }
 }

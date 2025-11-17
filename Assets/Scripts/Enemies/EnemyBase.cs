@@ -12,6 +12,7 @@ public class EnemyBase : MonoBehaviour
 
 
     public bool attackTaken;
+    public bool isDead = false;
 
 
     private void Start()
@@ -30,7 +31,8 @@ public class EnemyBase : MonoBehaviour
         if (health <= 0)
         {
             EnemyManager.instance.RemoveEnemy(enemyId);
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            isDead = true;
         }
     }
 

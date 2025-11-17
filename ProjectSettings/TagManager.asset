@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - DefaultBlood
   - Water
   - UI
   - 
@@ -24,7 +24,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Effects
   - Post Process
   - 
   - 
