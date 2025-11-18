@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 8f3ede925be5ed6469c485ea1ec93d33
+guid: 80e16976c3c85ab4e97931c0934841c9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1_Cabinet
+    second: {fileID: 2100000, guid: 1ea949e60a2ab294aa3b1e7f2f430c1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1_desk
+    second: {fileID: 2100000, guid: 922227c223262884eb3b532eddbff741, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +45,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
