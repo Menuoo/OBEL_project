@@ -156,7 +156,7 @@ CharacterController:
   m_Height: 1.8
   m_Radius: 0.25
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
@@ -175,6 +175,8 @@ MonoBehaviour:
   targetPoint: {fileID: 5148185455135693664}
   health: 50
   attackTaken: 0
+  isDead: 0
+  isAggro: 0
 --- !u!1001 &1217850367820215406
 PrefabInstance:
   m_ObjectHideFlags: 0

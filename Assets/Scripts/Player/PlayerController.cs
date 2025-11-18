@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 walkDir { get; private set; }
     public float animSpeed { get; private set; }
+    float currentSpeed = 0f;
 
 
     // ROTATION   ---   Player and Camera
@@ -116,9 +117,9 @@ public class PlayerController : MonoBehaviour
             velocity = Vector3.up * velocity.y;
         }
 
+        currentSpeed = velocity.magnitude;
 
         velocity.y += verticalVelocity;
-
         characterController.Move(velocity * Time.deltaTime);
     }
 
@@ -202,4 +203,6 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("direction locked");
     }
+
+    public float GetSpeed() => currentSpeed;
 }

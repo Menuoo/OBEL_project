@@ -13,7 +13,7 @@ public class EnemyBase : MonoBehaviour
 
     public bool attackTaken;
     public bool isDead = false;
-
+    public bool isAggro = false;
 
     private void Start()
     {
@@ -46,6 +46,12 @@ public class EnemyBase : MonoBehaviour
 
             TakeDamage(attackId, dmgTaken);
         }
+
+        zPlayerAlert alert = other.gameObject.GetComponent<zPlayerAlert>();
+        if (alert != null)
+        {
+            BecomeAggro();
+        }
     }
 
     public void TakeDamage(int attackId, int dmgTaken)
@@ -57,6 +63,11 @@ public class EnemyBase : MonoBehaviour
 
             attackTaken = true;
         }
+    }
+
+    public void BecomeAggro()
+    {
+        isAggro = true;
     }
 
     public Vector3 GetTargetPos() => targetPoint.position;

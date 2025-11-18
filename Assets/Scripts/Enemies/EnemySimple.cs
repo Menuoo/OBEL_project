@@ -17,11 +17,13 @@ public class EnemySimple : MonoBehaviour
     private static int attackHash = Animator.StringToHash("attack");
     private static int flinchHash = Animator.StringToHash("flinch");
     private static int deadHash = Animator.StringToHash("dead");
+    private static int idleHash = Animator.StringToHash("idle");
 
     public bool inAction { get; private set; }
     bool canAttack = true;
 
     public bool immobile = false;
+
 
     private void Start()
     {
@@ -40,12 +42,25 @@ public class EnemySimple : MonoBehaviour
             return;
         }
 
-        if (player != null) {    //  - - - --  -  HAVE TO ADD IDLING AND SEEING/HEARING PLAYER
+        if (player != null)
+        {    //  - - - --  -  HAVE TO ADD IDLING AND SEEING/HEARING PLAYER
+
+
 
             float dist = (player.transform.position - transform.position).magnitude;
 
             if (immobile)
                 return;
+
+            if (!enemy.isAggro)
+            {
+                animator.SetBool(idleHash, true);
+                return;
+            }
+            else
+            {
+                animator.SetBool(idleHash, false);
+            }
 
             if (!inAction && dist <= 1.1f)   // CHANGE LOGIC OF ATTACK DECISION (PROBABLY TO RAYCAST)  ---  OR SEPERATE OBJECT AROUND ATTACK LOCATION TO CHECK DIST
             {
@@ -55,6 +70,11 @@ public class EnemySimple : MonoBehaviour
             {
                 Move();
             }
+        }
+        else 
+        {
+            enemy.isAggro = false;
+            animator.SetBool(idleHash, true);
         }
     }
 

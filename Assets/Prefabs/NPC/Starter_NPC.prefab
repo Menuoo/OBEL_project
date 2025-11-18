@@ -34,23 +34,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6a3631fe4d23e849b4bf2824c4966fd, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1
+      value: 1.0999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6a3631fe4d23e849b4bf2824c4966fd, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1
+      value: 1.0999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6a3631fe4d23e849b4bf2824c4966fd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.473
+      value: -2.2005575
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6a3631fe4d23e849b4bf2824c4966fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.016
+      value: -0.004009649
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6a3631fe4d23e849b4bf2824c4966fd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.582
+      value: 6.819997
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6a3631fe4d23e849b4bf2824c4966fd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6a3631fe4d23e849b4bf2824c4966fd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6a3631fe4d23e849b4bf2824c4966fd, type: 3}
       propertyPath: m_LocalRotation.y
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6a3631fe4d23e849b4bf2824c4966fd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6a3631fe4d23e849b4bf2824c4966fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -469,10 +469,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayText:
-  - hey, why did you -- ah, nevermind...
+  - huh.
   - you wish to leave? it is not safe out there.
-  - you-- you're not her, huh..
-  - I, uh, locked the door earlier, the key should be around here somewhere.
+  - I, uh, locked the door earlier. the key should be around here somewhere.
+  - you really did disappear. didn't you?
 --- !u!114 &101187320162692354
 MonoBehaviour:
   m_ObjectHideFlags: 0
