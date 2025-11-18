@@ -85,8 +85,8 @@ public class Pistol : MonoBehaviour
 
             float angleBetween = Vector3.Angle(vectorTo, playerForward);
 
-            if (angleBetween < minAngle)
-            {
+            if (angleBetween < minAngle)                                     // add distance check, which dictates the maximum allowed angle
+            {                                                                // max distance = angle must be perfect (and also cant lock on)
                 minAngle = angleBetween;
                 targetEnemy = enemy;
             }
