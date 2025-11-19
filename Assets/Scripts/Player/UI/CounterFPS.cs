@@ -24,7 +24,7 @@ public class CounterFPS : MonoBehaviour
         }
 
         counter++;
-        time += Time.deltaTime;
+        time += Time.unscaledDeltaTime;
 
         if (counter == 100)
         {
