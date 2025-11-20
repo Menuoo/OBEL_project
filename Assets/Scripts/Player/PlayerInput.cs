@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 {
+    [SerializeField] PlayerController controller;
     [SerializeField] PlayerInputUI ui;
     [SerializeField] LayerMask mouseLayers;
     [SerializeField] AudioSource playerSource;
@@ -180,4 +181,6 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     {
         playerSource.PlayOneShot(SoundManager.instance.GetSound(id));
     }
+
+    public PlayerController GetController() => controller;
 }

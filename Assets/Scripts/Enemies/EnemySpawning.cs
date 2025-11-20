@@ -38,6 +38,7 @@ public class EnemySpawning : MonoBehaviour
 
         Instantiate(EffectManager.instance.GetParticles(1), toTrans);
         EnemyBase newGuy = Instantiate(toSpawn, toTrans.position + addDir, Quaternion.identity); // idk how to rotate rn
+        newGuy.BecomeAggro();
 
         // have to set up a way to actually slide enemies onto the scene here, idea's there tho
     }

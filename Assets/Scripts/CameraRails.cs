@@ -22,6 +22,9 @@ public class CameraRails : MonoBehaviour
 
     private void Update()
     {
+        if (positions.Length < 1)
+            return;
+
         if (!rails)
             CheckPositions();
         else

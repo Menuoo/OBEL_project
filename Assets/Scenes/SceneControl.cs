@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneControl : MonoBehaviour
 {
-    [SerializeField] PlayerInput input;
+    PlayerInput input;
+    [SerializeField] SceneDatabase scenes;
 
     public static SceneControl instance { get; private set; }
 
     int nextId = 0;
+    int nextDoor = 0;
 
     private void Awake()
     {
@@ -27,6 +29,12 @@ public class SceneControl : MonoBehaviour
         if (version)
         {
             SceneManager.LoadScene(nextId);
+
+            Vector4 vec = scenes.GetScene(nextId).GetDoor(nextDoor);
+
+            input.GetController().SetPosition(vec);
+            input.GetController().SetRotation(vec.w);
+
             TransitionLogic.instance.TransitionScene(false);
         }
         else
@@ -39,9 +47,10 @@ public class SceneControl : MonoBehaviour
     }
 
     // could maybe do an invoke for input?,    ---   ALSO: setup is unideal, cause it depends on another script to finish, may be prone to softlocks
-    public void TransitionScene(int id, PlayerInput newInput)
+    public void TransitionScene(int id, int door, PlayerInput newInput)
     {
         nextId = id;
+        nextDoor = door;
         TransitionLogic.instance.TransitionScene(true);
         TransitionLogic.TransitionEvent += ChangeScene;
 

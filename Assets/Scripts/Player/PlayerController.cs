@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerRotation = this.transform.eulerAngles.y;
         lastTrans = CameraSingle.instance.transHolder.transform;
 
         inMovementLock = false;
@@ -94,7 +95,6 @@ public class PlayerController : MonoBehaviour
         {
             camTrans = lastTrans;
         }
-        Debug.Log(camTrans.position);
 
         Vector3 cameraForward = new Vector3(camTrans.forward.x, 0f, camTrans.forward.z).normalized;
         Vector3 cameraRight = new Vector3(camTrans.right.x, 0f, camTrans.right.z).normalized;
@@ -205,4 +205,15 @@ public class PlayerController : MonoBehaviour
     }
 
     public float GetSpeed() => currentSpeed;
+
+    public void SetPosition(Vector3 vec)
+    { 
+        characterController.enabled = false;
+        transform.position = vec;
+        characterController.enabled = true;
+    }
+    public void SetRotation(float rot)
+    {
+        playerRotation = rot;
+    }
 }

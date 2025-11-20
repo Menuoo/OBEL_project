@@ -5,6 +5,7 @@ using UnityEngine;
 public class DoorObject : IInteractable
 {
     [SerializeField] int targetScene;
+    [SerializeField] int targetDoor;
 
     [SerializeField] int conditionItem = -1; // if -1, then no condition, the door just works
 
@@ -24,7 +25,7 @@ public class DoorObject : IInteractable
         if (state == 2 || conditionItem == -1)
         {
             Debug.Log("scene changed");
-            SceneControl.instance.TransitionScene(targetScene, interactions.GetInput());
+            SceneControl.instance.TransitionScene(targetScene, targetDoor, interactions.GetInput());
         }
         else if (state == 0)
         {

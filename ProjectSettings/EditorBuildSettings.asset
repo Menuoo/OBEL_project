@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Room1/Room1.unity
     guid: 976aedaa1423b6042bbf4a3af1deeac9
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/archive/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Scene2.unity
-    guid: d42cffbee9bc3e7478381b33495a4e8b
+    path: Assets/Scenes/Room2/Room2.unity
+    guid: 5d685a36a6177144883d7d5c4f6707e9
   m_configObjects: {}
