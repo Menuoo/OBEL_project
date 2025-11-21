@@ -86,9 +86,21 @@ public class PlayerInteractions : MonoBehaviour
 
     public bool CheckKey(int keyId)
     {
+        if (DataVariables.data.DoorStates.TryGetValue(keyId, out bool state))
+        {
+            if (state)
+                return true;
+        }
+        else
+        {
+            DataVariables.data.DoorStates.Add(keyId, state);
+        }
+
         if (playerInfo.inventory.ContainsKey(keyId))
         {
             playerInfo.inventory.Remove(keyId);
+
+            DataVariables.data.DoorStates[keyId] = true;
             return true;
         }
         else

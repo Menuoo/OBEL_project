@@ -6,14 +6,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/SceneDatabase")]
 public class SceneDatabase : ScriptableObject
 {
-    [SerializeField] SceneDatabaseEntry[] scenes;
+    //[SerializeField] SceneDatabaseEntry[] scenes;
+    [SerializeField] SceneObjectSO[] scenes;
 
     public SceneObjectSO GetScene(int id)
     {
         foreach (var scene in scenes)
         { 
-            if (scene.sceneId == id)
-                return scene.sceneObject;
+            if (scene.GetId() == id)
+                return scene;
         }
 
         return null;

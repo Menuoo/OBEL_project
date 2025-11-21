@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: SceneDatabase
   m_EditorClassIdentifier: 
   scenes:
-  - sceneId: 1
-    sceneObject: {fileID: 11400000, guid: 7421698382b02f24f9f46b28f2364f34, type: 2}
-  - sceneId: 2
-    sceneObject: {fileID: 11400000, guid: 8a37b2ab4d0667c41addddd0da3f4546, type: 2}
+  - {fileID: 11400000, guid: 7421698382b02f24f9f46b28f2364f34, type: 2}
+  - {fileID: 11400000, guid: 8a37b2ab4d0667c41addddd0da3f4546, type: 2}

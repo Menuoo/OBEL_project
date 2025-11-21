@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -58,9 +59,20 @@ public class PlayerInformation : MonoBehaviour
             Reload(2002); // reload gun
             SoundManager.instance.PlaySound(2);
         }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SaveLogic();
+            CheckJson();
+            //DataVariables.data.SceneStates[1].sceneItems[0].isActive = false;
+        }
     }
 
-
+    public void CheckJson()
+    {
+        string json = JsonConvert.SerializeObject(DataVariables.data);
+        Debug.Log(json);
+    }
 
     public void AddItem(int id, int quantity)
     { 
@@ -161,6 +173,6 @@ public class PlayerInformation : MonoBehaviour
         PlayerVariables newPlayerVar = new PlayerVariables { health = this.health, 
             inventory = this.inventory, currWeap = this.currentWeapon, flashlightOn = this.flashlightOn};
 
-        DataVariables.playerVars = newPlayerVar;
+        DataVariables.data.PlayerVars = newPlayerVar;
     }
 }

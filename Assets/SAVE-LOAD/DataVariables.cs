@@ -1,13 +1,22 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 public static class DataVariables
 {
-    static public PlayerVariables playerVars = new PlayerVariables(true);
-    static public Dictionary<int, SceneSaveState> sceneStates = new Dictionary<int, SceneSaveState>();
+    public static DataVars data = new DataVars();
 }
+
+public class DataVars
+{
+    public PlayerVariables PlayerVars = new PlayerVariables(true);
+    public Dictionary<int, SerializedSceneState> SceneStates = new Dictionary<int, SerializedSceneState>();
+    public Dictionary<int, bool> DoorStates = new Dictionary<int, bool>();
+}
+
 
 
 public struct PlayerVariables

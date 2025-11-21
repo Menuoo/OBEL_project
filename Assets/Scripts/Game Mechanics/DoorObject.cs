@@ -16,6 +16,12 @@ public class DoorObject : IInteractable
 
     public override void OnInteract(PlayerInteractions interactions)
     {
+        if (DataVariables.data.DoorStates.TryGetValue(conditionItem, out bool val))
+        {
+            state = val ? 2 : 0;
+        }
+
+
         // add a unlock check which sets state to 1
         if (state == 0 && conditionItem != -1)
         {
@@ -24,7 +30,7 @@ public class DoorObject : IInteractable
 
         if (state == 2 || conditionItem == -1)
         {
-            Debug.Log("scene changed");
+            //Debug.Log("scene changed");
             SceneControl.instance.TransitionScene(targetScene, targetDoor, interactions.GetInput());
         }
         else if (state == 0)

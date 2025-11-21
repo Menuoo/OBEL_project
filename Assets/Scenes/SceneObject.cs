@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/SceneObject")]
 public class SceneObjectSO : ScriptableObject
 {
+    [SerializeField] int sceneId;
     [SerializeField] Vector3[] doorLocations;
     [SerializeField] float[] doorRotations;
 
@@ -15,4 +16,6 @@ public class SceneObjectSO : ScriptableObject
 
         return new Vector4(doorLocations[id].x, doorLocations[id].y, doorLocations[id].z, doorRotations[id]);
     }
+
+    public int GetId() => sceneId;
 }
