@@ -18,32 +18,20 @@ public class SceneSaveState : MonoBehaviour
 
         if (DataVariables.data.SceneStates.TryGetValue(thisScene.GetId(), out SerializedSceneState sceneState))
         {
-            //int i = 0;
-            foreach (var item in sceneState.sceneItems)
+            itemStates = sceneState.sceneItems;
+
+            foreach (var it in sceneItems)
             {
-                itemStates[i] = item;
-
-                foreach (var it in sceneItems)
-                {
-                    if (itemStates[i].itemId == it.id)
-                    {
-                        it.item.state = itemStates[i];
-                        break;
-                    }
-                }
-
-                //i++;
+                it.item.state = itemStates[it.id];
             }
-            //sceneItems = sceneState.sceneItems;
         }
+
         else 
         {
-            int i = 0;
             foreach (var item in sceneItems)
             {
                 item.item.state.itemId = item.id;
-                itemStates[i] = item.item.state;
-                i++;
+                itemStates.Add(item.id, item.item.state);
             }
             DataVariables.data.SceneStates.Add(thisScene.GetId(), new SerializedSceneState { sceneItems = this.itemStates});
         }

@@ -7,6 +7,18 @@ public class FieldItem : IInteractable
     [SerializeField] int id;
     [SerializeField] int quantity;
 
+    SceneItemSave itemSave;
+
+    private void Start()
+    {
+        itemSave = GetComponent<SceneItemSave>();
+        if (itemSave != null)
+        {
+            if (!itemSave.state.isActive)
+                this.gameObject.SetActive(false);
+        }
+    }
+
     public override void OnInteract(PlayerInteractions interactions)
     {
         SoundManager.instance.PlaySound(7);
@@ -23,5 +35,10 @@ public class FieldItem : IInteractable
     {
         interactions.AddItemToInventory(id, quantity);
         Destroy(this.gameObject);
+
+        if (itemSave != null)
+        { 
+            itemSave.state.isActive = false;
+        }
     }
 }

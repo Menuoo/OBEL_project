@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
+    [SerializeField] CharacterController controller;
     [SerializeField] Transform targetPoint;
     [SerializeField] float health = 20;
     int enemyId;
@@ -15,9 +16,23 @@ public class EnemyBase : MonoBehaviour
     public bool isDead = false;
     public bool isAggro = false;
 
+    SceneItemSave itemSave;
+
+
     private void Start()
     {
         enemyId = EnemyManager.instance.AddEnemy(this);
+
+        itemSave = GetComponent<SceneItemSave>();
+        if (itemSave != null)
+        {
+            if (!itemSave.state.isActive)
+            {
+                Die(true);
+                transform.position = new Vector3(itemSave.state.posRot[0], itemSave.state.posRot[1], itemSave.state.posRot[2]);
+                transform.rotation = Quaternion.Euler(0f, itemSave.state.posRot[3], 0f);
+            }
+        }
     }
 
 
@@ -31,8 +46,21 @@ public class EnemyBase : MonoBehaviour
         if (health <= 0 || isForced)
         {
             EnemyManager.instance.RemoveEnemy(enemyId);
-            //Destroy(this.gameObject);
+
+            controller.enabled = false;
             isDead = true;
+
+            if (!isForced)
+            {
+                if (itemSave != null)
+                {
+                    itemSave.state.isActive = false;
+                    itemSave.state.posRot[0] = transform.position.x;
+                    itemSave.state.posRot[1] = transform.position.y;
+                    itemSave.state.posRot[2] = transform.position.z;
+                    itemSave.state.posRot[3] = transform.eulerAngles.y;
+                }
+            }
         }
     }
 

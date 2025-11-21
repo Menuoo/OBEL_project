@@ -146,6 +146,6 @@ public class EnemySimple : MonoBehaviour
     {
         animator.SetBool(deadHash, true);
         this.enabled = false;
-        controller.enabled = false;
+        //controller.enabled = false;
     }
 }

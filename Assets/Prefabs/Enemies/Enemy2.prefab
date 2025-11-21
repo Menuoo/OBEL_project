@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ebde0ea42265b459e0abdc42635559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 3122705592862371336}
   targetPoint: {fileID: 5148185455135693664}
   health: 50
   attackTaken: 0
@@ -190,9 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d3e2bb8bc9f7e4480f4712f42a5479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  state: 1
-  posRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &1217850367820215406
 PrefabInstance:
   m_ObjectHideFlags: 0
