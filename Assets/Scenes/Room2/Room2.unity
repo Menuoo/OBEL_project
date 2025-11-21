@@ -4480,7 +4480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce360da3d174c04799029e9d8d30bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenes: {fileID: 0}
+  scenes: {fileID: 11400000, guid: bd258b6888a1f1e4687a8757e66bd214, type: 2}
 --- !u!4 &1529411844
 Transform:
   m_ObjectHideFlags: 0
@@ -6871,6 +6871,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall_door
       objectReference: {fileID: 0}
+    - target: {fileID: 5299439464655278108, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7507667083535415827, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.9061854
@@ -6914,8 +6918,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5299439464655278108, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1994401258}
   m_SourcePrefab: {fileID: 100100000, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+--- !u!1 &1994401257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5299439464655278108, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+  m_PrefabInstance: {fileID: 1994401256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1994401258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994401257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b6a5306f1dae447a50f95e0e4b11c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScene: 0
+  targetDoor: 0
+  conditionItem: -1
+  lockedText: []
+  unlockText: []
 --- !u!1 &2023867062
 GameObject:
   m_ObjectHideFlags: 0
