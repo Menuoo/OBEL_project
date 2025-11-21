@@ -9,6 +9,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerInformation : MonoBehaviour
 {
+    [SerializeField] PlayerController controller;
     [SerializeField] WeaponControls weaponControls;
     [SerializeField] int maxHealth = 100;
 
@@ -18,6 +19,7 @@ public class PlayerInformation : MonoBehaviour
     public int health { get; private set; }
 
     public Dictionary<int, int> inventory { get; private set; }
+
     public bool equipChange { get; private set; }
     //public int equipId { get; private set; }
 
@@ -36,6 +38,22 @@ public class PlayerInformation : MonoBehaviour
         equipChange = false;
 
         flashlight.enabled = flashlightOn;
+
+
+        // load player data
+        PlayerVariables playerVars = DataVariables.data.PlayerVars;
+        health = playerVars.health;
+
+        currentWeapon = playerVars.currWeap;
+        weaponControls.SetWeapon(currentWeapon);
+
+        flashlightOn = playerVars.flashlightOn;
+        flashlight.enabled = flashlightOn;
+
+        inventory = playerVars.inventory;
+
+        controller.SetPosition(new Vector3(playerVars.rotPos[0], playerVars.rotPos[1], playerVars.rotPos[2]));
+        controller.SetRotation(playerVars.rotPos[3]);
     }
 
     private void OnEnable()
@@ -49,6 +67,7 @@ public class PlayerInformation : MonoBehaviour
     }
 
 
+
     void Update()
     {
         if (health <= 0)
@@ -60,19 +79,15 @@ public class PlayerInformation : MonoBehaviour
             SoundManager.instance.PlaySound(2);
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        // MUST REMOVE AFTER TESTING
+        if (Input.GetKeyDown(KeyCode.P))               //     REMOVE        AFTER        TESTING        ALERT
         {
-            SaveLogic();
-            CheckJson();
-            //DataVariables.data.SceneStates[1].sceneItems[0].isActive = false;
+            PlayerSaveLogic();
+
+            DataVariables.Save();
         }
     }
 
-    public void CheckJson()
-    {
-        string json = JsonConvert.SerializeObject(DataVariables.data);
-        Debug.Log(json);
-    }
 
     public void AddItem(int id, int quantity)
     { 
@@ -168,10 +183,14 @@ public class PlayerInformation : MonoBehaviour
     }
 
 
-    public void SaveLogic()
-    { 
-        PlayerVariables newPlayerVar = new PlayerVariables { health = this.health, 
-            inventory = this.inventory, currWeap = this.currentWeapon, flashlightOn = this.flashlightOn};
+    public void PlayerSaveLogic()
+    {
+        float[] vec4 = { transform.position.x, transform.position.y, transform.position.z, transform.eulerAngles.y};
+
+        PlayerVariables newPlayerVar = new PlayerVariables { 
+            health = this.health, inventory = this.inventory, currWeap = this.currentWeapon,
+            flashlightOn = this.flashlightOn, rotPos = vec4 
+        };
 
         DataVariables.data.PlayerVars = newPlayerVar;
     }

@@ -17,10 +17,21 @@ public class MainMenuLogic : MonoBehaviour
         
     }
 
-    public void StartScene()
+    public void StartScene(bool toLoad)
     {
-        SceneManager.LoadScene(1);
+        if (toLoad)
+        {
+            DataVariables.Load();
+        }
+        else
+        {
+            DataVariables.Reset();
+        }
+
+        SceneManager.LoadScene(DataVariables.data.LastScene);
         SceneManager.LoadScene("PLAYER SCENE", LoadSceneMode.Additive);
+
+
         //PlayerInput playerInput = EnemyManager.instance.GetPlayer().GetInput();
         //SceneControl.instance.TransitionScene(1, 0, playerInput);
     }

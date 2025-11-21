@@ -32,6 +32,7 @@ public class SceneControl : MonoBehaviour
         if (version)
         {
             SceneManager.LoadScene(nextId);
+            DataVariables.data.LastScene = nextId;
 
             Vector4 vec = scenes.GetScene(nextId).GetDoor(nextDoor);
 
