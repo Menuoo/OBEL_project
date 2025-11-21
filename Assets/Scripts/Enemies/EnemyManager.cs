@@ -24,6 +24,16 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneControl.SceneChangeEvent += ClearEnemies;
+    }
+
+    private void OnDisable()
+    {
+        SceneControl.SceneChangeEvent -= ClearEnemies;
+    }
+
     public int AddEnemy(EnemyBase toAdd)
     { 
         enemyList.Add(currentID++, toAdd);
@@ -38,8 +48,15 @@ public class EnemyManager : MonoBehaviour
         enemyList.Remove(id);
     }
 
+    public void ClearEnemies(bool state)
+    { 
+        enemyList.Clear();
+    }
+
     public PlayerController GetPlayer() => player;
 }
+
+
 
 /*public static class EnemyManager
 {

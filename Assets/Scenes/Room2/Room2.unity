@@ -6940,7 +6940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b6a5306f1dae447a50f95e0e4b11c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: 0
+  targetScene: 1
   targetDoor: 0
   conditionItem: -1
   lockedText: []

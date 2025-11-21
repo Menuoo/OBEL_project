@@ -206,6 +206,7 @@ public class PlayerController : MonoBehaviour
 
     public float GetSpeed() => currentSpeed;
 
+    public PlayerInput GetInput() => playerInput;
     public void SetPosition(Vector3 vec)
     { 
         characterController.enabled = false;

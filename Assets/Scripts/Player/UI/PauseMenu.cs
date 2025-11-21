@@ -110,12 +110,15 @@ public class PauseMenu : MonoBehaviour
 
 
         // handle equip image
-        if (playerInformation.equipChange)
+        /*if (playerInformation.equipChange)
         {
             equippedItem = ItemDatabase.GetItem(playerInformation.equipId);
-        }
-        if (equippedItem != null)
+        }*/
+        //if (equippedItem != null)
+        if (playerInformation.currentWeapon != CurrentWeapon.None)
         {
+            equippedItem = ItemDatabase.GetItem((int) playerInformation.currentWeapon);
+
             if (equippedItem.GetId() == 2002)
             {
                 int quant = 0;

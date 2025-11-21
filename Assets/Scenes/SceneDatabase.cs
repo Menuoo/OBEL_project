@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,23 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/SceneDatabase")]
 public class SceneDatabase : ScriptableObject
 {
-    [SerializeField] SceneObject[] scenes;
+    [SerializeField] SceneDatabaseEntry[] scenes;
 
-    public SceneObject GetScene(int id)
+    public SceneObjectSO GetScene(int id)
     {
-        if (id >= scenes.Length)
-            return null;
+        foreach (var scene in scenes)
+        { 
+            if (scene.sceneId == id)
+                return scene.sceneObject;
+        }
 
-        return scenes[id];
+        return null;
     }
+}
+
+[Serializable]
+public struct SceneDatabaseEntry
+{
+    public int sceneId;
+    public SceneObjectSO sceneObject;
 }

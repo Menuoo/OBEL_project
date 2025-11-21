@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class SceneControl : MonoBehaviour
 {
     PlayerInput input;
     [SerializeField] SceneDatabase scenes;
+
+    public static event Action<bool> SceneChangeEvent;
 
     public static SceneControl instance { get; private set; }
 
@@ -34,6 +37,8 @@ public class SceneControl : MonoBehaviour
 
             input.GetController().SetPosition(vec);
             input.GetController().SetRotation(vec.w);
+
+            SceneChangeEvent(true);
 
             TransitionLogic.instance.TransitionScene(false);
         }

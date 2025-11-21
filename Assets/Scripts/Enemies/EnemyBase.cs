@@ -23,12 +23,12 @@ public class EnemyBase : MonoBehaviour
 
     private void Update()
     {
-        Die();
+        Die(false);
     }
 
-    void Die()
+    void Die(bool isForced)
     {
-        if (health <= 0)
+        if (health <= 0 || isForced)
         {
             EnemyManager.instance.RemoveEnemy(enemyId);
             //Destroy(this.gameObject);

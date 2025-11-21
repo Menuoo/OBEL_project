@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -17,7 +18,10 @@ public class PlayerInformation : MonoBehaviour
 
     public Dictionary<int, int> inventory { get; private set; }
     public bool equipChange { get; private set; }
-    public int equipId { get; private set; }
+    //public int equipId { get; private set; }
+
+    public CurrentWeapon currentWeapon = CurrentWeapon.None; // careful with this one
+
 
     void Start()
     {
@@ -125,11 +129,13 @@ public class PlayerInformation : MonoBehaviour
         }
     }
 
-    public void Equip(CurrentWeapon weaponToEquip, int id)
+    public void Equip(CurrentWeapon weaponToEquip)
     { 
+        currentWeapon = weaponToEquip;
+
         weaponControls.SetWeapon(weaponToEquip);
         equipChange = true;
-        equipId = id;
+        //equipId = id;
     }
 
     public void ResetEquip()
@@ -147,5 +153,14 @@ public class PlayerInformation : MonoBehaviour
     void Die()
     {
         Destroy(this.gameObject);
+    }
+
+
+    public void SaveLogic()
+    { 
+        PlayerVariables newPlayerVar = new PlayerVariables { health = this.health, 
+            inventory = this.inventory, currWeap = this.currentWeapon, flashlightOn = this.flashlightOn};
+
+        DataVariables.playerVars = newPlayerVar;
     }
 }

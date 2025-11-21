@@ -14,6 +14,6 @@ public class EquipItem : InventoryItem
             SoundManager.instance.PlaySound(3);
         else SoundManager.instance.PlaySound(0);
             
-        playerInfo.Equip(weaponType, this.GetId());
+        playerInfo.Equip(weaponType);
     }
 }

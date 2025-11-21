@@ -109,4 +109,4 @@ public class WeaponControls : MonoBehaviour
     public Pistol GetPistol() => pistol;
 }
 
-public enum CurrentWeapon { None, Knife, Pistol }
+public enum CurrentWeapon { None = 0, Knife = 2001, Pistol = 2002 }
