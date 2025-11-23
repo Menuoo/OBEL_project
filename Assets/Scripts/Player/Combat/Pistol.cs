@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -67,7 +68,8 @@ public class Pistol : MonoBehaviour
         Vector3 playerForward = playerController.transform.forward;
         EnemyBase targetEnemy = null;
         //float minDist = range;
-        float minAngle = 30f;
+        float minimum = 30f;
+        float minAngle = minimum;
 
         foreach (var pair in EnemyManager.instance.enemyList)
         { 
@@ -79,14 +81,18 @@ public class Pistol : MonoBehaviour
                 continue;
             }
 
+            float minFactor = math.lerp(1, 0, vectorTo.magnitude / range);
+            Debug.Log(vectorTo.magnitude);
+
+
             vectorTo.y = 0;
             vectorTo = vectorTo.normalized;
 
 
             float angleBetween = Vector3.Angle(vectorTo, playerForward);
 
-            if (angleBetween < minAngle)                                     // add distance check, which dictates the maximum allowed angle
-            {                                                                // max distance = angle must be perfect (and also cant lock on)
+            if (angleBetween < minAngle && angleBetween < minFactor * minimum)      // DONE: add distance check, which dictates the maximum allowed angle
+            {                                                                       // DONE: max distance = angle must be perfect (and also cant lock on)
                 minAngle = angleBetween;
                 targetEnemy = enemy;
             }

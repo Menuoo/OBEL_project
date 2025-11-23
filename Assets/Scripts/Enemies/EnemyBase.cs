@@ -99,5 +99,7 @@ public class EnemyBase : MonoBehaviour
         isAggro = true;
     }
 
+    public float GetHealth() => health;
+
     public Vector3 GetTargetPos() => targetPoint.position;
 }

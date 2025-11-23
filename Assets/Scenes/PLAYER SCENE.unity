@@ -1328,7 +1328,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 32
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: dadb75d3aac1c5f43af0bc05c9bcbf13, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667593491}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11682840b2341449b8a844942dfad18, type: 3}
   m_Name: 
@@ -2968,7 +2968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -75.8, y: -26.600006}
+  m_AnchoredPosition: {x: -75.79999, y: -26.599976}
   m_SizeDelta: {x: 143.64, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1112404814
@@ -4836,6 +4836,10 @@ PrefabInstance:
       propertyPath: uiControls
       value: 
       objectReference: {fileID: 807293904}
+    - target: {fileID: 7377121479598909217, guid: 3511871b6ac5d4f4ba9b424ff0198482, type: 3}
+      propertyPath: range
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7377121479598909217, guid: 3511871b6ac5d4f4ba9b424ff0198482, type: 3}
       propertyPath: aimTarget
       value: 

@@ -17,6 +17,7 @@ public class EnemySimple : MonoBehaviour
     private static int attackHash = Animator.StringToHash("attack");
     private static int flinchHash = Animator.StringToHash("flinch");
     private static int deadHash = Animator.StringToHash("dead");
+    private static int instaDeadHash = Animator.StringToHash("instaDie");
     private static int idleHash = Animator.StringToHash("idle");
 
     public bool inAction { get; private set; }
@@ -144,7 +145,16 @@ public class EnemySimple : MonoBehaviour
 
     public void Die()
     {
-        animator.SetBool(deadHash, true);
+        if (enemy.GetHealth() > 0)
+        {
+            animator.SetBool(instaDeadHash, true);
+        }
+        else
+        {
+            animator.SetBool(deadHash, true);
+        }
+
+
         this.enabled = false;
         //controller.enabled = false;
     }
