@@ -9,7 +9,9 @@ public class PostProcessCamera : MonoBehaviour
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        Graphics.Blit(source, renderTex);
-        Graphics.Blit(renderTex, destination, mat);
+        //Graphics.Blit(source, renderTex, mat);
+        //Graphics.Blit(renderTex, destination);
+
+        Graphics.Blit(source, destination, mat);
     }
 }

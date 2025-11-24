@@ -63,12 +63,15 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
     {
         // Mouse World Position
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float fac = 640f / Screen.width;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition * fac);
         bool mouseHit = Physics.Raycast(ray, out hit, 1000f, mouseLayers);
 
         if (mouseHit)
         {
             mousePosition = hit.point;
+            Debug.Log(mousePosition);
         }
     }
 
