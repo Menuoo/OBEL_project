@@ -71,7 +71,6 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
         if (mouseHit)
         {
             mousePosition = hit.point;
-            Debug.Log(mousePosition);
         }
     }
 

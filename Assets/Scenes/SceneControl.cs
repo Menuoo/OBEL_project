@@ -8,6 +8,7 @@ public class SceneControl : MonoBehaviour
 {
     PlayerInput input;
     [SerializeField] SceneDatabase scenes;
+    //[SerializeField] DoorObject[] doors;
 
     public static event Action<bool> SceneChangeEvent;
 
@@ -26,6 +27,10 @@ public class SceneControl : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        //Debug.Log("LastScene: " + DataVariables.data.LastScene);
+    }
 
     public void ChangeScene(bool version)
     {
@@ -35,6 +40,11 @@ public class SceneControl : MonoBehaviour
             DataVariables.data.LastScene = nextId;
 
             Vector4 vec = scenes.GetScene(nextId).GetDoor(nextDoor);
+
+            //SceneDoors sceneDoors = FindObjectOfType<SceneDoors>();
+            //Vector4 vec = sceneDoors.GetDoor(nextDoor).GetVec4();
+
+            Debug.Log(vec);
 
             input.GetController().SetPosition(vec);
             input.GetController().SetRotation(vec.w);

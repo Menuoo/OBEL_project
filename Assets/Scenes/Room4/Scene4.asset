@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afb201941f7ba3419926c87ffe23242, type: 3}
   m_Name: Scene4
   m_EditorClassIdentifier: 
-  sceneId: 3
+  sceneId: 4
   doorLocations:
-  - {x: -2.331, y: 0.9, z: 0}
+  - {x: -4.5, y: 0.9, z: -3.8}
   doorRotations:
-  - 90
+  - 0

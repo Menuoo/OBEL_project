@@ -1857,6 +1857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 348465654}
   - component: {fileID: 348465653}
+  - component: {fileID: 348465655}
   m_Layer: 0
   m_Name: ~~ SCENE-SAVE ~~  ROOM1
   m_TagString: Untagged
@@ -1897,12 +1898,26 @@ Transform:
   m_GameObject: {fileID: 348465652}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2616615, y: -9.160169, z: 21.958302}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &348465655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348465652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ee6139d6430d841b3cca2997da0082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doors:
+  - {fileID: 1268205591}
 --- !u!4 &351694551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9076284972916284645, guid: 3b6c5d55c5a703e49aea527b1eacd4fb, type: 3}
@@ -6938,6 +6953,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall_door
       objectReference: {fileID: 0}
+    - target: {fileID: 5295986417645736325, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+      propertyPath: targetDoor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295986417645736325, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+      propertyPath: targetScene
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295986417645736325, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+      propertyPath: conditionItem
+      value: 3001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295986417645736325, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+      propertyPath: lockedText.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295986417645736325, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+      propertyPath: unlockText.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295986417645736325, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+      propertyPath: lockedText.Array.data[0]
+      value: The door appears to be locked.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295986417645736325, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+      propertyPath: unlockText.Array.data[0]
+      value: Door unlocked using <Key>!
+      objectReference: {fileID: 0}
     - target: {fileID: 5299439464655278108, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -6986,7 +7029,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8818781613954879192, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -7011,6 +7055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b6a5306f1dae447a50f95e0e4b11c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLoc: {fileID: 1268205592}
   targetScene: 2
   targetDoor: 0
   conditionItem: 3001
@@ -7018,6 +7063,11 @@ MonoBehaviour:
   - The door is locked.
   unlockText:
   - Door unlocked!
+--- !u!4 &1268205592 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3267937319163261136, guid: 80a7e9f5b2dd8f341a5959fd34c30cc3, type: 3}
+  m_PrefabInstance: {fileID: 1268205589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1274165021
 PrefabInstance:
   m_ObjectHideFlags: 0

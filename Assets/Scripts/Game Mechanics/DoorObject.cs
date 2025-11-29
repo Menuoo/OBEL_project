@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoorObject : IInteractable
 {
+    [SerializeField] Transform playerLoc;
     [SerializeField] int targetScene;
     [SerializeField] int targetDoor;
 
@@ -16,6 +17,11 @@ public class DoorObject : IInteractable
 
     public override void OnInteract(PlayerInteractions interactions)
     {
+        if (targetScene <= 0)
+        {
+            return;
+        }
+
         if (DataVariables.data.DoorStates.TryGetValue(conditionItem, out bool val))
         {
             state = val ? 2 : 0;
@@ -42,5 +48,15 @@ public class DoorObject : IInteractable
             interactions.DisplayMessage(unlockText);
             state = 2;
         }
+    }
+
+    public Vector4 GetVec4()
+    { 
+        Vector4 vec = playerLoc.TransformPoint(playerLoc.localPosition);
+        vec.w = playerLoc.rotation.eulerAngles.y;
+
+        Debug.Log(vec);
+
+        return vec;
     }
 }

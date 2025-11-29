@@ -45,7 +45,7 @@ public class CameraRails : MonoBehaviour
                 break;
         }
 
-        Debug.Log(dist + " " + firstPos);
+        //Debug.Log(dist + " " + firstPos);
 
         if (firstPos == 0)
             CameraSingle.instance.SetPos(positions[firstPos].transform.position);
