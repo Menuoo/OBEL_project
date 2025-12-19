@@ -29,6 +29,9 @@ public class PlayerAnimationLogic : MonoBehaviour
     bool addAvailable = false;
     public bool actionIntention { get; private set; }
 
+    float nextAngle = 0f;
+    float currAngle = 0f;
+    float angleSpeed = 20f;
 
     private static int rightHandHash = Animator.StringToHash("rightHandHold");
     private static int walkingHash = Animator.StringToHash("isWalking");
@@ -39,6 +42,9 @@ public class PlayerAnimationLogic : MonoBehaviour
     private static int additionalActionHash = Animator.StringToHash("additionalAction");
     private static int inActionHash = Animator.StringToHash("inAction");
     private static int flinchingHash = Animator.StringToHash("flinching");
+    private static int dirXHash = Animator.StringToHash("dirX");
+    private static int dirYHash = Animator.StringToHash("dirY");
+
 
     void Start()
     {
@@ -135,11 +141,44 @@ public class PlayerAnimationLogic : MonoBehaviour
         verticalTarget = weaponControls.GetPistol().GetTargetValue();
 
         if (state)
-            playerController.SetAnimationLock(state, playerController.inRotationLock);
+            playerController.SetAnimationLock(false, playerController.inRotationLock);  // movement is NOT locked, currently
         else if (!playerAnimator.GetBool(inActionHash))
             playerController.SetAnimationLock(false, false);
     }
+    public bool TryAimWalk(float angle)//Vector3 dir)
+    {
+        nextAngle = angle;
 
+        float diff = Mathf.Abs(currAngle - nextAngle);
+
+        if (diff > 330f)
+        {
+            diff = 360f - diff;
+            if (nextAngle < currAngle)
+            {
+                currAngle = Mathf.Lerp(currAngle, currAngle + diff, angleSpeed * Time.deltaTime);
+                currAngle = currAngle > 180 ? currAngle - 360f : currAngle;
+            }
+            else
+            {
+                currAngle = Mathf.Lerp(currAngle, currAngle - diff, angleSpeed * Time.deltaTime);
+                currAngle = currAngle < -180 ? currAngle + 360f : currAngle;
+            }
+        }
+        else
+            currAngle = Mathf.Lerp(currAngle, nextAngle, angleSpeed * Time.deltaTime);
+
+        if (!playerAnimator.GetBool(aimingHash))
+        {
+            return false;
+        }
+
+        Vector2 dir = new Vector2(Mathf.Sin(Mathf.Deg2Rad * currAngle), Mathf.Cos(Mathf.Deg2Rad * currAngle));
+
+        playerAnimator.SetFloat(dirXHash, dir.x);
+        playerAnimator.SetFloat(dirYHash, dir.y);
+        return true;
+    }
 
 
 
@@ -164,9 +203,6 @@ public class PlayerAnimationLogic : MonoBehaviour
 
         SetKnife(false);
     }
-
-
-
 
 
     public void Flinch()

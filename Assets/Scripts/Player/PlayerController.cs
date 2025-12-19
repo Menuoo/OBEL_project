@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     [SerializeField] PlayerInput playerInput;
     [SerializeField] WeaponControls weaponControls;
+    [SerializeField] PlayerAnimationLogic playerAnim;
 
     [Header("Movement")]
     [SerializeField] float movementSpeed;
@@ -101,10 +102,15 @@ public class PlayerController : MonoBehaviour
 
         walkDir = cameraForward * playerInput.Walk.y + cameraRight * playerInput.Walk.x;
 
-
         float rotationFactor = 1f - Vector3.Angle(walkDir, transform.forward) / 180f;
         rotationFactor = math.max(rotationFactor, 0.1f);
 
+
+
+        if (playerAnim.TryAimWalk(Vector3.SignedAngle(this.transform.forward, walkDir, Vector3.up))) // check if aiming, constant rotation factor
+        {
+            rotationFactor = 0.3f;
+        }
 
         Vector3 velocity = walkDir * (playerInput.SprintPressed ? sprintSpeed : movementSpeed);
         velocity *= math.lerp(0f, 1f, rotationFactor);
