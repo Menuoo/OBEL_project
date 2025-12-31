@@ -280,14 +280,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e03ab1c404a0545824108ce58a6d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 2
   enemy: {fileID: 1544448060345201081}
   movementSpeed: 0.7
   rotationSpeed: 2
   controller: {fileID: 1850009552925094553}
   animator: {fileID: 737648713141583453}
-  attackCtrl: {fileID: 82464942794979908}
+  attackCtrl1: {fileID: 82464942794979908}
+  attackCtrl2: {fileID: 82464942794979908}
   immobile: 0
   staggerThreshold: 25
+  attackDistance: 1.1
 --- !u!4 &6691376305682654247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5d31763883f2cd24398d34c1b2937569, type: 3}

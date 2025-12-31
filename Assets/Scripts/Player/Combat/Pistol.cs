@@ -92,7 +92,7 @@ public class Pistol : MonoBehaviour
             }
 
             float minFactor = math.lerp(1, 0, vectorTo.magnitude / range);
-            Debug.Log(vectorTo.magnitude);
+            //Debug.Log(vectorTo.magnitude);
 
 
             vectorTo.y = 0;
@@ -169,7 +169,6 @@ public class Pistol : MonoBehaviour
         attackId = (attackId + 1) % 8 + 8;
 
         float aimMult = Mathf.Lerp(1.0f, 1.5f, ((int)(aimTime / 0.4f)) / 5f); // increase damage based on aim time
-        Debug.Log(aimMult);
         target?.TakeDamage(attackId, (int) (damage * aimMult));
 
         aimTime = 0f;

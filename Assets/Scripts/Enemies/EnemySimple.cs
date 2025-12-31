@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemySimple : MonoBehaviour
 {
+    [SerializeField] EnemyType enemyType;
     [SerializeField] EnemyBase enemy;
     [SerializeField] float movementSpeed = 1.0f;
     [SerializeField] float rotationSpeed = 400f;
     [SerializeField] CharacterController controller;
     [SerializeField] Animator animator;
-    [SerializeField] EnemyAttack attackCtrl;
+    [SerializeField] EnemyAttack attackCtrl1;
+    [SerializeField] EnemyAttack attackCtrl2;
 
     PlayerController player;
 
     private static int attackHash = Animator.StringToHash("attack");
+    private static int addAttackHash = Animator.StringToHash("addAttack");
+    private static int longAttackHash = Animator.StringToHash("longAttack");
     private static int flinchHash = Animator.StringToHash("flinch");
     private static int staggerHash = Animator.StringToHash("stagger");
     private static int deadHash = Animator.StringToHash("dead");
@@ -26,11 +31,22 @@ public class EnemySimple : MonoBehaviour
 
     public bool immobile = false;
 
+    float dist = 100f;
     Vector3 moveDir = Vector3.zero;
 
+    // stagger logic
     float maxHP;
     float lastHP;
     [SerializeField] float staggerThreshold;
+
+    // claw
+    [SerializeField] float attackDistance = 1.1f;
+    bool addAttack = false;
+
+    // branch
+    [SerializeField] float attackCD = 4f;
+    float attackCooldown = 0f;
+    float rotDiff = 180f;
 
 
     private void Start()
@@ -54,13 +70,11 @@ public class EnemySimple : MonoBehaviour
         }
 
         HandleMove();
+        attackCooldown += Time.deltaTime;
 
         if (player != null)
-        {    //  - - - --  -  HAVE TO ADD IDLING AND SEEING/HEARING PLAYER
-
-
-
-            float dist = (player.transform.position - transform.position).magnitude;
+        {   
+            dist = (player.transform.position - transform.position).magnitude;
 
             if (immobile)
                 return;
@@ -75,9 +89,14 @@ public class EnemySimple : MonoBehaviour
                 animator.SetBool(idleHash, false);
             }
 
-            if (!inAction && dist <= 1.1f)   // CHANGE LOGIC OF ATTACK DECISION (PROBABLY TO RAYCAST)  ---  OR SEPERATE OBJECT AROUND ATTACK LOCATION TO CHECK DIST
+            if (!inAction && dist <= attackDistance)   // CHANGE LOGIC OF ATTACK DECISION (PROBABLY TO RAYCAST)  ---  OR SEPERATE OBJECT AROUND ATTACK LOCATION TO CHECK DIST
             {
                 Attack();
+            }
+            else if (enemyType == EnemyType.Branch && !inAction && rotDiff < 5f && attackCooldown >= attackCD)
+            {
+                Branch_LongAttack();
+                //attackCooldown = 0f;
             }
             else if (!inAction)
             {
@@ -108,6 +127,9 @@ public class EnemySimple : MonoBehaviour
 
         Quaternion rotation = controller.transform.rotation;
         controller.transform.transform.LookAt(player.transform.position);
+
+        rotDiff = 180f - math.abs(math.abs(rotation.eulerAngles.y - controller.transform.eulerAngles.y) - 180f);
+
         controller.transform.rotation = Quaternion.Lerp(rotation, Quaternion.Euler(0, controller.transform.eulerAngles.y, 0), Time.deltaTime * rotationSpeed);
 
         moveDir = controller.transform.forward * movementSpeed;
@@ -123,10 +145,49 @@ public class EnemySimple : MonoBehaviour
 
         inAction = true;
         animator.SetBool(attackHash, inAction);
-        attackCtrl.Begin();
+        attackCtrl1.Begin();
 
         immobile = true;
     }
+    void AddAttack()
+    {
+        attackCtrl1.End();
+
+        addAttack = true;
+
+        inAction = true;
+        animator.SetBool(addAttackHash, inAction);
+        attackCtrl2.Begin();
+
+        immobile = true;
+    }
+
+    void Claw_AdditionalAttack()
+    {
+        if (enemyType == EnemyType.Claw && player != null)
+        {
+            //float dist = (player.transform.position - transform.position).magnitude;
+
+            if (dist <= attackDistance && Random.value < 0.65f && !addAttack)
+            {
+                AddAttack();
+            }
+        }
+    }
+
+    void Branch_LongAttack()
+    {
+        if (animator.GetBool(attackHash))
+            return;
+
+        inAction = true;
+        animator.SetBool(longAttackHash, inAction);
+        attackCtrl1.Begin();
+        //attackCtrl2.Long();
+
+        immobile = true;
+    }
+
 
     void Flinch()
     {
@@ -150,7 +211,8 @@ public class EnemySimple : MonoBehaviour
 
         inAction = true;
         animator.SetBool(staggerHash, true); // inAction changed to true
-        attackCtrl.End();
+        attackCtrl1.End();
+        attackCtrl2.End();
     }
 
 
@@ -161,11 +223,18 @@ public class EnemySimple : MonoBehaviour
 
     void RealEndAction() // have to add a delay because unity animation sucks giga ass
     {
+        if (enemyType == EnemyType.Branch && animator.GetBool(longAttackHash))
+            attackCooldown = 0f;
+
+        addAttack = false;
         inAction = false;
+
         animator.SetBool(attackHash, false);
+        animator.SetBool(addAttackHash, false);
         animator.SetBool(flinchHash, false);
         animator.SetBool(staggerHash, false);
-        attackCtrl.End();
+        attackCtrl1.End();
+        attackCtrl2.End();
 
         Invoke("Mobile", 0.5f);
     }
@@ -198,7 +267,8 @@ public class EnemySimple : MonoBehaviour
         else
         {
             animator.SetBool(deadHash, true);
-            attackCtrl.End();
+            attackCtrl1.End();
+            attackCtrl2.End();
         }
 
 
@@ -206,3 +276,5 @@ public class EnemySimple : MonoBehaviour
         //controller.enabled = false;
     }
 }
+
+public enum EnemyType { Base, Claw, Branch }
