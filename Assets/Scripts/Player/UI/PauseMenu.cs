@@ -190,7 +190,7 @@ public class PauseMenu : MonoBehaviour
     void HealthVisuals()
     {
         //healthVisual.color = Color.Lerp(Color.red, Color.green, playerInformation.health / 100.0f);
-        healthVisual.color = Color.HSVToRGB(Mathf.Lerp(0f, 0.33f, playerInformation.health / 100.0f), 1f, 1f);
+        healthVisual.color = Color.HSVToRGB(Mathf.Lerp(0f, 0.33f, (playerInformation.health / 100.0f) * (playerInformation.health / 100.0f)), 1f, 1f);
     }
 
 

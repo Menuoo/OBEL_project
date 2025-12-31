@@ -16,6 +16,7 @@ public class EnemySimple : MonoBehaviour
 
     private static int attackHash = Animator.StringToHash("attack");
     private static int flinchHash = Animator.StringToHash("flinch");
+    private static int staggerHash = Animator.StringToHash("stagger");
     private static int deadHash = Animator.StringToHash("dead");
     private static int instaDeadHash = Animator.StringToHash("instaDie");
     private static int idleHash = Animator.StringToHash("idle");
@@ -25,9 +26,17 @@ public class EnemySimple : MonoBehaviour
 
     public bool immobile = false;
 
+    Vector3 moveDir = Vector3.zero;
+
+    float maxHP;
+    float lastHP;
+
 
     private void Start()
     {
+        maxHP = enemy.GetHealth();
+        lastHP = maxHP;
+
         inAction = false;
         player = EnemyManager.instance.GetPlayer();
     }
@@ -42,6 +51,8 @@ public class EnemySimple : MonoBehaviour
             Die();
             return;
         }
+
+        HandleMove();
 
         if (player != null)
         {    //  - - - --  -  HAVE TO ADD IDLING AND SEEING/HEARING PLAYER
@@ -79,6 +90,14 @@ public class EnemySimple : MonoBehaviour
         }
     }
 
+    void HandleMove()
+    {
+        moveDir.y = -3f;
+        controller.Move(moveDir * Time.deltaTime);
+
+        moveDir = Vector3.zero;
+    }
+
     void Move()
     {
         //Vector3 dir = player.transform.position - transform.position;
@@ -90,7 +109,10 @@ public class EnemySimple : MonoBehaviour
         controller.transform.transform.LookAt(player.transform.position);
         controller.transform.rotation = Quaternion.Lerp(rotation, Quaternion.Euler(0, controller.transform.eulerAngles.y, 0), Time.deltaTime * rotationSpeed);
 
-        controller.Move(controller.transform.forward * movementSpeed * Time.deltaTime);
+        moveDir = controller.transform.forward * movementSpeed;
+
+        HandleMove();
+        //controller.Move(controller.transform.forward * movementSpeed * Time.deltaTime);
     }
 
     void Attack()
@@ -107,13 +129,29 @@ public class EnemySimple : MonoBehaviour
 
     void Flinch()
     {
-        if (animator.GetBool(flinchHash))
+        if (animator.GetBool(flinchHash) || animator.GetBool(staggerHash))
+            return;
+
+        //inAction = true;
+        animator.SetBool(flinchHash, true); // inAction changed to true
+        //attackCtrl.End();
+    }
+
+    public void EndFlinch()
+    {
+        animator.SetBool(flinchHash, false);
+    }
+
+    void Stagger()
+    {
+        if (animator.GetBool(staggerHash))
             return;
 
         inAction = true;
-        animator.SetBool(flinchHash, inAction);
+        animator.SetBool(staggerHash, true); // inAction changed to true
         attackCtrl.End();
     }
+
 
     public void EndAction()
     {
@@ -125,6 +163,7 @@ public class EnemySimple : MonoBehaviour
         inAction = false;
         animator.SetBool(attackHash, false);
         animator.SetBool(flinchHash, false);
+        animator.SetBool(staggerHash, false);
         attackCtrl.End();
 
         Invoke("Mobile", 0.5f);
@@ -138,9 +177,15 @@ public class EnemySimple : MonoBehaviour
 
     public void TakeDamage()
     {
-        Flinch();
+        if (lastHP > 30f && enemy.GetHealth() <= 30f)  // magic threshold /
+        {
+            Stagger();
+        }
+        else { Flinch(); }
+
         enemy.attackTaken = false;
         Instantiate(EffectManager.instance.GetParticles(0), enemy.GetTargetPos(), Quaternion.identity);
+        lastHP = enemy.GetHealth();
     }
 
     public void Die()

@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
         Vector3 velocity = walkDir * (playerInput.SprintPressed ? sprintSpeed : movementSpeed);
         velocity *= math.lerp(0f, 1f, rotationFactor);
 
-        animSpeed = playerInput.SprintPressed ? 2.5f : 1.5f;
+        animSpeed = playerInput.SprintPressed ? 2f : 1.3f;
 
 
         if (inMovementLock)
