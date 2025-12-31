@@ -30,6 +30,7 @@ public class EnemySimple : MonoBehaviour
 
     float maxHP;
     float lastHP;
+    [SerializeField] float staggerThreshold;
 
 
     private void Start()
@@ -177,7 +178,7 @@ public class EnemySimple : MonoBehaviour
 
     public void TakeDamage()
     {
-        if (lastHP > 30f && enemy.GetHealth() <= 30f)  // magic threshold /
+        if (lastHP > staggerThreshold && enemy.GetHealth() <= staggerThreshold)
         {
             Stagger();
         }

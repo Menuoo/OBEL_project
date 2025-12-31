@@ -22,6 +22,9 @@ public class Pistol : MonoBehaviour
     int attackId = 9;
 
     EnemyBase target = null;
+    float aimTime = 0f;
+
+    Vector3 targetScale = Vector3.one;
 
     private void OnEnable()
     {
@@ -35,6 +38,11 @@ public class Pistol : MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        targetScale = aimTarget.transform.localScale;
+    }
+
     void Update()
     {
         HandleAim();
@@ -44,18 +52,20 @@ public class Pistol : MonoBehaviour
     {
         if (weaponControls.isAiming) {
             //if (target == null)
-            //{
                 TryLockOn();
-            //}
         }
         else {
             target = null;
+            aimTime = 0f;
         }
 
 
         if (target != null) {
             aimTarget.GetComponent<Renderer>().enabled = true;
             aimTarget.transform.position = target.GetTargetPos();
+
+            float scaleFactor = Mathf.Lerp(1.2f, 0.6f, ((int)(aimTime / 0.4f)) / 5f);
+            aimTarget.transform.localScale = targetScale * scaleFactor;
         }
         else {
             aimTarget.GetComponent<Renderer>().enabled = false;
@@ -94,6 +104,8 @@ public class Pistol : MonoBehaviour
             if (angleBetween < minAngle && angleBetween < minFactor * minimum)      // DONE: add distance check, which dictates the maximum allowed angle
             {                                                                       // DONE: max distance = angle must be perfect (and also cant lock on)
                 minAngle = angleBetween;
+
+
                 targetEnemy = enemy;
             }
 
@@ -102,6 +114,15 @@ public class Pistol : MonoBehaviour
                 minDist = vectorTo.magnitude;
                 targetEnemy = enemy;
             }*/
+        }
+
+        if (targetEnemy == target)
+        {
+            aimTime += Time.deltaTime;
+        }
+        else
+        {
+            aimTime = 0f; // reset aim time
         }
 
         target = targetEnemy;
@@ -146,8 +167,12 @@ public class Pistol : MonoBehaviour
         Debug.Log("we shootin out here");
 
         attackId = (attackId + 1) % 8 + 8;
-        target?.TakeDamage(attackId, damage);
 
+        float aimMult = Mathf.Lerp(1.0f, 1.5f, ((int)(aimTime / 0.4f)) / 5f); // increase damage based on aim time
+        Debug.Log(aimMult);
+        target?.TakeDamage(attackId, (int) (damage * aimMult));
+
+        aimTime = 0f;
 
         input.PlaySound(1);
 

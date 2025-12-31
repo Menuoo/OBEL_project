@@ -93,7 +93,7 @@ Transform:
   m_GameObject: {fileID: 8335519480614856312}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.31, z: 0.102}
+  m_LocalPosition: {x: 0, y: 1.31, z: 0.085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -281,12 +281,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1544448060345201081}
-  movementSpeed: 1
-  rotationSpeed: 4
+  movementSpeed: 0.7
+  rotationSpeed: 2
   controller: {fileID: 1850009552925094553}
   animator: {fileID: 737648713141583453}
   attackCtrl: {fileID: 82464942794979908}
   immobile: 0
+  staggerThreshold: 25
 --- !u!4 &6691376305682654247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5d31763883f2cd24398d34c1b2937569, type: 3}

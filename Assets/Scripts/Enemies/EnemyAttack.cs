@@ -8,6 +8,8 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] int damage = 20;
 
     bool isActive = false;
+    //int id = 0;
+    //int attackId = 0;
 
     private void Start()
     {
@@ -31,8 +33,16 @@ public class EnemyAttack : MonoBehaviour
         PlayerInformation player = other.GetComponent<PlayerInformation>();
         if (player != null)
         {
-            player.AlterHP(-damage);
-            isActive = false;
+            if (isActive)
+            {
+                player.AlterHP(-damage);
+                isActive = false;
+            }
         }
     }
+
+    /*public void SetId(int newId)
+    { 
+        id = newId;
+    }*/
 }

@@ -7,7 +7,7 @@ public class EnemyBase : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
     [SerializeField] Transform targetPoint;
-    [SerializeField] float health = 20;
+    [SerializeField] float health = 70;
     int enemyId;
     int lastAttack = -1;
 
