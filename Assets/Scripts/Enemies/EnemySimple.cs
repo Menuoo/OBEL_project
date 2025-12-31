@@ -197,6 +197,7 @@ public class EnemySimple : MonoBehaviour
         else
         {
             animator.SetBool(deadHash, true);
+            attackCtrl.End();
         }
 
 
