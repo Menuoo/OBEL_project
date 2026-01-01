@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.InputSystem.Processors;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float lookLimitV;
     [SerializeField] LayerMask groundLayers;
 
+    public bool dead = false;
 
     public Vector3 walkDir { get; private set; }
     public float animSpeed { get; private set; }
@@ -222,5 +224,14 @@ public class PlayerController : MonoBehaviour
     public void SetRotation(float rot)
     {
         playerRotation = rot;
+    }
+
+
+    public void Die()
+    {
+        dead = true;
+        playerInput.SwapControls(-1);
+        this.enabled = false;
+        characterController.enabled = false;
     }
 }

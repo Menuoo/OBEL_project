@@ -607,8 +607,8 @@ MonoBehaviour:
   playerInput: {fileID: 7402301982722166470}
   weaponControls: {fileID: 4639715612424567742}
   playerAnim: {fileID: 3794459151304604947}
-  movementSpeed: 1.3
-  sprintSpeed: 2
+  movementSpeed: 1
+  sprintSpeed: 1.5
   rotateSpeed: 500
   jumpStrength: 1
   gravity: 25

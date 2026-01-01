@@ -162,12 +162,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8335519480614856312}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.316, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00005, y: 0.00022, z: 0.00055}
+  m_LocalScale: {x: 0.01, y: 0.009999998, z: 0.010000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4964384431087289188}
+  m_Father: {fileID: 2052990769474041395}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8619926253002786131
 GameObject:
@@ -187,7 +187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4964384431087289188
 Transform:
   m_ObjectHideFlags: 0
@@ -201,7 +201,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8977157604387769588}
   - {fileID: 5646953575438145069}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -316,6 +315,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -3050895055062153227, guid: 43e55b7d95a5b9d4e88c39b3dda874ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8977157604387769588}
     - targetCorrespondingSourceObject: {fileID: 4058852915679833821, guid: 43e55b7d95a5b9d4e88c39b3dda874ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2365171192545730996}
@@ -333,6 +335,11 @@ PrefabInstance:
 --- !u!4 &1607026859900139845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6888806815857526915, guid: 43e55b7d95a5b9d4e88c39b3dda874ba, type: 3}
+  m_PrefabInstance: {fileID: 5320082835365802438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2052990769474041395 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3050895055062153227, guid: 43e55b7d95a5b9d4e88c39b3dda874ba, type: 3}
   m_PrefabInstance: {fileID: 5320082835365802438}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4978116922461424791 stripped
@@ -353,7 +360,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 69eeffddf0627c944a01b2cf1163a945, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

@@ -72,9 +72,10 @@ public class EnemySimple : MonoBehaviour
         HandleMove();
         attackCooldown += Time.deltaTime;
 
-        if (player != null)
+        if (player != null && !player.dead)
         {   
             dist = (player.transform.position - transform.position).magnitude;
+
 
             if (immobile)
                 return;
@@ -89,11 +90,12 @@ public class EnemySimple : MonoBehaviour
                 animator.SetBool(idleHash, false);
             }
 
-            if (!inAction && dist <= attackDistance)   // CHANGE LOGIC OF ATTACK DECISION (PROBABLY TO RAYCAST)  ---  OR SEPERATE OBJECT AROUND ATTACK LOCATION TO CHECK DIST
+            if (!inAction && dist <= attackDistance && (enemyType == EnemyType.Branch || rotDiff < 80f))   
             {
+                // CHANGE LOGIC OF ATTACK DECISION (PROBABLY TO RAYCAST)  ---  OR SEPERATE OBJECT AROUND ATTACK LOCATION TO CHECK DIST
                 Attack();
             }
-            else if (enemyType == EnemyType.Branch && !inAction && rotDiff < 5f && attackCooldown >= attackCD)
+            else if (enemyType == EnemyType.Branch && !inAction && rotDiff < 10f && attackCooldown >= attackCD)
             {
                 Branch_LongAttack();
                 //attackCooldown = 0f;
@@ -132,7 +134,7 @@ public class EnemySimple : MonoBehaviour
 
         controller.transform.rotation = Quaternion.Lerp(rotation, Quaternion.Euler(0, controller.transform.eulerAngles.y, 0), Time.deltaTime * rotationSpeed);
 
-        moveDir = controller.transform.forward * movementSpeed;
+        moveDir = controller.transform.forward * movementSpeed * ((180f - rotDiff) / 180f); // modulated by rotDiff
 
         HandleMove();
         //controller.Move(controller.transform.forward * movementSpeed * Time.deltaTime);
@@ -241,7 +243,7 @@ public class EnemySimple : MonoBehaviour
         attackCtrl1.End();
         attackCtrl2.End();
 
-        Invoke("Mobile", 0.5f);
+        Invoke("Mobile", 0.3f);
     }
 
 

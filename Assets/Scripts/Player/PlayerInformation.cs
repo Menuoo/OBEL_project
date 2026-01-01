@@ -179,7 +179,9 @@ public class PlayerInformation : MonoBehaviour
 
     void Die()
     {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        controller.Die();
+        this.enabled = false;
     }
 
 

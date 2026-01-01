@@ -81,7 +81,7 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
     public void SwapControls(int state)
     {
-        if (state == 0)
+        if (state == 0) // UI controls
         {
             playerActions.UI.Enable();
             playerActions.UI.SetCallbacks(ui);
@@ -91,7 +91,7 @@ public class PlayerInput : MonoBehaviour, PlayerActions.IMainActions
 
             ControlsEnabled = !ControlsEnabled;
         }
-        else if (state == 1)
+        else if (state == 1) // game controls
         {
             playerActions.Main.Enable();
             playerActions.Main.SetCallbacks(this);
