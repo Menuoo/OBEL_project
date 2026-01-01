@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ba1ddf1865674398daf0623b34869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  longAttack: 0
   attackCollider: {fileID: 2886086868073878860}
   damage: 20
 --- !u!1 &7799945238092356892
@@ -134,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ba1ddf1865674398daf0623b34869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  longAttack: 0
   attackCollider: {fileID: 526660536924010879}
   damage: 20
 --- !u!1 &8335519480614856312
@@ -185,7 +187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4964384431087289188
 Transform:
   m_ObjectHideFlags: 0
@@ -382,6 +384,7 @@ MonoBehaviour:
   immobile: 0
   staggerThreshold: 25
   attackDistance: 1.2
+  attackCD: 4
 --- !u!4 &5646953575438145069 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43e55b7d95a5b9d4e88c39b3dda874ba, type: 3}

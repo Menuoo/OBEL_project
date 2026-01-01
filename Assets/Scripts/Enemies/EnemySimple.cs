@@ -183,11 +183,15 @@ public class EnemySimple : MonoBehaviour
         inAction = true;
         animator.SetBool(longAttackHash, inAction);
         attackCtrl1.Begin();
-        //attackCtrl2.Long();
+        attackCtrl2.Long(player.transform.position);//enemy.transform.forward * dist);
 
         immobile = true;
     }
 
+    void Branch_Extension()
+    {
+        attackCtrl2.Extend();
+    }
 
     void Flinch()
     {
@@ -230,6 +234,7 @@ public class EnemySimple : MonoBehaviour
         inAction = false;
 
         animator.SetBool(attackHash, false);
+        animator.SetBool(longAttackHash, false);
         animator.SetBool(addAttackHash, false);
         animator.SetBool(flinchHash, false);
         animator.SetBool(staggerHash, false);
