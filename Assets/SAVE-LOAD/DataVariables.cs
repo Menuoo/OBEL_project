@@ -121,7 +121,7 @@ public struct PlayerVariables
 
         inventory = new Dictionary<int, int>();
         inventory.Add(2001, 1); // knife
-        inventory.Add(2002, 15); // gun
+        inventory.Add(2002, 10); // gun
         inventory.Add(2003, 30); // ammo
 
         currWeap = CurrentWeapon.None;

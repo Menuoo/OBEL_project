@@ -38,9 +38,12 @@ public class AnimationHandling : MonoBehaviour
 
     public void Action_End()
     {
-        playerController.SetAnimationLock(false, false);
-        playerAnim.ResetActions();
-        playerAnim.SetInAction(false);
+        if (!playerAnim.isFlinching)
+        {
+            playerController.SetAnimationLock(false, false);
+            playerAnim.ResetActions();
+            playerAnim.SetInAction(false);
+        }
     }
 
 

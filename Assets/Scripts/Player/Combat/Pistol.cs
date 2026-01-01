@@ -8,6 +8,7 @@ using UnityEngine.Animations;
 public class Pistol : MonoBehaviour
 {
     [SerializeField] PlayerInformation playerInfo;
+    [SerializeField] PlayerAnimationLogic anim;
     [SerializeField] PlayerController playerController;
     [SerializeField] WeaponControls weaponControls;
     [SerializeField] Billboard aimTarget;
@@ -50,7 +51,7 @@ public class Pistol : MonoBehaviour
 
     void HandleAim()
     {
-        if (weaponControls.isAiming) {
+        if (weaponControls.isAiming && !anim.isFlinching) {
             //if (target == null)
                 TryLockOn();
         }

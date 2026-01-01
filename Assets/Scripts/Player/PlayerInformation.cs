@@ -10,6 +10,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class PlayerInformation : MonoBehaviour
 {
     [SerializeField] PlayerController controller;
+    [SerializeField] PlayerAnimationLogic anim;
     [SerializeField] WeaponControls weaponControls;
     [SerializeField] int maxHealth = 100;
 
@@ -28,16 +29,19 @@ public class PlayerInformation : MonoBehaviour
 
     void Start()
     {
+        //   OLD    CODE    MAY NEED AT SOME POINT
+        /*
         inventory = new Dictionary<int, int>();
         // adds gun and knife to inventory
         inventory.Add(2001, 1); // knife
-        inventory.Add(2002, 15); // gun
+        inventory.Add(2002, 10); // gun /
         inventory.Add(2003, 30); // ammo
 
         health = maxHealth;
         equipChange = false;
 
         flashlight.enabled = flashlightOn;
+        */
 
 
         // load player data
@@ -70,9 +74,6 @@ public class PlayerInformation : MonoBehaviour
 
     void Update()
     {
-        if (health <= 0)
-            Die();
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             Reload(2002); // reload gun
@@ -115,9 +116,12 @@ public class PlayerInformation : MonoBehaviour
             TakeDamage();
         }
 
-        Debug.Log("health changed by: " + amount);
+        //Debug.Log("health changed by: " + amount);
 
         health = Math.Clamp(health + amount, 0, maxHealth);
+
+        if (health <= 0)
+            Die();
     }
 
     void TakeDamage()
@@ -125,6 +129,8 @@ public class PlayerInformation : MonoBehaviour
         CameraEffects.instance.Shake(10f);
         CameraEffects.instance.Aberrate(4f);
         Instantiate(EffectManager.instance.GetParticles(0), transform.position, Quaternion.identity);
+
+        anim.Flinch();
     }
 
 
@@ -145,7 +151,7 @@ public class PlayerInformation : MonoBehaviour
         int ammoCount = inventory[id];       // bullet max is 15
         int bulletCount = inventory[id + 1]; // follow this logic for any future weapons lol
 
-        int reloadCount = Mathf.Min((15 - ammoCount), bulletCount);
+        int reloadCount = Mathf.Min((10 - ammoCount), bulletCount);
 
         inventory[id] += reloadCount;
         inventory[id + 1] -= reloadCount;

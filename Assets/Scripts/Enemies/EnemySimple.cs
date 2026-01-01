@@ -140,6 +140,7 @@ public class EnemySimple : MonoBehaviour
         //controller.Move(controller.transform.forward * movementSpeed * Time.deltaTime);
     }
 
+
     void Attack()
     {
         if (animator.GetBool(attackHash))
@@ -147,7 +148,7 @@ public class EnemySimple : MonoBehaviour
 
         inAction = true;
         animator.SetBool(attackHash, inAction);
-        attackCtrl1.Begin();
+        //attackCtrl1.Begin();
 
         immobile = true;
     }
@@ -159,7 +160,7 @@ public class EnemySimple : MonoBehaviour
 
         inAction = true;
         animator.SetBool(addAttackHash, inAction);
-        attackCtrl2.Begin();
+        //attackCtrl2.Begin();
 
         immobile = true;
     }
@@ -184,7 +185,7 @@ public class EnemySimple : MonoBehaviour
 
         inAction = true;
         animator.SetBool(longAttackHash, inAction);
-        attackCtrl1.Begin();
+        //attackCtrl1.Begin();
         attackCtrl2.Long(player.transform.position);//enemy.transform.forward * dist);
 
         immobile = true;
@@ -194,6 +195,7 @@ public class EnemySimple : MonoBehaviour
     {
         attackCtrl2.Extend();
     }
+
 
     void Flinch()
     {
@@ -282,6 +284,32 @@ public class EnemySimple : MonoBehaviour
         this.enabled = false;
         //controller.enabled = false;
     }
+
+    public void Activate1()
+    {
+        if (addAttack)
+            attackCtrl2.Begin();
+        else
+            attackCtrl1.Begin();
+    }
+
+    public void Finish1()
+    {
+        if (addAttack)
+            attackCtrl2.End();
+        else
+            attackCtrl1.End();
+    }
+
+    /*
+    public void Activate2()
+    {
+        attackCtrl2.Begin();
+    }
+    public void Finish2()
+    {
+        attackCtrl2.End();
+    }*/
 }
 
 public enum EnemyType { Base, Claw, Branch }

@@ -22,7 +22,7 @@ public class PlayerAnimationLogic : MonoBehaviour
     float intentionTimer = 0f;
 
     float flinchTime = 0f;
-    bool isFlinching = false;
+    public bool isFlinching = false;
 
 
     bool rightHandHold = true;
@@ -44,6 +44,7 @@ public class PlayerAnimationLogic : MonoBehaviour
     private static int flinchingHash = Animator.StringToHash("flinching");
     private static int dirXHash = Animator.StringToHash("dirX");
     private static int dirYHash = Animator.StringToHash("dirY");
+    private static int deadHash = Animator.StringToHash("dead");
 
 
     void Start()
@@ -135,15 +136,18 @@ public class PlayerAnimationLogic : MonoBehaviour
 
     public void Aiming(bool state)
     {
-        playerAnimator.SetBool(aimingHash, state);
+        if (!isFlinching)
+        {
+            playerAnimator.SetBool(aimingHash, state);
 
-        // for vertical aim
-        verticalTarget = weaponControls.GetPistol().GetTargetValue();
+            // for vertical aim
+            verticalTarget = weaponControls.GetPistol().GetTargetValue();
 
-        if (state)
-            playerController.SetAnimationLock(false, playerController.inRotationLock);  // movement is NOT locked, currently
-        else if (!playerAnimator.GetBool(inActionHash))
-            playerController.SetAnimationLock(false, false);
+            if (state)
+                playerController.SetAnimationLock(false, playerController.inRotationLock);  // movement is NOT locked, currently
+            else if (!playerAnimator.GetBool(inActionHash))
+                playerController.SetAnimationLock(false, false);
+        }
     }
     public bool TryAimWalk(float angle)//Vector3 dir)
     {
@@ -207,13 +211,16 @@ public class PlayerAnimationLogic : MonoBehaviour
 
     public void Flinch()
     {
-        ResetActions();
-        isFlinching = true;
-        playerAnimator.SetBool(flinchingHash, true);
-        playerController.SetAnimationLock(true, true);
+        if (!isFlinching)
+        {
+            ResetActions();
+            isFlinching = true;
+            playerAnimator.SetBool(flinchingHash, true);
+            playerController.SetAnimationLock(true, true);
 
-        addAvailable = false;
-        flinchTime = 1f;
+            addAvailable = false;
+            flinchTime = 0.5f;
+        }
     }
 
     public void FinishFlinch()
@@ -241,5 +248,10 @@ public class PlayerAnimationLogic : MonoBehaviour
     public void ResetSlice()
     {
         playerAnimator.SetBool(slicingHash, false);
+    }
+
+    public void Die()
+    {
+        playerAnimator.SetBool(deadHash, true);
     }
 }

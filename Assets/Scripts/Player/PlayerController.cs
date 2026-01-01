@@ -230,6 +230,8 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         dead = true;
+        playerAnim.Die();
+
         playerInput.SwapControls(-1);
         this.enabled = false;
         characterController.enabled = false;
