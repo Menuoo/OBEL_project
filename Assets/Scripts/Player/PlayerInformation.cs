@@ -85,7 +85,7 @@ public class PlayerInformation : MonoBehaviour
         {
             PlayerSaveLogic();
 
-            DataVariables.Save();
+            DataVariables.Save(1);
         }
     }
 

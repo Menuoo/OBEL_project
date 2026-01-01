@@ -13,10 +13,17 @@ public static class DataVariables
     public static DataVars data = new DataVars();
     public static string path = Application.persistentDataPath + "/who-are-you" + ".obel";
     public static string deathPath = Application.persistentDataPath + "/" + playerID + ".mirtys";
+
     static WaitForEndOfFrame frameEnd = new WaitForEndOfFrame();
+    static DateTime runningTime = new DateTime();
 
 
-    public static IEnumerator RealAppend()              // possible memory leak
+    /// <summary>
+    /// Specifically for use with Appending Death images,  - OR -  for use with Save State images
+    /// </summary>
+    /// <param name="death"></param>
+    /// <returns></returns>
+    public static IEnumerator TakeScreenshot(bool death)              // possible memory leak
     {
         yield return frameEnd;
 
@@ -41,8 +48,15 @@ public static class DataVariables
         byte[] bytes = tex.EncodeToJPG();
         string base64 = Convert.ToBase64String(bytes);
 
-        File.AppendAllText(deathPath, base64 + "\n");
-        Debug.Log("Data written to: " + Application.persistentDataPath);
+        if (death)
+        {
+            File.AppendAllText(deathPath, base64 + "\n");
+            Debug.Log("Data written to: " + Application.persistentDataPath);
+        }
+        else
+        {
+            data.SaveInfo.SaveImage = base64;
+        }
 
         RenderTexture.active = main;
     }
@@ -50,7 +64,13 @@ public static class DataVariables
     public static Texture2D GrabImage(int num)
     {
         string[] lines = File.ReadAllLines(deathPath);
-        byte[] bytes = Convert.FromBase64String(lines[num]);
+
+        return ParseImage(lines[num]);
+    }
+
+    public static Texture2D ParseImage(string base64)
+    {
+        byte[] bytes = Convert.FromBase64String(base64);
 
         Texture2D newImg = new Texture2D(0, 0);
         if (ImageConversion.LoadImage(newImg, bytes))
@@ -59,24 +79,46 @@ public static class DataVariables
             return null;
     }
 
-
-    public static void Save()
+    public static void Save(int saveNum)
     {
-        File.WriteAllText(path, MakeJson(true));
+        data.SaveInfo.Playtime += (float) DateTime.Now.Subtract(runningTime).TotalSeconds;
+
+        File.WriteAllText(path + "" + saveNum, MakeJson(true));
         Debug.Log("Data written to: " + Application.persistentDataPath);
 
-        //MakeImage();
+        runningTime = DateTime.Now;
     }
 
     public static void Reset()
     {
         data = new DataVars();
+        playerID = data.SaveInfo.PlayerID;
+
+        runningTime = DateTime.Now;
     }
 
-    public static void Load()
+    public static void Load(int saveNum)
     { 
-        DataVars newData = JsonConvert.DeserializeObject<DataVars>(File.ReadAllText(path));
+        DataVars newData = JsonConvert.DeserializeObject<DataVars>(File.ReadAllText(path + "" + saveNum));
         data = newData;
+        playerID = data.SaveInfo.PlayerID;
+
+        runningTime = DateTime.Now;
+    }
+
+    public static SaveInformation LoadInfo(int saveNum)
+    {
+        SaveInformation possibleInfo = null;
+        try
+        {
+            possibleInfo = JsonConvert.DeserializeObject<DataVars>(File.ReadAllText(path + "" + saveNum)).SaveInfo;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+
+        return possibleInfo;
     }
 
     public static string MakeJson(bool format)
@@ -85,66 +127,34 @@ public static class DataVariables
 
         return json;
     }
-
-    /*public static void MakeImage()
-    {
-        string json = MakeJson(false);
-        var bytes = System.Text.Encoding.UTF8.GetBytes(json);
-        int imgSize = (int)Mathf.Sqrt(bytes.Length + 1);
-
-        //imgSize = 1000;
-
-        var header = new byte[54]
-        {
-            //Antraštė
-            0x42, 0x4d,
-            0x0, 0x0, 0x0, 0x0, //0x3e, 0xf4, 0x1, 0x0,
-            0x0, 0x0, 0x0, 0x0,
-            0x0, 0x0, 0x0, 0x0,
-            //Antraštės informacija
-            0x28, 0x0, 0x0, 0x0,
-            0xe8, 0x3, 0x0, 0x0, // width
-            0xe8, 0x3, 0x0, 0x0, // height
-            0x1, 0x0,
-            0x18, 0x0,            // colour depth
-            0x0, 0x0, 0x0, 0x0,
-            0x0, 0x0, 0x0, 0x0,
-            0x0, 0x0, 0x0, 0x0,
-            0x0, 0x0, 0x0, 0x0,
-            0x0, 0x0, 0x0, 0x0,
-            0x0, 0x0, 0x0, 0x0,
-        };
-
-        //Pataisome paveikslėlio plotį į imgSize
-        Array.Copy(BitConverter.GetBytes((int)imgSize), 0, header, 0x12, sizeof(int));
-        //Pataisome paveikslėlio aukštį į imgSize
-        Array.Copy(BitConverter.GetBytes((int)imgSize), 0, header, 0x16, sizeof(int));
-
-        using (FileStream file = new FileStream(Application.persistentDataPath + "/image.bmp", FileMode.Create, FileAccess.Write))
-        {
-            file.Write(header);
-
-            var t = new byte[imgSize * imgSize * 3];
-
-            int i = 1;
-            foreach (var baitas in bytes)
-            {
-                t[t.Length - i++] = baitas;
-            }
-
-            file.Write(t);
-            file.Close();
-        }
-    }*/
 }
 
 public class DataVars
 {
+    public SaveInformation SaveInfo = new SaveInformation();
     public int LastScene = 1;
     public PlayerVariables PlayerVars = new PlayerVariables(true);
     public Dictionary<int, SerializedSceneState> SceneStates = new Dictionary<int, SerializedSceneState>();
     public Dictionary<int, bool> DoorStates = new Dictionary<int, bool>();
     public NPC_States NPCs = new NPC_States();
+}
+
+
+public class SaveInformation
+{
+    // add save image
+    // add player id
+    // add time of last save
+    // add playtime
+    // add NG+ identifier
+    public string SaveImage = null;
+    public int PlayerID = (int)(UnityEngine.Random.value * 99999);
+    public DateTime LastSave = DateTime.Now;
+    public float Playtime = 0f;
+    public bool EndingA = false; // main
+    public bool EndingB = false; // bad
+    public bool EndingC = false; // nauya
+    public bool EndingD = false; // true
 }
 
 

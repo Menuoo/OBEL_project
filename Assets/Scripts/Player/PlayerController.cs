@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightAlt))
-            StartCoroutine(DataVariables.RealAppend());
+            StartCoroutine(DataVariables.TakeScreenshot(true));
 
 
         if (dead) // slow down time when dead, and also take screenshot of death
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
                 if (Time.timeScale < deathTime)
                 {
-                    StartCoroutine(DataVariables.RealAppend());
+                    StartCoroutine(DataVariables.TakeScreenshot(true));
                     deathTime = -1f;
                 }
             }
