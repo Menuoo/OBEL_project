@@ -9,16 +9,63 @@ using UnityEngine;
 
 public static class DataVariables
 {
+    public static int playerID = 68000;
     public static DataVars data = new DataVars();
-
     public static string path = Application.persistentDataPath + "/who-are-you" + ".obel";
+    public static string deathPath = Application.persistentDataPath + "/" + playerID + ".mirtys";
+    static WaitForEndOfFrame frameEnd = new WaitForEndOfFrame();
+
+
+    public static IEnumerator RealAppend()              // possible memory leak
+    {
+        yield return frameEnd;
+
+        RenderTexture temp = Camera.main.activeTexture;
+        RenderTexture main = RenderTexture.active;
+        RenderTexture.active = temp;
+
+        Texture2D tex = new Texture2D(temp.width, temp.height, TextureFormat.RGBA64, false);
+        tex.filterMode = FilterMode.Point;
+
+        tex.ReadPixels(new Rect(0, 0, temp.width, temp.height), 0, 0);
+
+        Color[] pixels = tex.GetPixels();
+        for (int p = 0; p < pixels.Length; p++) // gamma bullshit
+        {
+            pixels[p] = pixels[p].gamma;
+        }
+        tex.SetPixels(pixels);
+
+        tex.Apply();
+
+        byte[] bytes = tex.EncodeToJPG();
+        string base64 = Convert.ToBase64String(bytes);
+
+        File.AppendAllText(deathPath, base64 + "\n");
+        Debug.Log("Data written to: " + Application.persistentDataPath);
+
+        RenderTexture.active = main;
+    }
+
+    public static Texture2D GrabImage(int num)
+    {
+        string[] lines = File.ReadAllLines(deathPath);
+        byte[] bytes = Convert.FromBase64String(lines[num]);
+
+        Texture2D newImg = new Texture2D(0, 0);
+        if (ImageConversion.LoadImage(newImg, bytes))
+            return newImg;
+        else
+            return null;
+    }
+
 
     public static void Save()
     {
         File.WriteAllText(path, MakeJson(true));
         Debug.Log("Data written to: " + Application.persistentDataPath);
 
-        MakeImage();
+        //MakeImage();
     }
 
     public static void Reset()
@@ -39,7 +86,7 @@ public static class DataVariables
         return json;
     }
 
-    public static void MakeImage()
+    /*public static void MakeImage()
     {
         string json = MakeJson(false);
         var bytes = System.Text.Encoding.UTF8.GetBytes(json);
@@ -88,7 +135,7 @@ public static class DataVariables
             file.Write(t);
             file.Close();
         }
-    }
+    }*/
 }
 
 public class DataVars

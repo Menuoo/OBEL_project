@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayers;
 
     public bool dead = false;
+    float deathTime = 0;
 
     public Vector3 walkDir { get; private set; }
     public float animSpeed { get; private set; }
@@ -67,6 +68,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.RightAlt))
+            StartCoroutine(DataVariables.RealAppend());
+
+
+        if (dead) // slow down time when dead, and also take screenshot of death
+        {
+            if (Time.timeScale > 0)
+            {
+                Time.timeScale = Mathf.Clamp(Time.timeScale - Time.unscaledDeltaTime / 3f, 0, Time.timeScale);
+
+                if (Time.timeScale < deathTime)
+                {
+                    StartCoroutine(DataVariables.RealAppend());
+                    deathTime = -1f;
+                }
+            }
+
+            return;
+        }
+
         if (playerInput.Walk.magnitude <= 0.1f)
         {
             stillLast = false; // might change to something else tbh
@@ -230,10 +251,11 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         dead = true;
+        deathTime = UnityEngine.Random.value * 0.2f + 0.7f;
+
         playerAnim.Die();
 
         playerInput.SwapControls(-1);
-        this.enabled = false;
         characterController.enabled = false;
     }
 }
