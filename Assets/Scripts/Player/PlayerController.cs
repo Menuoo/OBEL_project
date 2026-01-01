@@ -68,10 +68,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightAlt))
-            StartCoroutine(DataVariables.TakeScreenshot(true));
-
-
         if (dead) // slow down time when dead, and also take screenshot of death
         {
             if (Time.timeScale > 0)

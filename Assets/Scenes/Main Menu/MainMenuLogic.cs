@@ -29,14 +29,16 @@ public class MainMenuLogic : MonoBehaviour
     [SerializeField] Button delete;
     [SerializeField] Button loadButton;
     bool isLoaded = false;
-    SaveInformation saveInfo1;
-    SaveInformation saveInfo2;
-    SaveInformation saveInfo3;
+    SaveInformation saveInfo1 = null;
+    SaveInformation saveInfo2 = null;
+    SaveInformation saveInfo3 = null;
     int selection = 0;
 
     void Start()
     {
-        
+        saveInfo1 = null;
+        saveInfo2 = null;
+        saveInfo3 = null;
     }
 
     public void StartNew()
@@ -69,14 +71,15 @@ public class MainMenuLogic : MonoBehaviour
 
             if (!isLoaded)
             {
+                isLoaded = true;
                 saveInfo1 = DataVariables.LoadInfo(1);
-                saveInfo1 = DataVariables.LoadInfo(2);
-                saveInfo1 = DataVariables.LoadInfo(3);
+                saveInfo2 = DataVariables.LoadInfo(2);
+                saveInfo3 = DataVariables.LoadInfo(3);
             }
 
-            playtime1.text = saveInfo1 == null ? "-:--:--" : TimeSpan.FromSeconds(saveInfo1.Playtime).ToString();
-            playtime2.text = saveInfo2 == null ? "-:--:--" : TimeSpan.FromSeconds(saveInfo2.Playtime).ToString();
-            playtime3.text = saveInfo3 == null ? "-:--:--" : TimeSpan.FromSeconds(saveInfo3.Playtime).ToString();
+            playtime1.text = saveInfo1 == null ? "-:--:--" : TimeSpan.FromSeconds(saveInfo1.Playtime).ToString(@"h\:mm\:ss");
+            playtime2.text = saveInfo2 == null ? "-:--:--" : TimeSpan.FromSeconds(saveInfo2.Playtime).ToString(@"h\:mm\:ss");
+            playtime3.text = saveInfo3 == null ? "-:--:--" : TimeSpan.FromSeconds(saveInfo3.Playtime).ToString(@"h\:mm\:ss");
         }
     }
 
@@ -98,33 +101,33 @@ public class MainMenuLogic : MonoBehaviour
                 selection = 1; save1.interactable = false;
                 if (saveInfo1 != null) 
                 {   
-                    saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo1.SaveImage), new Rect(0, 0, 360, 360), new Vector2(140, 0), .01f);
+                    saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo1.SaveImage), new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
                     delete.interactable = true; loadButton.interactable = true; 
-                    lastSaved.gameObject.SetActive(false); lastSaved.text = saveInfo1.LastSave.ToShortDateString();
+                    lastSaved.gameObject.SetActive(true); lastSaved.text = "last saved on: " + saveInfo1.LastSave.ToShortDateString();
                 } 
                 break;
             case 2:
                 selection = 2; save2.interactable = false;
-                if (saveInfo1 != null)
+                if (saveInfo2 != null)
                 {
-                    saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo2.SaveImage), new Rect(0, 0, 360, 360), new Vector2(140, 0), .01f);
+                    saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo2.SaveImage), new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
                     delete.interactable = true; loadButton.interactable = true;
-                    lastSaved.gameObject.SetActive(false); lastSaved.text = saveInfo2.LastSave.ToShortDateString();
+                    lastSaved.gameObject.SetActive(true); lastSaved.text = "last saved on: " + saveInfo2.LastSave.ToShortDateString();
                 }
                 break;
             case 3:
                 selection = 3; save3.interactable = false;
                 if (saveInfo3 != null)
                 {
-                    saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo3.SaveImage), new Rect(0, 0, 360, 360), new Vector2(140, 0), .01f);
+                    saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo3.SaveImage), new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
                     delete.interactable = true; loadButton.interactable = true;
-                    lastSaved.gameObject.SetActive(false); lastSaved.text = saveInfo3.LastSave.ToShortDateString();
+                    lastSaved.gameObject.SetActive(true); lastSaved.text = "last saved on: " + saveInfo3.LastSave.ToShortDateString();
                 }
                 break;
             default: break;

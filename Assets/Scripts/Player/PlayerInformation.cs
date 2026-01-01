@@ -85,12 +85,19 @@ public class PlayerInformation : MonoBehaviour
         {
             PlayerSaveLogic();
 
-            DataVariables.Save(1);
+            StartCoroutine(DataVariables.TakeScreenshot(false));
+            //DataVariables.Save(1); // saving usual
+        }
+
+        // MUST REMOVE AFTER TESTING
+        if (Input.GetKeyDown(KeyCode.RightAlt))
+        {
+            StartCoroutine(DataVariables.TakeScreenshot(true)); // saving death
         }
     }
 
 
-    public void AddItem(int id, int quantity)
+        public void AddItem(int id, int quantity)
     { 
         if (inventory.ContainsKey(id))
             inventory[id] += quantity;

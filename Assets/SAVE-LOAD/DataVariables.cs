@@ -19,7 +19,7 @@ public static class DataVariables
 
 
     /// <summary>
-    /// Specifically for use with Appending Death images,  - OR -  for use with Save State images
+    /// Specifically for use with appending Death images,  - OR -  for use with Save State images
     /// </summary>
     /// <param name="death"></param>
     /// <returns></returns>
@@ -56,6 +56,7 @@ public static class DataVariables
         else
         {
             data.SaveInfo.SaveImage = base64;
+            Save(1); // arbitrary number for now
         }
 
         RenderTexture.active = main;
@@ -115,6 +116,7 @@ public static class DataVariables
         }
         catch (Exception e)
         {
+            //Debug.LogError(e);
             return null;
         }
 
