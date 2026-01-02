@@ -70,22 +70,48 @@ public class KeyPadObject : IInteractable
 
     void NewInput(int num)
     {
-        Debug.Log(num);
+        if (currentNum < 4)
+        {
+            input[currentNum++] = num;
+            UpdateText();
+        }
     }
 
     void EnterCode()
-    { 
-        
+    {
+        if (currentNum > 3 && input[0] == passcode / 1000 && input[1] == passcode / 100 % 10 && input[2] == passcode / 10 % 10 && input[3] == passcode % 10)
+        {
+            Close(); // dunno if this is best to do
+            this.enabled = false;
+            DataVariables.data.DoorStates.Add(doorValue, true);
+        }
+        else 
+        {
+            currentNum = 0;
+        }
+        UpdateText();
     }
 
     void DeleteLast()
     {
+        if (currentNum > 0)
+        {
+            currentNum--;
+        }
+        UpdateText();
+    }
 
+    void UpdateText()
+    {
+        string newText = string.Format("{0} {1} {2} {3}", currentNum > 0 ? input[0] : "-", currentNum > 1 ? input[1] : "-",
+            currentNum > 2 ? input[2] : "-", currentNum > 3 ? input[3] : "-");
+        displayText.text = newText;
     }
 
     public void Open()
     {
         CameraSingle.instance.SpecialCamera(true, cameraPivot);
+        CameraSingle.instance.SetLookAt(this.gameObject.transform);
         isActive = true;
     }
 

@@ -15,17 +15,19 @@ public class KeyButton : MonoBehaviour
 
     public IEnumerator HandlePress()
     {
-        float x = 0.3f;
-        for (float i = 0; i < x; i += Time.unscaledDeltaTime)
+        float x = 0.15f;
+        for (float i = 0; i < x * 2f; i += Time.unscaledDeltaTime)
         {
-            this.transform.position = orig + transform.up * i * 0.05f;
+            this.transform.position = i < x ? orig + transform.up * i * 0.05f : orig + transform.up * (2f * x - i) * 0.05f;
+            Debug.Log("run1");
 
             yield return null;
         }
 
         for (float i = x; i < 0f; i -= Time.unscaledDeltaTime)
         {
-            this.transform.position = orig + transform.up * i * -0.05f;
+            this.transform.position = orig + transform.up * i * 0.05f;
+            Debug.Log("run2");
 
             yield return null;
         }

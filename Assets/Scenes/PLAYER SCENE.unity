@@ -3375,17 +3375,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891655715}
   m_CullTransparentMesh: 1
---- !u!114 &911831378 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3794459151304604947, guid: 3511871b6ac5d4f4ba9b424ff0198482, type: 3}
-  m_PrefabInstance: {fileID: 7560400080382828420}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41ab3df81471d114bb2edd2734ae47e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &914605036
 GameObject:
   m_ObjectHideFlags: 0
@@ -7775,18 +7764,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1782455393021099677, guid: 3511871b6ac5d4f4ba9b424ff0198482, type: 3}
-      propertyPath: anim
-      value: 
-      objectReference: {fileID: 911831378}
     - target: {fileID: 4344221525626153113, guid: 3511871b6ac5d4f4ba9b424ff0198482, type: 3}
       propertyPath: uiControls
       value: 
       objectReference: {fileID: 807293904}
-    - target: {fileID: 7377121479598909217, guid: 3511871b6ac5d4f4ba9b424ff0198482, type: 3}
-      propertyPath: anim
-      value: 
-      objectReference: {fileID: 911831378}
     - target: {fileID: 7377121479598909217, guid: 3511871b6ac5d4f4ba9b424ff0198482, type: 3}
       propertyPath: aimTarget
       value: 

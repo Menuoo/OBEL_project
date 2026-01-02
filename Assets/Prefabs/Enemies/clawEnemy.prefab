@@ -268,6 +268,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4964384431087289188}
     m_Modifications:
+    - target: {fileID: -9064114903961122858, guid: 43e55b7d95a5b9d4e88c39b3dda874ba, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43e55b7d95a5b9d4e88c39b3dda874ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -308,9 +312,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1776834575732309787, guid: 43e55b7d95a5b9d4e88c39b3dda874ba, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 43e55b7d95a5b9d4e88c39b3dda874ba, type: 3}
       propertyPath: m_Name
       value: Claw2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 43e55b7d95a5b9d4e88c39b3dda874ba, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

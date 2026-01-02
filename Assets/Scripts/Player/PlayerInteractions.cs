@@ -117,8 +117,11 @@ public class PlayerInteractions : MonoBehaviour
 
     public void StartKeypad(KeyPadObject keypad)
     {
-        Debug.Log("we keypaddin'");
-        keypad.Open();
+        //Debug.Log("we keypaddin'");
+        if (keypad.isActiveAndEnabled)
+        {
+            keypad.Open();
+        }
     }
 
     /*private void OnTriggerStay(Collider other)
