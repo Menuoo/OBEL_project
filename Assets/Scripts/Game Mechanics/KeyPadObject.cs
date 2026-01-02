@@ -112,12 +112,16 @@ public class KeyPadObject : IInteractable
     {
         CameraSingle.instance.SpecialCamera(true, cameraPivot);
         CameraSingle.instance.SetLookAt(this.gameObject.transform);
+
+        PauseHandler.PauseTime();
         isActive = true;
     }
 
     public void Close()
     {
         CameraSingle.instance.SpecialCamera(false, null);
+
+        PauseHandler.ResumeTime();
         isActive = false;
     }
 
