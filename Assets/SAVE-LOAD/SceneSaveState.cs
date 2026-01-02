@@ -22,7 +22,11 @@ public class SceneSaveState : MonoBehaviour
 
             foreach (var it in sceneItems)
             {
-                it.item.state = itemStates[it.id];
+                if (itemStates.ContainsKey(it.id))
+                {
+                    it.item.state = itemStates[it.id];
+                }
+                else itemStates.Add(it.id, it.item.state); // add items that weren't in the previous version of the game
             }
         }
 

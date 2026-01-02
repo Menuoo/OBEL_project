@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TransitionLogic : MonoBehaviour
 {
-    [SerializeField] float transTime = 0.1f;
+    public float transTime = 0.1f;
     [SerializeField] Image image;
 
     public static TransitionLogic instance { get; private set; }
@@ -39,6 +39,41 @@ public class TransitionLogic : MonoBehaviour
             StartCoroutine(TransitionZero());
     }
 
+    public IEnumerator TransitionOneZero()
+    {
+        Color clr = image.color;
+        for (float i = 0; i < transTime; i += Time.unscaledDeltaTime)
+        {
+            clr.a = Mathf.Min(i / transTime, 1f);
+            image.color = clr;
+
+            yield return null;
+        }
+
+        clr.a = 1f;
+        image.color = clr;
+
+        TransitionEvent?.Invoke(true);
+
+        StartCoroutine(TransitionZero());
+    }
+
+    public IEnumerator LightsOut()
+    {
+        Color clr = image.color;
+        for (float i = 0; i < transTime; i += Time.unscaledDeltaTime)
+        {
+            clr.a = Mathf.Min(i / transTime, 1f);
+            image.color = clr;
+
+            yield return null;
+        }
+
+        clr.a = 1f;
+        image.color = clr;
+
+        Application.Quit();
+    }
 
     IEnumerator TransitionOne()
     {
@@ -54,7 +89,7 @@ public class TransitionLogic : MonoBehaviour
         clr.a = 1f;
         image.color = clr;
 
-        TransitionEvent(true);
+        TransitionEvent?.Invoke(true);
     }
 
     IEnumerator TransitionZero()
@@ -71,6 +106,8 @@ public class TransitionLogic : MonoBehaviour
         clr.a = 0f;
         image.color = clr;
 
-        TransitionEvent(false);
+        TransitionEvent?.Invoke(false);
     }
+
+    public static float GetTime() => instance.transTime;
 }

@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63efe9763ed65c943b939cbb75176f3f, type: 3}
-  m_Name: Family Photo
+  m_Name: Elevator Keycard
   m_EditorClassIdentifier: 
-  id: 4001
-  itemName: Family Photo
-  inventorySprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  description: A researcher's family is pictured.
-  altDescription: A wife, husband, two children and a dog are seen happily standing
-    in a group.
+  id: 3002
+  itemName: Elevator Keycard
+  inventorySprite: {fileID: 21300000, guid: 161a5b98f134c984f85d4cb3eb294fa4, type: 3}
+  description: Grants access to the researcher-only elevator.
+  altDescription: No need to be accompanied by them anymore.

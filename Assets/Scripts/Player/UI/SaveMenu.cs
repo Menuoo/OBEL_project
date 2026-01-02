@@ -7,12 +7,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenuLogic : MonoBehaviour
+public class SaveMenu : MonoBehaviour
 {
     // general objects
     [Header("General")]
     [SerializeField] GameObject loadMenu;
-    [SerializeField] GameObject settingsMenu;
+    [SerializeField] UIcontroller ui;
 
 
     // load menu objects
@@ -25,8 +25,7 @@ public class MainMenuLogic : MonoBehaviour
     [SerializeField] TMP_Text playtime2;
     [SerializeField] TMP_Text playtime3;
     [SerializeField] TMP_Text lastSaved;
-    [SerializeField] Button delete;
-    [SerializeField] Button loadButton;
+    [SerializeField] Button saveButton;
     bool isLoaded = false;
     SaveInformation saveInfo1 = null;
     SaveInformation saveInfo2 = null;
@@ -38,6 +37,8 @@ public class MainMenuLogic : MonoBehaviour
         saveInfo1 = null;
         saveInfo2 = null;
         saveInfo3 = null;
+
+        LoadMenu(true);
     }
 
     public void StartNew()
@@ -88,8 +89,7 @@ public class MainMenuLogic : MonoBehaviour
         saveImage.color = new Color(0, 0, 0, 0);
         selection = 0;
         lastSaved.gameObject.SetActive(false);
-        loadButton.interactable = false;
-        delete.interactable = false;
+        saveButton.interactable = false;
         save1.interactable = true;
         save2.interactable = true;
         save3.interactable = true;
@@ -98,34 +98,34 @@ public class MainMenuLogic : MonoBehaviour
         {
             case 1: 
                 selection = 1; save1.interactable = false;
+                saveButton.interactable = true;
                 if (saveInfo1 != null) 
                 {   
                     saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo1.SaveImage), new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
-                    delete.interactable = true; loadButton.interactable = true; 
                     lastSaved.gameObject.SetActive(true); lastSaved.text = "last saved on: " + saveInfo1.LastSave.ToShortDateString();
                 } 
                 break;
             case 2:
                 selection = 2; save2.interactable = false;
+                saveButton.interactable = true;
                 if (saveInfo2 != null)
                 {
                     saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo2.SaveImage), new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
-                    delete.interactable = true; loadButton.interactable = true;
                     lastSaved.gameObject.SetActive(true); lastSaved.text = "last saved on: " + saveInfo2.LastSave.ToShortDateString();
                 }
                 break;
             case 3:
                 selection = 3; save3.interactable = false;
+                saveButton.interactable = true;
                 if (saveInfo3 != null)
                 {
                     saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo3.SaveImage), new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
-                    delete.interactable = true; loadButton.interactable = true;
                     lastSaved.gameObject.SetActive(true); lastSaved.text = "last saved on: " + saveInfo3.LastSave.ToShortDateString();
                 }
                 break;
@@ -135,10 +135,28 @@ public class MainMenuLogic : MonoBehaviour
 
     public void LoadGameButton()
     {
-        DataVariables.Load(selection);
+        StartCoroutine(Reload());
+        //DataVariables.Save(selection);
 
-        SceneManager.LoadScene(DataVariables.data.LastScene);
-        SceneManager.LoadScene("PLAYER SCENE", LoadSceneMode.Additive);
+        //SceneManager.LoadScene(DataVariables.data.LastScene);
+        //SceneManager.LoadScene("PLAYER SCENE", LoadSceneMode.Additive);
+    }
+
+    public IEnumerator Reload()
+    {
+        StartCoroutine(DataVariables.TakeScreenshot(false, selection));
+
+        yield return new WaitForSecondsRealtime(0.05f); // might have to try "until end of frame"
+
+        saveInfo1 = DataVariables.LoadInfo(1);
+        saveInfo2 = DataVariables.LoadInfo(2);
+        saveInfo3 = DataVariables.LoadInfo(3);
+
+        playtime1.text = saveInfo1 == null ? "-:--:--" : TimeSpan.FromSeconds(saveInfo1.Playtime).ToString(@"h\:mm\:ss");
+        playtime2.text = saveInfo2 == null ? "-:--:--" : TimeSpan.FromSeconds(saveInfo2.Playtime).ToString(@"h\:mm\:ss");
+        playtime3.text = saveInfo3 == null ? "-:--:--" : TimeSpan.FromSeconds(saveInfo3.Playtime).ToString(@"h\:mm\:ss");
+
+        LoadStateButton(selection);
     }
 
 
@@ -147,13 +165,8 @@ public class MainMenuLogic : MonoBehaviour
         // Delete save data
     }
 
-    public void SettingsMenu(bool state)
-    { 
-        settingsMenu.SetActive(state);
-    }
-
-    public void Quit()
+    public void ExitMenu()
     {
-        Application.Quit();
+        ui.EnableSaveMenu(false);
     }
 }

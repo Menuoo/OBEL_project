@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
     public bool dead = false;
     float deathTime = 0;
+    bool deathBool = true;
 
     public Vector3 walkDir { get; private set; }
     public float animSpeed { get; private set; }
@@ -76,8 +77,14 @@ public class PlayerController : MonoBehaviour
 
                 if (Time.timeScale < deathTime)
                 {
-                    StartCoroutine(DataVariables.TakeScreenshot(true));
+                    StartCoroutine(DataVariables.TakeScreenshot(true, 0));
                     deathTime = -1f;
+                }
+
+                if (deathBool && Time.timeScale < 0.3f)
+                { 
+                    deathBool = false;
+                    StartCoroutine(TransitionLogic.instance.LightsOut());
                 }
             }
 

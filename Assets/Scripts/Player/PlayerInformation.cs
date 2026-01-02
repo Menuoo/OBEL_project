@@ -85,14 +85,14 @@ public class PlayerInformation : MonoBehaviour
         {
             PlayerSaveLogic();
 
-            StartCoroutine(DataVariables.TakeScreenshot(false));
+            StartCoroutine(DataVariables.TakeScreenshot(false, 2));
             //DataVariables.Save(1); // saving usual
         }
 
         // MUST REMOVE AFTER TESTING
         if (Input.GetKeyDown(KeyCode.RightAlt))
         {
-            StartCoroutine(DataVariables.TakeScreenshot(true)); // saving death
+            StartCoroutine(DataVariables.TakeScreenshot(true, 2)); // saving death
         }
     }
 

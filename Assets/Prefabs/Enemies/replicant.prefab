@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9ba1ddf1865674398daf0623b34869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  longAttack: 0
   attackCollider: {fileID: 2909084379091606307}
   damage: 20
 --- !u!1 &8591065716400909774
@@ -652,13 +653,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e03ab1c404a0545824108ce58a6d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
   enemy: {fileID: 1290802105352021156}
   movementSpeed: 1
   rotationSpeed: 4
   controller: {fileID: 3122705592862371336}
   animator: {fileID: 3555355035341695213}
-  attackCtrl: {fileID: 8135029131679576109}
+  attackCtrl1: {fileID: 8135029131679576109}
+  attackCtrl2: {fileID: 8135029131679576109}
   immobile: 0
+  staggerThreshold: -1
+  attackDistance: 1.1
+  attackCD: 4
 --- !u!4 &5728395356463103213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6888806815857526915, guid: 1f6c2fea9a4557b41862c503d0860749, type: 3}

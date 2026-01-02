@@ -109,6 +109,12 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
+    public void Save()
+    {
+        uiControls.EnableSaveMenu(true);
+        playerInfo.PlayerSaveLogic();
+    }
+
     /*private void OnTriggerStay(Collider other)
     {
         if (interactTriggered)

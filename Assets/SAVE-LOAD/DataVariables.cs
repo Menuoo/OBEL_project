@@ -23,7 +23,7 @@ public static class DataVariables
     /// </summary>
     /// <param name="death"></param>
     /// <returns></returns>
-    public static IEnumerator TakeScreenshot(bool death)              // possible memory leak
+    public static IEnumerator TakeScreenshot(bool death, int saveNum)              // possible memory leak
     {
         yield return frameEnd;
 
@@ -50,13 +50,13 @@ public static class DataVariables
 
         if (death)
         {
-            File.AppendAllText(deathPath, base64 + "\n");
+            File.AppendAllText(Application.persistentDataPath + "/" + playerID + ".mirtys", base64 + "\n");
             Debug.Log("Data written to: " + Application.persistentDataPath);
         }
         else
         {
             data.SaveInfo.SaveImage = base64;
-            Save(1); // arbitrary number for now
+            Save(saveNum); // arbitrary number for now
         }
 
         RenderTexture.active = main;

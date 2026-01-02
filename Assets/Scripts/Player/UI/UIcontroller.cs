@@ -33,8 +33,10 @@ public class UIcontroller : MonoBehaviour
     [SerializeField] ItemDatabase ItemDatabase;
     [SerializeField] PlayerInputUI inputUI;
     [SerializeField] PauseMenu pauseMenu;
+    [SerializeField] SaveMenu saveMenu;
 
     bool pauseState = false;
+
 
     private void OnEnable()
     {
@@ -96,7 +98,7 @@ public class UIcontroller : MonoBehaviour
 
         InventoryItem item = ItemDatabase.GetItem(id);
 
-        itemText.text = item.GetName() + " [x" + amnt + "] ?";
+        itemText.text = item.GetName() + " [x" + amnt + "]";
         itemImage.sprite = ItemDatabase.GetItem(id).GetSprite();
 
         itemMenuOpen = true;
@@ -158,6 +160,45 @@ public class UIcontroller : MonoBehaviour
         textMenuOpen = false;
     }
 
+    public void EnableSaveMenu(bool state)
+    {
+        if (state)
+        {
+            TransitionLogic.instance.StartCoroutine(TransitionLogic.instance.TransitionOneZero());
+            inputUI.input.SwapControls(-1);
+
+            StartCoroutine(RealInvoke(EnableControls, TransitionLogic.instance.transTime * 2f));
+            StartCoroutine(RealInvoke(SaveMenu, TransitionLogic.instance.transTime));
+
+            pauseState = true;
+            PauseHandler.PauseTime();
+        }
+        else
+        {
+            TransitionLogic.instance.StartCoroutine(TransitionLogic.instance.TransitionOneZero());
+            inputUI.input.SwapControls(-1);
+
+            StartCoroutine(RealInvoke(EnableControls, TransitionLogic.instance.transTime * 2f));
+            StartCoroutine(RealInvoke(SaveMenu, TransitionLogic.instance.transTime));
+
+            pauseState = false;
+        }
+    }
+
+    public void SaveMenu()
+    { 
+        saveMenu.gameObject.SetActive(pauseState ? true : false);
+        Debug.Log("this executes");
+    }
+
+    public void EnableControls()
+    {
+        inputUI.input.SwapControls(pauseState ? 0 : 1);
+        if (!pauseState)
+            PauseHandler.ResumeTime();
+    }
+
+
 
     public void EnablePauseMenu(bool state)
     { 
@@ -195,5 +236,14 @@ public class UIcontroller : MonoBehaviour
         inputUI.input.SwapControls(-1);
         if (pauseState)
             PauseHandler.PauseTime();
+    }
+
+
+    public IEnumerator RealInvoke(System.Action action, float Delay)
+    {
+        Debug.Log("we here");
+        yield return new WaitForSecondsRealtime(Delay);
+        if (action != null)
+            action();
     }
 }
