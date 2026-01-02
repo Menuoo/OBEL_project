@@ -618,6 +618,7 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 1
+  dead: 0
 --- !u!114 &7402301982722166470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,6 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 3421961899796464527}
+  isFlinching: 0
 --- !u!114 &4639715612424567742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,6 +690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 354838776450640986}
+  anim: {fileID: 3794459151304604947}
   weaponControls: {fileID: 4639715612424567742}
   maxHealth: 100
   flashlight: {fileID: 4390329653134331425}
@@ -946,6 +949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInfo: {fileID: 1782455393021099677}
+  anim: {fileID: 3794459151304604947}
   playerController: {fileID: 354838776450640986}
   weaponControls: {fileID: 4639715612424567742}
   aimTarget: {fileID: 0}

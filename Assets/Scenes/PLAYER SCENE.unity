@@ -5390,6 +5390,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2515cbd0daf7bf2459114e63de21631c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  virtCam: {fileID: 405214110}
+  playerCam: {fileID: 1877779287}
+  specialLayers:
+    serializedVersion: 2
+    m_Bits: 1605823
+  specialCamera: 0
   transHolder: {fileID: 1153070751}
 --- !u!1 &1545143979
 GameObject:

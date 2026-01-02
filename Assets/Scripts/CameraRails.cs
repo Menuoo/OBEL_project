@@ -12,8 +12,10 @@ public class CameraRails : MonoBehaviour
 
     public int currentPos = 0;
 
-
     PlayerController player;
+
+    //public bool specialCondition = false;
+
 
     private void Start()
     {
@@ -22,6 +24,9 @@ public class CameraRails : MonoBehaviour
 
     private void Update()
     {
+        if (CameraSingle.instance.specialCamera)
+            return;
+
         if (positions.Length < 1)
             return;
 

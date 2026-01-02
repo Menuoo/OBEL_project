@@ -144,11 +144,6 @@ public class DataVars
 
 public class SaveInformation
 {
-    // add save image
-    // add player id
-    // add time of last save
-    // add playtime
-    // add NG+ identifier
     public string SaveImage = null;
     public int PlayerID = (int)(UnityEngine.Random.value * 99999);
     public DateTime LastSave = DateTime.Now;

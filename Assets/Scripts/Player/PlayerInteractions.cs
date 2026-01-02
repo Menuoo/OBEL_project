@@ -115,6 +115,12 @@ public class PlayerInteractions : MonoBehaviour
         playerInfo.PlayerSaveLogic();
     }
 
+    public void StartKeypad(KeyPadObject keypad)
+    {
+        Debug.Log("we keypaddin'");
+        keypad.Open();
+    }
+
     /*private void OnTriggerStay(Collider other)
     {
         if (interactTriggered)
