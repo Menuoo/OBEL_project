@@ -36,6 +36,14 @@ public class CameraSingle : MonoBehaviour
         }
     }
 
+    public void SetRot(Quaternion newRot)
+    {
+        if (!specialCamera)
+        {
+            transform.rotation = newRot;
+        }
+    }
+
     public void SpecialCamera(bool state, Transform newTrans)
     {
         specialCamera = state;
@@ -45,12 +53,13 @@ public class CameraSingle : MonoBehaviour
             transform.rotation = newTrans.rotation;
         }
 
-        SetLookAt(specialCamera ? null : playerCam);
+        SetLookAt(false, specialCamera ? null : playerCam);
         Camera.main.cullingMask = specialCamera ? specialLayers : initialLayers;
     }
 
-    public void SetLookAt(Transform newLookAt)
+    public void SetLookAt(bool playerMode, Transform newLookAt)
     {
-        virtCam.LookAt = newLookAt;
+        virtCam.LookAt = playerMode ? playerCam : newLookAt;
+        virtCam.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
     }
 }

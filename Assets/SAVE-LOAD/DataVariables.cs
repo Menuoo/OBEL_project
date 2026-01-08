@@ -177,6 +177,7 @@ public struct PlayerVariables
         inventory.Add(2001, 1); // knife
         inventory.Add(2002, 10); // gun
         inventory.Add(2003, 30); // ammo
+        inventory.Add(2999, 1); // flashlight
 
         currWeap = CurrentWeapon.None;
         flashlightOn = false;

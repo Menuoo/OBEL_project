@@ -23,6 +23,8 @@ public class KeyPadObject : IInteractable
     {
         if (DataVariables.data.DoorStates.TryGetValue(doorValue, out bool val))
         {
+            Debug.Log("found doorValue 3002");
+
             if (val)
             {
                 this.enabled = false;
@@ -83,7 +85,8 @@ public class KeyPadObject : IInteractable
         {
             Close(); // dunno if this is best to do
             this.enabled = false;
-            DataVariables.data.DoorStates.Add(doorValue, true);
+            DataVariables.data.DoorStates.TryAdd(doorValue, true);
+            DataVariables.data.DoorStates[doorValue] = true;
         }
         else 
         {
@@ -111,7 +114,7 @@ public class KeyPadObject : IInteractable
     public void Open()
     {
         CameraSingle.instance.SpecialCamera(true, cameraPivot);
-        CameraSingle.instance.SetLookAt(this.gameObject.transform);
+        CameraSingle.instance.SetLookAt(false, this.gameObject.transform);
 
         PauseHandler.PauseTime();
         isActive = true;

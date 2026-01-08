@@ -26,6 +26,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] Image equipImage;
     [SerializeField] TMP_Text gunAmmo;
 
+    [SerializeField] Sprite FlashlightON;
+
 
     List<InventoryItem> items = new List<InventoryItem>();
     int lastId;
@@ -102,7 +104,9 @@ public class PauseMenu : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             finalIndex = (itemIndex + i) % items.Count;
-            invImages[i].sprite = items[finalIndex].GetSprite();
+
+            // use flashlight image when necessary
+            invImages[i].sprite = (items[finalIndex].GetId() == 2999 && playerInformation.GetFlash()) ? FlashlightON : items[finalIndex].GetSprite();
 
             if (i == 2)
                 currentIndex = finalIndex;
@@ -145,8 +149,12 @@ public class PauseMenu : MonoBehaviour
         nameField.text = "Item: " + items[currentIndex].GetName();
         descriptionField.text = items[currentIndex].GetDescription();
 
-        playerInformation.inventory.TryGetValue(items[currentIndex].GetId(), out var quant);
+
+        playerInformation.inventory.TryGetValue(items[currentIndex].GetId(), out var quant); // check for extra cases
         quantityField.text = (lastId == 2002 ? "Ammo: " : "Quantity: ") + quant.ToString();
+
+        descriptionField.text = (lastId != 2999 ? descriptionField.text : string.Format("It is currently [{0}]", playerInformation.GetFlash() ? "ON" : "OFF"));
+
 
         button1.GetComponentInChildren<TMP_Text>().text = items[currentIndex].GetButtons()[0].name;
         button2.GetComponentInChildren<TMP_Text>().text = items[currentIndex].GetButtons()[1].name;

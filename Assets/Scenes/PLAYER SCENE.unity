@@ -861,6 +861,7 @@ MonoBehaviour:
   button2: {fileID: 1413450214}
   equipImage: {fileID: 152839391}
   gunAmmo: {fileID: 2089009075}
+  FlashlightON: {fileID: 21300000, guid: 0d084a747c24d58419df4d2ba679ab68, type: 3}
 --- !u!1 &405214109
 GameObject:
   m_ObjectHideFlags: 0

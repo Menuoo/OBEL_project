@@ -98,7 +98,8 @@ public class PlayerInteractions : MonoBehaviour
 
         if (playerInfo.inventory.ContainsKey(keyId))
         {
-            playerInfo.inventory.Remove(keyId);
+            if (keyId != 4002)      // do not remove matches upon door check
+                playerInfo.inventory.Remove(keyId);
 
             DataVariables.data.DoorStates[keyId] = true;
             return true;

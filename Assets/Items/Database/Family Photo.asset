@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4001
   itemName: Family Photo
-  inventorySprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  inventorySprite: {fileID: 21300000, guid: 41321fcfaa8403b44b9ab6fd1595f70c, type: 3}
   description: A researcher's family is pictured.
   altDescription: A wife, husband, two children and a dog are seen happily standing
     in a group.

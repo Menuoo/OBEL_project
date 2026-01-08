@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63efe9763ed65c943b939cbb75176f3f, type: 3}
-  m_Name: Gasoline
+  m_Name: Flashlight
   m_EditorClassIdentifier: 
-  id: 4003
-  itemName: Gasoline
-  inventorySprite: {fileID: 21300000, guid: c045d732d67091e41b923f2ec12ab3ec, type: 3}
-  description: A half-full canister of fuel.
-  altDescription: Rather simple and convenient receptacle to use. Great for pouring.
+  id: 2999
+  itemName: Flashlight
+  inventorySprite: {fileID: 21300000, guid: a96d73f9f5a760d429124805f9f6d43a, type: 3}
+  description: It is currently [OFF].
+  altDescription: Somehow fits in a shirt pocket.

@@ -34,6 +34,8 @@ public class CameraRails : MonoBehaviour
             CheckPositions();
         else
             Rails();
+
+        CameraSingle.instance.SetLookAt(positions[currentPos].lookatPlayer, null); // look at player or not look at player
     }
 
 
@@ -53,7 +55,10 @@ public class CameraRails : MonoBehaviour
         //Debug.Log(dist + " " + firstPos);
 
         if (firstPos == 0)
+        {
             CameraSingle.instance.SetPos(positions[firstPos].transform.position);
+            CameraSingle.instance.SetRot(positions[firstPos].transform.rotation);
+        }
         else
         {
             float distDiff = positions[firstPos].distThreshold - positions[firstPos - 1].distThreshold;
@@ -61,7 +66,10 @@ public class CameraRails : MonoBehaviour
 
             Vector3 newPos = Vector3.Lerp(positions[firstPos - 1].transform.position, positions[firstPos].transform.position, dist / distDiff);
 
+            Quaternion newRot = Quaternion.Lerp(positions[firstPos - 1].transform.rotation, positions[firstPos].transform.rotation, dist / distDiff);
+
             CameraSingle.instance.SetPos(newPos);
+            CameraSingle.instance.SetRot(newRot);
         }
     }
 
@@ -98,6 +106,7 @@ public class CameraRails : MonoBehaviour
 
         currentPos = thisTheOne;
         CameraSingle.instance.SetPos(positions[currentPos].transform.position);
+        CameraSingle.instance.SetRot(positions[currentPos].transform.rotation); // for when camera is not looking at player
     }
 
 
@@ -112,6 +121,7 @@ public class CameraPosition
     public Transform trigger;
     public float distThreshold;
     public bool moreThan = false;
+    public bool lookatPlayer = true;
 }
 
 [Serializable]

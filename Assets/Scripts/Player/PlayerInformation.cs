@@ -189,6 +189,8 @@ public class PlayerInformation : MonoBehaviour
         flashlightOn = !flashlightOn;
         flashlight.enabled = flashlightOn;
     }
+    public bool GetFlash() => flashlightOn;
+
 
     void Die()
     {
