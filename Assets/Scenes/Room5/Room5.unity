@@ -2695,6 +2695,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2846108069078341559, guid: 82782fc99b6298a459b425ce94946e5e, type: 3}
+      propertyPath: passcode
+      value: 4594
+      objectReference: {fileID: 0}
     - target: {fileID: 6213197316225369526, guid: 82782fc99b6298a459b425ce94946e5e, type: 3}
       propertyPath: m_Name
       value: keypad

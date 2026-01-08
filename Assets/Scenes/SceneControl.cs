@@ -39,7 +39,7 @@ public class SceneControl : MonoBehaviour
             SceneManager.LoadScene(nextId);
             DataVariables.data.LastScene = nextId;
 
-            Vector4 vec = scenes.GetScene(nextId).GetDoor(nextDoor);
+            Vector4 vec = scenes.GetScene(nextId).GetDoor(nextDoor);//
 
             //SceneDoors sceneDoors = FindObjectOfType<SceneDoors>();
             //Vector4 vec = sceneDoors.GetDoor(nextDoor).GetVec4();

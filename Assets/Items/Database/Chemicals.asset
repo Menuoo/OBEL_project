@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63efe9763ed65c943b939cbb75176f3f, type: 3}
   m_Name: Chemicals
   m_EditorClassIdentifier: 
-  id: 4004
+  id: 4200
   itemName: Chemicals
   inventorySprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   description: '"HANDLE WITH CARE: severely weakens the roots of plants" is written

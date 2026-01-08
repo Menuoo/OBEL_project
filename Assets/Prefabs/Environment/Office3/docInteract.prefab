@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &9089185920126481804
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7067387787534269722, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.141
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067387787534269722, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067387787534269722, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.872
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067387787534269722, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9914449
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067387787534269722, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067387787534269722, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.13052616
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067387787534269722, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067387787534269722, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067387787534269722, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067387787534269722, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592988789528176544, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_Name
+      value: docInteract
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592988789528176544, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8241388732389131893, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 545de0308a919b9498f509592065c13d, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7592988789528176544, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6391222529149862221}
+    - targetCorrespondingSourceObject: {fileID: 7592988789528176544, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3013936806011759920}
+  m_SourcePrefab: {fileID: 100100000, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+--- !u!1 &1692492967719686700 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7592988789528176544, guid: 51d0ebc663dd8ae4ab9abd322f8e5ed7, type: 3}
+  m_PrefabInstance: {fileID: 9089185920126481804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6391222529149862221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692492967719686700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd4cb67e8b62ae498ad3d0e0c8da8ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText:
+  - 'Re: Storage Lock/nTO: Secretariat /nFROM: Administratoriat'
+  - 'We have processed your request for access to the storage area. The temporarily-issused
+    code is as such:'
+  - "45\u25A14"
+  - Please inform my office as soon as you handle the relevant tasks.
+  - '- Administrator'
+--- !u!65 &3013936806011759920
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692492967719686700}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.002498762, y: 0.0000615843, z: 0.0036582826}
+  m_Center: {x: -0.00020044058, y: 0.00003592381, z: 0.0018610184}

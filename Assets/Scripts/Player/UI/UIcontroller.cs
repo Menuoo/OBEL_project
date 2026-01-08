@@ -154,10 +154,13 @@ public class UIcontroller : MonoBehaviour
 
     public void EndTextBox()
     {
-        inputUI.input.SwapControls(1);
+        if (textMenuOpen)
+        {
+            inputUI.input.SwapControls(1);
 
-        textBox.SetActive(false);
-        textMenuOpen = false;
+            textBox.SetActive(false);
+            textMenuOpen = false;
+        }
     }
 
     public void EnableSaveMenu(bool state)

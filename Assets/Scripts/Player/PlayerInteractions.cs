@@ -93,7 +93,7 @@ public class PlayerInteractions : MonoBehaviour
         }
         else
         {
-            DataVariables.data.DoorStates.Add(keyId, state);
+            DataVariables.data.DoorStates.TryAdd(keyId, state);
         }
 
         if (playerInfo.inventory.ContainsKey(keyId))

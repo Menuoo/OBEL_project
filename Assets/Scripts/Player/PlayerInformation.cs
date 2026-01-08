@@ -10,6 +10,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class PlayerInformation : MonoBehaviour
 {
     [SerializeField] PlayerController controller;
+    [SerializeField] UIcontroller controllerUI;
     [SerializeField] PlayerAnimationLogic anim;
     [SerializeField] WeaponControls weaponControls;
     [SerializeField] int maxHealth = 100;
@@ -133,6 +134,8 @@ public class PlayerInformation : MonoBehaviour
 
     void TakeDamage()
     {
+        controllerUI.EndTextBox();
+
         CameraEffects.instance.Shake(10f);
         CameraEffects.instance.Aberrate(4f);
         Instantiate(EffectManager.instance.GetParticles(0), transform.position, Quaternion.identity);
