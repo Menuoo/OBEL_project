@@ -51,7 +51,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e2a751463ee087c4f8003cc9aa680ec5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 273bbbf19e8761b43859f41dc5115ac4, type: 2}
+      objectReference: {fileID: 2100000, guid: 4965d44c1a3cb6b42abb312f96ea0b53, type: 2}
+    - target: {fileID: -5754084199372789682, guid: e2a751463ee087c4f8003cc9aa680ec5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -7430331260140856982, guid: c188fb812a7d6f54fa77a1c6f68f4e2f, type: 3}
     - target: {fileID: 919132149155446097, guid: e2a751463ee087c4f8003cc9aa680ec5, type: 3}
       propertyPath: m_Name
       value: roots_1

@@ -16,6 +16,8 @@ MonoBehaviour:
   doorLocations:
   - {x: -2.331, y: 0.9, z: 0}
   - {x: 14.306, y: 0.9, z: 0}
+  - {x: 10.48, y: 0.9, z: 0.6}
   doorRotations:
   - 90
   - -90
+  - -180

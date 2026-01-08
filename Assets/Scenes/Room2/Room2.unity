@@ -1973,6 +1973,7 @@ MonoBehaviour:
   button2: {fileID: 1863797150}
   equipImage: {fileID: 752771309}
   gunAmmo: {fileID: 1879658996}
+  FlashlightON: {fileID: 0}
 --- !u!114 &774133314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2758,10 +2759,12 @@ MonoBehaviour:
     trigger: {fileID: 1081745788}
     distThreshold: 4
     moreThan: 0
+    lookatPlayer: 1
   - transform: {fileID: 242122067}
     trigger: {fileID: 1081745788}
     distThreshold: 10
     moreThan: 0
+    lookatPlayer: 1
   currentPos: 0
 --- !u!1 &1005050683
 GameObject:
@@ -4726,7 +4729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLoc: {fileID: 0}
-  targetScene: 1
+  targetScene: 8
   targetDoor: 0
   conditionItem: 4003
   lockedText:

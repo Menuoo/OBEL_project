@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Room7 - Foyer/Room7.unity
     guid: 1085a38c62fe30d468b04be4d5c8741a
   - enabled: 1
+    path: Assets/Scenes/Room8/Room8.unity
+    guid: 5eea23e21d651b84480da22877ceaa66
+  - enabled: 1
     path: Assets/Scenes/PLAYER SCENE.unity
     guid: 8829b57239db094408f37447a188054f
   m_configObjects: {}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63efe9763ed65c943b939cbb75176f3f, type: 3}
   m_Name: Elevator Keycard
   m_EditorClassIdentifier: 
-  id: 3002
+  id: 3003
   itemName: Elevator Keycard
   inventorySprite: {fileID: 21300000, guid: 338592da7c39f734597b6257aa7d1ada, type: 3}
   description: Grants access to the researcher-only elevator.

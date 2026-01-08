@@ -240,10 +240,13 @@ public class PlayerController : MonoBehaviour
 
     public PlayerInput GetInput() => playerInput;
     public void SetPosition(Vector3 vec)
-    { 
-        characterController.enabled = false;
-        transform.position = vec;
-        characterController.enabled = true;
+    {
+        if (this)
+        {
+            characterController.enabled = false;
+            transform.position = vec;
+            characterController.enabled = true;
+        }
     }
     public void SetRotation(float rot)
     {
