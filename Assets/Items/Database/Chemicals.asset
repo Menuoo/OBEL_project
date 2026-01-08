@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63efe9763ed65c943b939cbb75176f3f, type: 3}
-  m_Name: Flowers
+  m_Name: Chemicals
   m_EditorClassIdentifier: 
   id: 4004
-  itemName: Flowers
+  itemName: Chemicals
   inventorySprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  description: A drawer with soil and healthy flowers.
-  altDescription: Laia spares no effort in taking care of all plants. On closer inspection,
-    one of these flowers is wilted.
+  description: '"HANDLE WITH CARE: severely weakens the roots of plants" is written
+    on the label.'
+  altDescription: Seems to be one of Laia's experiments - a failure. Instead of helping
+    plants, it withers their extremities.

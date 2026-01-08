@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1850009552925094553}
   targetPoint: {fileID: 8977157604387769588}
-  health: 50
+  health: 70
   attackTaken: 0
   isDead: 0
   isAggro: 0
@@ -343,9 +343,9 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.01, y: 0.01, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5278899323856172296
 MonoBehaviour:
@@ -388,7 +388,7 @@ MonoBehaviour:
   attackCtrl1: {fileID: 82464942794979908}
   attackCtrl2: {fileID: 5278899323856172296}
   immobile: 0
-  staggerThreshold: 25
+  staggerThreshold: 30
   attackDistance: 1.1
   attackCD: 4
 --- !u!4 &6691376305682654247 stripped

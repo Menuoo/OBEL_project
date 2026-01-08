@@ -1936,17 +1936,17 @@ MonoBehaviour:
     trigger: {fileID: 239183146}
     distThreshold: 8
     moreThan: 1
-    lookatPlayer: 1
+    lookatPlayer: 0
   - transform: {fileID: 1713161891}
     trigger: {fileID: 239183146}
     distThreshold: 6
     moreThan: 1
-    lookatPlayer: 1
+    lookatPlayer: 0
   - transform: {fileID: 2033333385}
     trigger: {fileID: 239183146}
     distThreshold: 6
     moreThan: 0
-    lookatPlayer: 1
+    lookatPlayer: 0
   currentPos: 0
 --- !u!1001 &1022148041
 PrefabInstance:

@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1850009552925094553}
   targetPoint: {fileID: 8977157604387769588}
-  health: 50
+  health: 70
   attackTaken: 0
   isDead: 0
   isAggro: 0
@@ -401,7 +401,7 @@ MonoBehaviour:
   attackCtrl1: {fileID: 3079217598082727133}
   attackCtrl2: {fileID: 8845942508607895157}
   immobile: 0
-  staggerThreshold: 25
+  staggerThreshold: 30
   attackDistance: 1.2
   attackCD: 4
 --- !u!4 &5646953575438145069 stripped
