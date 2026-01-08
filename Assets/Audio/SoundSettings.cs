@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class SoundSettings : MonoBehaviour
 {
     [SerializeField] Slider slider;
     [SerializeField] AudioMixer mixer;
+    [SerializeField] TMP_Text text;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,8 @@ public class SoundSettings : MonoBehaviour
         RefreshSlider(value);
         PlayerPrefs.SetFloat("SavedMasterValue", value);
         mixer.SetFloat("MasterVolume", Mathf.Log10(value / 100f) * 20f);
+
+        text.text = (Mathf.Round(value)).ToString();
     }
 
     public void SetVolumeFromSlider()

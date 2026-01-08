@@ -28,6 +28,10 @@ public static class DataVariables
         yield return frameEnd;
 
         RenderTexture temp = Camera.main.activeTexture;
+
+        //temp.antiAliasing = 0;
+        //temp.filterMode = FilterMode.Point;
+
         RenderTexture main = RenderTexture.active;
         RenderTexture.active = temp;
 
@@ -45,7 +49,7 @@ public static class DataVariables
 
         tex.Apply();
 
-        byte[] bytes = tex.EncodeToJPG();
+        byte[] bytes = tex.EncodeToPNG(); // encode to PNG
         string base64 = Convert.ToBase64String(bytes);
 
         if (death)
@@ -56,7 +60,7 @@ public static class DataVariables
         else
         {
             data.SaveInfo.SaveImage = base64;
-            Save(saveNum); // arbitrary number for now
+            Save(saveNum);
         }
 
         RenderTexture.active = main;

@@ -99,8 +99,11 @@ public class MainMenuLogic : MonoBehaviour
             case 1: 
                 selection = 1; save1.interactable = false;
                 if (saveInfo1 != null) 
-                {   
-                    saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo1.SaveImage), new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
+                {
+                    Texture2D tex2D = DataVariables.ParseImage(saveInfo1.SaveImage);
+                    tex2D.filterMode = FilterMode.Point;
+
+                    saveImage.sprite = Sprite.Create(tex2D, new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
                     delete.interactable = true; loadButton.interactable = true; 
@@ -111,7 +114,10 @@ public class MainMenuLogic : MonoBehaviour
                 selection = 2; save2.interactable = false;
                 if (saveInfo2 != null)
                 {
-                    saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo2.SaveImage), new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
+                    Texture2D tex2D = DataVariables.ParseImage(saveInfo2.SaveImage);
+                    tex2D.filterMode = FilterMode.Point;
+
+                    saveImage.sprite = Sprite.Create(tex2D, new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
                     delete.interactable = true; loadButton.interactable = true;
@@ -122,7 +128,10 @@ public class MainMenuLogic : MonoBehaviour
                 selection = 3; save3.interactable = false;
                 if (saveInfo3 != null)
                 {
-                    saveImage.sprite = Sprite.Create(DataVariables.ParseImage(saveInfo3.SaveImage), new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
+                    Texture2D tex2D = DataVariables.ParseImage(saveInfo3.SaveImage);
+                    tex2D.filterMode = FilterMode.Point;
+
+                    saveImage.sprite = Sprite.Create(tex2D, new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
                     delete.interactable = true; loadButton.interactable = true;
