@@ -1883,6 +1883,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b6c5d55c5a703e49aea527b1eacd4fb, type: 3}
+--- !u!1001 &600498045
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2441265263059894895, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_Range
+      value: 28.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862662410467313073, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_Name
+      value: LampSquare (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506097378286539979, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506097378286539979, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506097378286539979, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506097378286539979, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506097378286539979, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506097378286539979, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506097378286539979, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506097378286539979, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506097378286539979, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506097378286539979, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
 --- !u!1001 &605917342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3390,12 +3451,12 @@ MonoBehaviour:
     lookatPlayer: 1
   - transform: {fileID: 238839555}
     trigger: {fileID: 1637567463}
-    distThreshold: 7
+    distThreshold: 8
     moreThan: 1
     lookatPlayer: 1
   - transform: {fileID: 4916024}
     trigger: {fileID: 1637567463}
-    distThreshold: 11
+    distThreshold: 15
     moreThan: 1
     lookatPlayer: 1
   currentPos: 0
@@ -3407,6 +3468,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2441265263059894895, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_Range
+      value: 28.56
+      objectReference: {fileID: 0}
     - target: {fileID: 3862662410467313073, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
       propertyPath: m_Name
       value: LampSquare (3)
@@ -4257,6 +4322,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2441265263059894895, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_Range
+      value: 28.56
+      objectReference: {fileID: 0}
     - target: {fileID: 3862662410467313073, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
       propertyPath: m_Name
       value: LampSquare (1)
@@ -5289,6 +5358,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2441265263059894895, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_Range
+      value: 28.56
+      objectReference: {fileID: 0}
     - target: {fileID: 3862662410467313073, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
       propertyPath: m_Name
       value: LampSquare (2)
@@ -5468,6 +5541,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2441265263059894895, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
+      propertyPath: m_Range
+      value: 28.56
+      objectReference: {fileID: 0}
     - target: {fileID: 3862662410467313073, guid: ef28b3e52dd919c4191508f58bea1ebe, type: 3}
       propertyPath: m_Name
       value: LampSquare
@@ -7161,6 +7238,7 @@ SceneRoots:
   - {fileID: 1298457768}
   - {fileID: 1778651699}
   - {fileID: 1326831113}
+  - {fileID: 600498045}
   - {fileID: 1059868956}
   - {fileID: 1695476881}
   - {fileID: 1253962017}

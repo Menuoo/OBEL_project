@@ -78,8 +78,14 @@ public class PlayerInformation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload(2002); // reload gun
-            SoundManager.instance.PlaySound(2);
+            if (inventory.TryGetValue(2003, out int val))
+            {
+                if (val > 0)
+                {
+                    Reload(2002); // reload gun
+                    SoundManager.instance.PlaySound(2);
+                }
+            }
         }
 
         // MUST REMOVE AFTER TESTING

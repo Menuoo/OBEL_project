@@ -1134,7 +1134,7 @@ GameObject:
   - component: {fileID: 712797212}
   - component: {fileID: 712797211}
   m_Layer: 0
-  m_Name: ~~ SCENE-SAVE ~~  ROOM6
+  m_Name: ~~ SCENE-SAVE ~~  ROOM8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1165,7 +1165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d62187cc4a9564187a3703bda2b79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisScene: {fileID: 11400000, guid: 15cd817c7be5bea4bbc865f98fadb4a8, type: 2}
+  thisScene: {fileID: 11400000, guid: 39be121db97cafc46b6208546c6b9423, type: 2}
   sceneItems:
   - id: 0
     item: {fileID: 1384569203}

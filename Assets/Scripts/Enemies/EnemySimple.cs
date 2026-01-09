@@ -314,8 +314,14 @@ public class EnemySimple : MonoBehaviour
             attackCtrl1.End();
     }
 
+    public void PlaySound(int id)
+    {
+        src.PlayOneShot(SoundManager.instance.GetSound(id), src.volume * 1f);
+    }
+
     public void PlaySound(int id, float mult = 1f)
     {
+        mult = 1f;
         src.PlayOneShot(SoundManager.instance.GetSound(id), src.volume * mult);
     }
 

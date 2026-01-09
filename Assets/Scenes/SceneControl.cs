@@ -27,7 +27,7 @@ public class SceneControl : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Update() //
     {
         //Debug.Log("LastScene: " + DataVariables.data.LastScene);
     }

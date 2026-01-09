@@ -63,7 +63,7 @@ public class DoorObjectFlower : IInteractable
         if (!flower1.gameObject.active && !flower2.gameObject.active)
         {
             state = 2;
-            DataVariables.data.DoorStates.Add(conditionItem + 1, true);
+            DataVariables.data.DoorStates.TryAdd(conditionItem + 1, true);
         }
 
         if (state == 2 || conditionItem == -1)
