@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2003
-  quantity: 15
+  quantity: 7
 --- !u!114 &7696549837888020091
 MonoBehaviour:
   m_ObjectHideFlags: 0

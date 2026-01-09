@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 3
   doorLocations:
-  - {x: -2.331, y: 0.9, z: 0}
+  - {x: 6.2, y: 0.9, z: 3.08}
   doorRotations:
   - 90

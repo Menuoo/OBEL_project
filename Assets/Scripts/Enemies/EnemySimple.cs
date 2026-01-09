@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class EnemySimple : MonoBehaviour
 {
+    [SerializeField] AudioSource src;
     [SerializeField] EnemyType enemyType;
     [SerializeField] EnemyBase enemy;
     [SerializeField] float movementSpeed = 1.0f;
@@ -48,6 +50,7 @@ public class EnemySimple : MonoBehaviour
     float attackCooldown = 0f;
     float rotDiff = 180f;
 
+    bool lastAggro = false;
 
     private void Start()
     {
@@ -87,6 +90,10 @@ public class EnemySimple : MonoBehaviour
             }
             else
             {
+                if (lastAggro == false)
+                {
+                    PlaySound(11, 4f);
+                }
                 animator.SetBool(idleHash, false);
             }
 
@@ -110,6 +117,8 @@ public class EnemySimple : MonoBehaviour
             enemy.isAggro = false;
             animator.SetBool(idleHash, true);
         }
+
+        lastAggro = enemy.isAggro;
     }
 
     void HandleMove()
@@ -265,6 +274,9 @@ public class EnemySimple : MonoBehaviour
         enemy.attackTaken = false;
         Instantiate(EffectManager.instance.GetParticles(0), enemy.GetTargetPos(), Quaternion.identity);
         lastHP = enemy.GetHealth();
+
+        PlaySound(8);
+        PlaySound(10);
     }
 
     public void Die()
@@ -275,6 +287,7 @@ public class EnemySimple : MonoBehaviour
         }
         else
         {
+            PlaySound(11, 4f);
             animator.SetBool(deadHash, true);
             attackCtrl1.End();
             attackCtrl2.End();
@@ -300,6 +313,12 @@ public class EnemySimple : MonoBehaviour
         else
             attackCtrl1.End();
     }
+
+    public void PlaySound(int id, float mult = 1f)
+    {
+        src.PlayOneShot(SoundManager.instance.GetSound(id), src.volume * mult);
+    }
+
 
     /*
     public void Activate2()

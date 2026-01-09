@@ -9,6 +9,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerInformation : MonoBehaviour
 {
+    [SerializeField] AudioSource audioSrc;
     [SerializeField] PlayerController controller;
     [SerializeField] UIcontroller controllerUI;
     [SerializeField] PlayerAnimationLogic anim;
@@ -141,6 +142,12 @@ public class PlayerInformation : MonoBehaviour
         Instantiate(EffectManager.instance.GetParticles(0), transform.position, Quaternion.identity);
 
         anim.Flinch();
+        PlaySound(8);
+    }
+
+    public void PlaySound(int id)
+    {
+        audioSrc.PlayOneShot(SoundManager.instance.GetSound(id), audioSrc.volume);
     }
 
 

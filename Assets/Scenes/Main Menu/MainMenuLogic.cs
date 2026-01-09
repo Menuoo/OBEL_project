@@ -103,7 +103,7 @@ public class MainMenuLogic : MonoBehaviour
                     Texture2D tex2D = DataVariables.ParseImage(saveInfo1.SaveImage);
                     tex2D.filterMode = FilterMode.Point;
 
-                    saveImage.sprite = Sprite.Create(tex2D, new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
+                    saveImage.sprite = Sprite.Create(tex2D, new Rect(0, 0, 640, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
                     delete.interactable = true; loadButton.interactable = true; 
@@ -117,7 +117,7 @@ public class MainMenuLogic : MonoBehaviour
                     Texture2D tex2D = DataVariables.ParseImage(saveInfo2.SaveImage);
                     tex2D.filterMode = FilterMode.Point;
 
-                    saveImage.sprite = Sprite.Create(tex2D, new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
+                    saveImage.sprite = Sprite.Create(tex2D, new Rect(0, 0, 640, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
                     delete.interactable = true; loadButton.interactable = true;
@@ -131,7 +131,7 @@ public class MainMenuLogic : MonoBehaviour
                     Texture2D tex2D = DataVariables.ParseImage(saveInfo3.SaveImage);
                     tex2D.filterMode = FilterMode.Point;
 
-                    saveImage.sprite = Sprite.Create(tex2D, new Rect(140, 0, 360, 360), new Vector2(0, 0), .01f);
+                    saveImage.sprite = Sprite.Create(tex2D, new Rect(0, 0, 640, 360), new Vector2(0, 0), .01f);
                     saveImage.color = new Color(1, 1, 1, 1);
 
                     delete.interactable = true; loadButton.interactable = true;

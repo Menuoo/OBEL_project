@@ -24,6 +24,8 @@ public class KeyButton : MonoBehaviour
             yield return null;
         }
 
+        SoundManager.instance.PlaySound(13);
+
         for (float i = x; i < 0f; i -= Time.unscaledDeltaTime)
         {
             this.transform.position = orig + transform.up * i * 0.05f;

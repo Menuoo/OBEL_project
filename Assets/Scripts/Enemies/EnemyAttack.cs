@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    EnemySimple enemy;
     [SerializeField] bool longAttack = false;
     [SerializeField] Collider attackCollider;
     [SerializeField] int damage = 20;
@@ -22,6 +23,7 @@ public class EnemyAttack : MonoBehaviour
 
     private void Start()
     {
+        enemy = GetComponentInParent<EnemySimple>();
         orig = transform.localPosition;
         attackCollider.enabled = false;
     }
@@ -93,6 +95,10 @@ public class EnemyAttack : MonoBehaviour
         {
             if (isActive)
             {
+                //enemy.PlaySound(8);
+                //enemy.PlaySound(10);
+                //enemy.PlaySound(15);
+
                 player.AlterHP(-damage);
                 isActive = false;
             }

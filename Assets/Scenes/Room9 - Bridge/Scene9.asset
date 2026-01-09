@@ -10,16 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1afb201941f7ba3419926c87ffe23242, type: 3}
-  m_Name: Scene3
+  m_Name: Scene9
   m_EditorClassIdentifier: 
-  sceneId: 3
+  sceneId: 8
   doorLocations:
-  - {x: -2.331, y: 0.9, z: 0}
-  - {x: 10.480001, y: 0.9, z: 1.207}
-  - {x: 4.4800005, y: 0.9, z: -1.169}
-  - {x: 20.2, y: 0.9, z: 0}
+  - {x: 8.9, y: 0.9, z: 1.38}
   doorRotations:
-  - 90
-  - 180
-  - 0
-  - -90
+  - 270
