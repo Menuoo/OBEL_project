@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] AudioSource src;
     public static EnemyManager instance { get; private set; }
 
     [SerializeField] PlayerController player;
 
     int currentID = 0;
     public Dictionary<int, EnemyBase> enemyList { get; private set; }
+
+    bool playFight = false;
 
 
     private void Awake()
@@ -21,6 +24,25 @@ public class EnemyManager : MonoBehaviour
             instance = this;
             currentID = 0;
             enemyList = new Dictionary<int, EnemyBase>();
+        }
+    }
+
+    private void Update()
+    {
+        playFight = false;
+        foreach (var enemPair in enemyList)
+        {
+            if (enemPair.Value.isAggro)
+            {
+                src.volume = 0.9f;
+                playFight = true;
+                break;
+            }
+        }
+
+        if (!playFight)
+        {
+            src.volume = 0f;
         }
     }
 

@@ -3678,6 +3678,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nauya Export
       objectReference: {fileID: 0}
+    - target: {fileID: 6437429411972104399, guid: 468d6e075c249c54295722995ad97ec9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -28,11 +28,9 @@ public class Researcher : IInteractable
 
     void DoState0(PlayerInteractions interactions)
     {
-        string[] texts1 = { "hey.. i'm a little hurt, as you can see.", "would appreciate if you could help me.. out.. here.",
-            "of course, only if you have the means.. i need something to treat this with.",
-            "things are a little rough out here, for everyone.. i understand if you can't help me."};
+        string[] texts1 = { "the key should be around here somewhere" };
 
-        string[] texts2 = { "hey.. have you a bandage?" };
+        string[] texts2 = { "..." };
 
         if (currentLine == 0)
         {

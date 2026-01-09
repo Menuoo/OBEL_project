@@ -42,6 +42,7 @@ public class MainMenuLogic : MonoBehaviour
 
     public void StartNew()
     {
+        SoundManager.instance.PlaySound(12);
         /*if (toLoad)
         {
             DataVariables.Load();
@@ -61,7 +62,8 @@ public class MainMenuLogic : MonoBehaviour
     }
 
     public void LoadMenu(bool state) // state: if true, then open menu, otherwise - close it
-    { 
+    {
+        SoundManager.instance.PlaySound(12);
         loadMenu.SetActive(state);
 
         if (state)
@@ -84,6 +86,8 @@ public class MainMenuLogic : MonoBehaviour
 
     public void LoadStateButton(int saveNum)
     {
+        SoundManager.instance.PlaySound(12);
+
         saveImage.sprite = null;
         saveImage.color = new Color(0, 0, 0, 0);
         selection = 0;
@@ -144,6 +148,7 @@ public class MainMenuLogic : MonoBehaviour
 
     public void LoadGameButton()
     {
+        SoundManager.instance.PlaySound(12);
         DataVariables.Load(selection);
 
         SceneManager.LoadScene(DataVariables.data.LastScene);
@@ -152,12 +157,14 @@ public class MainMenuLogic : MonoBehaviour
 
 
     public void DeleteSaveButton()
-    { 
+    {
+        SoundManager.instance.PlaySound(12);
         // Delete save data
     }
 
     public void SettingsMenu(bool state)
-    { 
+    {
+        SoundManager.instance.PlaySound(12);
         settingsMenu.SetActive(state);
     }
 
